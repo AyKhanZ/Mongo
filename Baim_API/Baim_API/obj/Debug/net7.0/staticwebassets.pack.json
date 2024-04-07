@@ -1,0 +1,133 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\css\\Style.css",
+      "PackagePath": "staticwebassets\\css\\Style.css"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\forgotPasswordLink.html",
+      "PackagePath": "staticwebassets\\forgotPasswordLink.html"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons.rar",
+      "PackagePath": "staticwebassets\\icons.rar"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\Agile.png",
+      "PackagePath": "staticwebassets\\icons\\Agile.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\Deadline.png",
+      "PackagePath": "staticwebassets\\icons\\Deadline.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\IMG_8073.PNG",
+      "PackagePath": "staticwebassets\\icons\\IMG_8073.PNG"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\LogIn.png",
+      "PackagePath": "staticwebassets\\icons\\LogIn.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\Settings.png",
+      "PackagePath": "staticwebassets\\icons\\Settings.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-facebook.png",
+      "PackagePath": "staticwebassets\\icons\\black-facebook.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-instagram.png",
+      "PackagePath": "staticwebassets\\icons\\black-instagram.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-linkedin.png",
+      "PackagePath": "staticwebassets\\icons\\black-linkedin.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-twitter.png",
+      "PackagePath": "staticwebassets\\icons\\black-twitter.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-youtube.png",
+      "PackagePath": "staticwebassets\\icons\\black-youtube.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\fb.png",
+      "PackagePath": "staticwebassets\\icons\\fb.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\fb_gray.png",
+      "PackagePath": "staticwebassets\\icons\\fb_gray.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\insta.png",
+      "PackagePath": "staticwebassets\\icons\\insta.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\insta_gray.png",
+      "PackagePath": "staticwebassets\\icons\\insta_gray.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\logo_baim.png",
+      "PackagePath": "staticwebassets\\icons\\logo_baim.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\telegram.png",
+      "PackagePath": "staticwebassets\\icons\\telegram.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\telegram_gray.png",
+      "PackagePath": "staticwebassets\\icons\\telegram_gray.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-facebook.png",
+      "PackagePath": "staticwebassets\\icons\\white-facebook.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-instagram.png",
+      "PackagePath": "staticwebassets\\icons\\white-instagram.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-linkedin.png",
+      "PackagePath": "staticwebassets\\icons\\white-linkedin.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-twitter.png",
+      "PackagePath": "staticwebassets\\icons\\white-twitter.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-youtube.png",
+      "PackagePath": "staticwebassets\\icons\\white-youtube.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\youtube.png",
+      "PackagePath": "staticwebassets\\icons\\youtube.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\youtube_gray.png",
+      "PackagePath": "staticwebassets\\icons\\youtube_gray.png"
+    },
+    {
+      "Id": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Baim_API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.Baim_API.props",
+      "PackagePath": "build\\Baim_API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Baim_API.props",
+      "PackagePath": "buildMultiTargeting\\Baim_API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.Baim_API.props",
+      "PackagePath": "buildTransitive\\Baim_API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

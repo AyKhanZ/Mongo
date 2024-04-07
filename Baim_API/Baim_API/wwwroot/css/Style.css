@@ -1,0 +1,178 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #f6f5f5;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  margin: 10vh 0;
+  padding: 30px 0;
+  width: 50%;
+  background-color: white;
+}
+
+header {
+  width: 100%;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.confirmLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #24aaa4;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  padding: 15px 0;
+}
+
+.logo {
+  width: 40%;
+  background-image: url(https://i.ibb.co/wJpgcX8/logo-baim.png);
+}
+
+.author {
+  width: 50%;
+}
+.content {
+  color: #178e89;
+  font-size: 14px;
+  text-align: right;
+  margin: 2px;
+}
+
+hr {
+  margin: 10px 20px;
+  border: 1.5px solid #178e89;
+}
+
+main {
+  padding: 20px;
+}
+
+.bold-text {
+  font-weight: bold;
+  color: #333333;
+  font-size: 16px;
+  margin: 30px 0px;
+}
+.text {
+  color: #333333;
+  font-size: 16px;
+  margin: 30px 0px;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+}
+.login {
+  padding-left: 10px;
+  text-decoration: none;
+  color: #61c4f2;
+}
+
+.token-link {
+  font-size: 16px;
+  color: #61c4f2;
+  text-decoration: none;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.btn {
+  background-color: #178e89;
+  color: #ffffff;
+  border-radius: 30px;
+  padding: 12px 35px;
+  border-color: transparent;
+}
+
+.btn:hover {
+  background-color: #24aaa4;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+.icon {
+  height: 50px;
+  width: 50px;
+  box-sizing: border-box;
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
+.facebook {
+  background-image: url(https://i.ibb.co/NLkwWK1/fb.png);
+}
+
+.facebook:hover {
+  background-image: url(https://i.ibb.co/gMbWw18/fb-gray.png);
+}
+
+.instagram {
+  background-image: url(https://i.ibb.co/2s45kGF/insta.png);
+}
+
+.instagram:hover {
+  background-image: url(https://i.ibb.co/prGzbpt/insta-gray.png);
+}
+
+.youtube {
+  background-image: url(https://i.ibb.co/rGcNNg0/youtube.png);
+}
+
+.youtube:hover {
+  background-image: url(https://i.ibb.co/SnyYf74/youtube-gray.png);
+}
+
+.telegram {
+  background-image: url(https://i.ibb.co/gzNJQqW/telegram.png);
+}
+
+.telegram:hover {
+  background-image: url(https://i.ibb.co/8zJmDR3/telegram-gray.png);
+}
+
+.tools-container {
+  background-image: url(./icons/youtube_gray.png);
+  width: 100%;
+  height: 200px;
+}
