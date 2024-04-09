@@ -1,6 +1,5 @@
 {
   "name": "baimpages",
-  "proxy": "https://localhost:7164",
   "version": "0.1.0",
   "private": true,
   "scripts": {

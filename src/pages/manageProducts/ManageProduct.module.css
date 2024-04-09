@@ -15,10 +15,11 @@
   border: 1px solid transparent;
   border-radius: 15px;
   background-color: white;
-  color: #3d8584;
+  color: black;
   padding: 10px;
   margin: 10px 0;
   accent-color: #3d8584;
+  width: 200px;
 }
 
 .form {
@@ -121,4 +122,10 @@
 
 .containerHidden {
   display: none;
+}
+
+
+.editBtn {
+  display: block;
+  color: #3d8584;
 }

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil as pencil } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan as trashCan } from "@fortawesome/free-solid-svg-icons";
 import DeleteForm from "@/components/DeleteForm/DeleteForm";
+import { useRouter } from "next/router";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -15,15 +16,16 @@ const ManageProducts = () => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [img, setImg] = useState("");
-  const [productType, setProductType] = useState("");
-  const [product, setProduct] = useState({});
+  const [type, setType] = useState("");
   const [products, setProducts] = useState([]);
+  const [delProductId, setDelProductId] = useState(0);
   const [deleteShown, setDeleteShown] = useState(false);
-  const [productId, setProductId] = useState();
+
+  const router = useRouter();
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://localhost:7164/Product");
+      const response = await fetch("/api/products");
       const data = await response.json();
       setProducts(data);
     } catch (err) {
@@ -31,36 +33,65 @@ const ManageProducts = () => {
     }
   };
 
+  const deleteProduct = async(id: number) => {
+    await fetch(`api/products/${id}`, {
+      method: 'DELETE'
+    })
+  }
+
   useEffect(() => {
     fetchProducts();
   }, [products]);
 
   const showDelete = (pId: any) => {
+    if (pId){
     console.log(pId);
-    setDeleteShown((prev) => !prev);
+    setDelProductId(pId);
+    setDeleteShown((prev) => !prev);}
   };
 
   return (
     <SideBarLayout>
       <div className={`${nunito.className} ${styles.container}`}>
-        <div className={styles.products}>
+      <div
+            className={
+              deleteShown
+                ? `${styles.deleteForm}`
+                : `${styles.containerHidden}`
+            }
+          >
+            <DeleteForm
+              setDeleteShown = {setDeleteShown}
+              deleteThisProduct = {() => deleteProduct(delProductId)}
+              // deleteShown={deleteShown}
+              // productId={p.id}
+            />
+          </div>
+        <div className={deleteShown ? styles.containerHidden : styles.products}>
           <div className={styles.containerTitle}>
             <h1 className={styles.heading}>Products CRUD</h1>
-            <CreateBtn onClick={() => 0} symbol="+" title="Create" />
+            <CreateBtn onClick={() => router.push('/postProduct')} symbol="+" title="Create" />
           </div>
+
+
 
           {products.length > 0 ? (
             products.map((p: Product) => (
-              <>
+    
                 <div className={styles.horizontal} key={p.id}>
                   <div className={styles.imgContainer}></div>
+                  
+
 
                   <div className={styles.productContent}>
                     <div className={styles.productTitle}>
                       <h2 className={styles.title}>{p.name}</h2>
+
+
+
                       <div className={styles.btns}>
                         <CreateBtn
-                          onClick={() => 0}
+                          onClick={() => router.push(`/manageProducts/${p.id}`)}
                           symbol={pencil}
                           title="Edit"
                         />
@@ -69,21 +100,12 @@ const ManageProducts = () => {
                           symbol={trashCan}
                           title="Delete"
                         />
-                        <div
-                          className={
-                            deleteShown
-                              ? `${styles.deleteForm}`
-                              : `${styles.containerHidden}`
-                          }
-                        >
-                          <DeleteForm
-                            setDelete={setDeleteShown}
-                            deleteShown={deleteShown}
-                            productId={p.id}
-                          />
-                        </div>
+                        
                       </div>
                     </div>
+                    
+
+
                     <h2 className={styles.id}>Id 1C: {p.id1C}</h2>
                     <p className={styles.desc}>
                       Lorem Ipsum is simply dummy text of the printing and
@@ -100,7 +122,7 @@ const ManageProducts = () => {
                     </p>
                   </div>
                 </div>
-              </>
+              
             ))
           ) : (
             <div className={styles.containerNone}>
