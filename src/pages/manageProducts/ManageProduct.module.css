@@ -1,6 +1,8 @@
 .container {
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+  min-width: 100%;
 }
 
 .formContainer {
@@ -49,6 +51,7 @@
   padding: 20px;
   background-color: #ffffff;
   border-radius: 15px;
+  width: 96%;
 }
 .containerTitle {
   display: flex;
@@ -92,4 +95,30 @@
   display: flex;
   justify-content: flex-end;
   width: 220px;
+}
+
+.containerNone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  border-radius: 15px;
+  border: 1px dashed #cbccce;
+}
+
+.noProductsText {
+  font-size: 22px;
+  color: #cbccce;
+}
+
+.deleteForm {
+  display: block !important;
+  position: absolute;
+  z-index: 1;
+  top: 200px;
+  left: calc(50vw - 125px);
+}
+
+.containerHidden {
+  display: none;
 }

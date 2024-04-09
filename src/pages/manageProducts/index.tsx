@@ -7,6 +7,7 @@ import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil as pencil } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan as trashCan } from "@fortawesome/free-solid-svg-icons";
+import DeleteForm from "@/components/DeleteForm/DeleteForm";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -17,64 +18,26 @@ const ManageProducts = () => {
   const [productType, setProductType] = useState("");
   const [product, setProduct] = useState({});
   const [products, setProducts] = useState([]);
+  const [deleteShown, setDeleteShown] = useState(false);
+  const [productId, setProductId] = useState();
 
   const fetchProducts = async () => {
-    const response = await fetch("https://localhost:7164/Product");
-    const data = await response.json();
-    setProducts(data);
+    try {
+      const response = await fetch("https://localhost:7164/Product");
+      const data = await response.json();
+      setProducts(data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
     fetchProducts();
   }, [products]);
 
-  const postProduct = async () => {
-    const productToPost = {
-      id: 30,
-      productType: productType,
-      productName: name,
-      productDesc: desc,
-      productImg: img,
-    };
-
-    const response = await fetch("/api/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productToPost),
-    });
-
-    const data = await response.json();
-    console.log(data);
-    await fetchProducts();
-  };
-
-  const deleteProduct = async (id: number) => {
-    await fetch(`https://localhost:7164/Product/ById/${id}`, {
-      method: "DELETE",
-    });
-  };
-
-  const editProduct = async (id: number) => {
-    const productToEdit = {
-      id: id,
-      productType: productType,
-      productName: name,
-      productDesc: desc,
-      productImg: img,
-    };
-
-    const response = await fetch(`/api/products/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productToEdit),
-    });
-
-    const data = await response.json();
-    await fetchProducts();
+  const showDelete = (pId: any) => {
+    console.log(pId);
+    setDeleteShown((prev) => !prev);
   };
 
   return (
@@ -102,10 +65,23 @@ const ManageProducts = () => {
                           title="Edit"
                         />
                         <CreateBtn
-                          onClick={() => deleteProduct(p.id)}
+                          onClick={() => showDelete(p.id)}
                           symbol={trashCan}
                           title="Delete"
                         />
+                        <div
+                          className={
+                            deleteShown
+                              ? `${styles.deleteForm}`
+                              : `${styles.containerHidden}`
+                          }
+                        >
+                          <DeleteForm
+                            setDelete={setDeleteShown}
+                            deleteShown={deleteShown}
+                            productId={p.id}
+                          />
+                        </div>
                       </div>
                     </div>
                     <h2 className={styles.id}>Id 1C: {p.id1C}</h2>
@@ -124,15 +100,12 @@ const ManageProducts = () => {
                     </p>
                   </div>
                 </div>
-                {/* <div className={styles.show}>
-                  <p>{p.img}</p>
-                  <p>{p.productType}</p>
-                  <p>{p.desc}</p>
-                </div> */}
               </>
             ))
           ) : (
-            <></>
+            <div className={styles.containerNone}>
+              <p className={styles.noProductsText}>No products yet ƪ(˘⌣˘)ʃ</p>
+            </div>
           )}
         </div>
       </div>
@@ -141,44 +114,46 @@ const ManageProducts = () => {
 };
 
 export default ManageProducts;
-{
-  /* <div className={styles.formContainer}>
-          <h1 className={styles.heading}>Manage product</h1>
-          <div className={styles.form}>
-            <input
-              className={styles.input}
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              placeholder="name"
-              type="text"
-              name="name"
-            />
-            <input
-              className={styles.input}
-              onChange={(e) => setDesc(e.target.value)}
-              value={desc}
-              placeholder="desc"
-              type="text"
-              name="desc"
-            />
-            <input
-              className={styles.input}
-              onChange={(e) => setImg(e.target.value)}
-              value={img}
-              placeholder="img"
-              type="text"
-              name="img"
-            />
-            <input
-              className={styles.input}
-              onChange={(e) => setProductType(e.target.value)}
-              value={productType}
-              placeholder="productType"
-              type="text"
-              name="productType"
-            />
-          </div>
-          <button onClick={postProduct}>Post products</button>
-        </div>
-        <hr className={styles.hr}></hr> */
-}
+
+// const postProduct = async () => {
+//   const productToPost = {
+//     id: 30,
+//     productType: productType,
+//     productName: name,
+//     productDesc: desc,
+//     productImg: img,
+//   };
+
+//   const response = await fetch("/api/products", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(productToPost),
+//   });
+
+//   const data = await response.json();
+//   console.log(data);
+//   await fetchProducts();
+// };
+
+// const editProduct = async (id: number) => {
+//   const productToEdit = {
+//     id: id,
+//     productType: productType,
+//     productName: name,
+//     productDesc: desc,
+//     productImg: img,
+//   };
+
+//   const response = await fetch(`/api/products/${id}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(productToEdit),
+//   });
+
+//   const data = await response.json();
+//   await fetchProducts();
+// };

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./DeleteForm.module.css";
 
-const DeleteForm = () => {
+const DeleteForm = (setDelete: any) => {
   return (
     <div className={`${styles.mainContainer}`}>
       <div className={`${styles.contentContainer} `}>
