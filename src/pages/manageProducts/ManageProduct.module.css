@@ -1,49 +1,95 @@
 .container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .formContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .input {
-    border: 1px solid transparent;
-    border-radius: 10px;
-    background-color: white;
-    color: #3d8584;
-    padding: 10px;
-    margin: 10px 0;
-    accent-color: #3d8584;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  background-color: white;
+  color: #3d8584;
+  padding: 10px;
+  margin: 10px 0;
+  accent-color: #3d8584;
 }
 
 .form {
-    margin: 20px;
-    border: 1px solid #3d8584;
-    border-radius: 10px;
-    background-color: #3d8584;
-    padding: 20px 20px;
-    display: flex;
-    flex-direction: column;
-    width: 250px;
+  margin: 20px;
+  border: 1px solid #3d8584;
+  border-radius: 10px;
+  background-color: #3d8584;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
 }
 
 .heading {
-    color: #3d8584;
-    margin: 20px;
+  font-weight: 800;
+  margin: 30px 0;
 }
-
+.title {
+  font-weight: 400;
+  width: 80%;
+}
+.id {
+  margin-bottom: 10px;
+}
+.desc {
+  width: 90%;
+}
 .products {
-    margin: 20px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
 }
-
+.containerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: "100%";
+  padding: 0 0 0 20px;
+}
 .hr {
-    border: 2px solid #3d8584;
-    margin: 20px 30px;
+  border: 2px solid #3d8584;
+  margin: 20px 30px;
 }
 
 .show {
-    display: none;
+  display: none;
+}
+
+.horizontal {
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+}
+.imgContainer {
+  border-radius: 15px;
+  background-color: #eaebef;
+  width: 280px;
+  height: 220px;
+}
+.productTitle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.productContent {
+  padding-left: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 220px;
 }
