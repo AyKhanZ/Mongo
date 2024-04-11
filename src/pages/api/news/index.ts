@@ -13,13 +13,13 @@ export default async function handler(
         try {
             let news = await NewsModel.find();
             news = news.map((item) => {
-                const imageBuffer = item.imag;
+                const imageBuffer = item.img;
                 const imageBase64 = imageBuffer.toString("base64");
                 item.img = `data:image/jpeg;base64${imageBase64}`;
-                return item;
+                return news;
             });
             return res.status(200).json(news);
-        } catch (err: any) {
+        } catch (error) {
             return res.status(500).json({ error: "Error fetching news" });
         }
     }
