@@ -3,6 +3,7 @@ export type Product = {
   id1C: string;
   name: string;
   desc: string;
-  img: string;
+  combinedImage: string;
   productType: string;
+  isPublic: boolean;
 };

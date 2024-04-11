@@ -8,6 +8,8 @@ import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import { faPencil as pencil } from "@fortawesome/free-solid-svg-icons";
 import { faLeftLong as back } from "@fortawesome/free-solid-svg-icons";
 import UploadImage from "@/components/UploadImage/UploadImage";
+import CheckBox from "@/components/CheckBox/CheckBox";
+import ComboBox from "@/components/ComboBox/ComboBox";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -17,64 +19,59 @@ const PostProduct = () => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [img, setImg] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
+  const productTypes = [
+    "Флагманские продукты",
+    "Услуги",
+    "Пользовательские лицензии",
+    "Серверные лицензии",
+    "1С:ИТС",
+  ];
 
   const router = useRouter();
   const params = useParams();
-
-  useEffect(() => {
-    console.log(img);
-  }, [img]);
 
   const getProduct = async (id: number) => {
     const response = await fetch(`https://localhost:7164/Product/ById/${id}`);
     const data = await response.json();
 
+    setIsPublic(data.isPublic);
+    setImg(data.image);
     setId1C(data.id1C);
     setType(data.productType);
     setName(data.name);
     setDesc(data.description);
+    console.log(isPublic);
   };
 
   useEffect(() => {
     getProduct(Number(params.editId));
   }, [params]);
 
-  const editProduct = async (id: number) => {
+  const handleTypeSelect = (ProductType: string) => {
+    setType(ProductType);
+  };
+
+  const edit = async (id: number) => {
     const productToEdit = {
       id: params.editId,
       id1C: id1C,
-      productType: type,
       name: name,
       description: desc,
+      productType: type,
+      isPublic: isPublic,
       image: img,
     };
 
-    const byteArray = new Uint8Array([
-      /* ваш массив байтов */
-    ]);
-
-    const formData = new FormData();
-    formData.append("productToEdit", JSON.stringify(productToEdit));
-    formData.append("image", new Blob([byteArray]));
-
-    fetch("https://localhost:7164/Product/ById/146513", {
+    await fetch(`https://localhost:7164/Product/ById/${params.editId}`, {
       method: "PUT",
-      body: formData,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("There was a problem with the PUT request:", error);
-      });
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productToEdit),
+    });
 
-    // router.push("/manageProducts");
+    router.push("/manageProducts");
   };
 
   return (
@@ -86,7 +83,7 @@ const PostProduct = () => {
 
             <div className={styles.btns}>
               <CreateBtn
-                onClick={() => editProduct(Number(params.editId))}
+                onClick={() => edit(Number(params.editId))}
                 symbol={pencil}
                 title="Edit"
               />
@@ -108,14 +105,6 @@ const PostProduct = () => {
                 placeholder="Id 1C"
                 type="text"
               />
-              <label className={styles.label}>Product type</label>
-              <input
-                className={styles.input}
-                defaultValue={type}
-                onChange={(ev) => setType(ev.target.value)}
-                placeholder="Product type"
-                type="text"
-              />
               <label className={styles.label}>Name</label>
               <input
                 className={styles.input}
@@ -131,10 +120,30 @@ const PostProduct = () => {
                 onChange={(ev) => setDesc(ev.target.value)}
                 placeholder="Product description"
               />
+              <label className={styles.label}>Product type</label>
+              <ComboBox options={productTypes} onSelect={handleTypeSelect} />
             </div>
             <div className={styles.imageContainer}>
               <label className={styles.label}>Image</label>
               <UploadImage setImg={setImg} />
+
+              {isPublic ? (
+                <CheckBox
+                  defaultValue={true}
+                  title={
+                    "Product is public ( it means than users can see this product )."
+                  }
+                  setCheck={setIsPublic}
+                />
+              ) : (
+                <CheckBox
+                  defaultValue={false}
+                  title={
+                    "Product is public ( it means than users can see this product )."
+                  }
+                  setCheck={setIsPublic}
+                />
+              )}
             </div>
           </div>
         </div>

@@ -2,20 +2,20 @@ import { Product } from "@/types";
 import { useEffect, useState } from "react";
 import styles from "./ManageProduct.module.css";
 import SideBarLayout from "@/components/SideBarLayout/SideBarLayout";
-import { Nunito } from "next/font/google";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import { faPencil as pencil } from "@fortawesome/free-solid-svg-icons";
 import { faTrashCan as trashCan } from "@fortawesome/free-solid-svg-icons";
 import DeleteForm from "@/components/DeleteForm/DeleteForm";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import FilterBtn from "@/components/FilterBtn/FilterBtn";
+import { Nunito } from "next/font/google";
+import ProductFilters from "@/components/ProductFilters/ProductFilters";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
 const ManageProducts = () => {
-  const [name, setName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [img, setImg] = useState("");
-  const [type, setType] = useState("");
+  const [url, setUrl] = useState("https://localhost:7164/Product");
   const [products, setProducts] = useState([]);
   const [delProductId, setDelProductId] = useState(0);
   const [deleteShown, setDeleteShown] = useState(false);
@@ -24,9 +24,10 @@ const ManageProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://localhost:7164/Product");
+      const response = await fetch(url);
       const data = await response.json();
       setProducts(data);
+      // console.log(Boolean(data.isPublic));
     } catch (err) {
       console.error(err);
     }
@@ -40,7 +41,7 @@ const ManageProducts = () => {
 
   useEffect(() => {
     fetchProducts();
-  }, [products]);
+  }, [products, url]);
 
   const showDelete = (pId: any) => {
     setDelProductId(pId);
@@ -58,24 +59,48 @@ const ManageProducts = () => {
           <DeleteForm
             setDeleteShown={setDeleteShown}
             deleteThisProduct={() => deleteProduct(delProductId)}
-            // deleteShown={deleteShown}
-            // productId={p.id}
           />
         </div>
-        <div className={deleteShown ? styles.containerHidden : styles.products}>
+        <div
+          className={
+            deleteShown ? styles.containerHidden : styles.containerHeader
+          }
+        >
           <div className={styles.containerTitle}>
-            <h1 className={styles.heading}>Products CRUD</h1>
+            <div className={styles.iconContainer}>
+              <h1 className={styles.heading}>All products</h1>
+              <Image
+                src="/product-delivery-icon.svg"
+                alt="Products icon"
+                height={40}
+                width={40}
+              />
+            </div>
             <CreateBtn
               onClick={() => router.push("/postProduct")}
               symbol="+"
               title="Create"
             />
           </div>
-
+        </div>
+        <div className={deleteShown ? styles.containerHidden : styles.filters}>
+          <ProductFilters setUrl={setUrl} />
+        </div>
+        <div className={deleteShown ? styles.containerHidden : styles.products}>
           {products.length > 0 ? (
             products.map((p: Product) => (
               <div className={styles.horizontal} key={p.id}>
-                <div className={styles.imgContainer}></div>
+                {p.combinedImage == null ? (
+                  <div className={styles.imgContainer}></div>
+                ) : (
+                  <Image
+                    className={styles.imgContainer}
+                    src={p.combinedImage}
+                    alt="Product image"
+                    width={280}
+                    height={220}
+                  />
+                )}
 
                 <div className={styles.productContent}>
                   <div className={styles.productTitle}>
@@ -96,6 +121,9 @@ const ManageProducts = () => {
                   </div>
 
                   <h2 className={styles.id}>Id 1C: {p.id1C}</h2>
+                  <h6 className={styles.title}>
+                    Is public: {Boolean(p.isPublic).toString()}
+                  </h6>
                   <p className={styles.desc}>
                     Lorem Ipsum is simply dummy text of the printing and
                     typesetting industry. Lorem Ipsum has been the industry s
