@@ -36,6 +36,12 @@
 .delete {
   background-color: #ff0000;
 }
+.update {
+  background-color: #ffb800;
+}
+.back {
+  background-color: #0089ff;
+}
 
 .text {
   position: absolute;
