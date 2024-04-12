@@ -16,7 +16,7 @@ export default async function handler(
                 const imageBuffer = item.img;
                 const imageBase64 = imageBuffer.toString("base64");
                 item.img = `data:image/jpeg;base64${imageBase64}`;
-                return news;
+                return item;
             });
             return res.status(200).json(news);
         } catch (error) {
@@ -24,15 +24,44 @@ export default async function handler(
         }
     }
 
-    // if (req.method === "POST") {
-    //     const { title, description, img } = req.body;
-    //     const newsData: News = {
-    //         title,
-    //         description,
-    //         img,
-    //     };
+    if (req.method === "POST") {
+        const { title, description, img, imageFile } = req.body;
+        const news = new NewsModel({
+            title,
+            description,
+            img,
+            imageFile,
+        });
+        try {
+            await news.save();
+            return res.status(201).json(news);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: "Error creating news" });
+        }
+    }
 
-    //     const news = await NewsModel.create(newsData);
-    //     return res.status(201).json(news);
-    // }
+    if (req.method === "DELETE") {
+        const { id } = req.body;
+        try {
+            const news = await NewsModel.findByIdAndDelete(id);
+            return res.status(200).json(news);
+        } catch (error) {
+            return res.status(500).json({ error: "Error deleting news" });
+        }
+    }
+
+    if (req.method === "PUT") {
+        const { id, title, description, img } = req.body;
+        try {
+            const news = await NewsModel.findByIdAndUpdate(id, {
+                title,
+                description,
+                img,
+            });
+            return res.status(200).json(news);
+        } catch (error) {
+            return res.status(500).json({ error: "Error updating news" });
+        }
+    }
 }

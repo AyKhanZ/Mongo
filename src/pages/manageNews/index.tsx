@@ -1,4 +1,4 @@
-import { Product } from "@/types";
+import { News, Product } from "@/types";
 import { useEffect, useState } from "react";
 import styles from "./ManageNews.module.css";
 import SideBarLayout from "@/components/SideBarLayout/SideBarLayout";
@@ -9,135 +9,193 @@ import DeleteForm from "@/components/DeleteForm/DeleteForm";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Nunito } from "next/font/google";
-import ProductFilters from "@/components/ProductFilters/ProductFilters";
+import { useParams } from "next/navigation";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
 const ManageNews = () => {
-  const [url, setUrl] = useState("https://localhost:7164/Product");
-  const [news, setNews] = useState([]);
-  const [delNewsId, setDelNewsId] = useState(0);
-  const [deleteShown, setDeleteShown] = useState(false);
+    const [news, setNews] = useState<News[]>([]);
+    const [delNewsId, setDelNewsId] = useState<string>("");
+    const [deleteShown, setDeleteShown] = useState(false);
 
-  const router = useRouter();
+    const router = useRouter();
 
-  //   const fetchNews = async () => {
-  //     try {
-  //       const response = await fetch(url);
-  //       const data = await response.json();
-  //       setNews(data);
-  //   } catch (error:any) {
-   //   console.error(error)
-  //   }
-  //   };
-  //   useEffect(() => {
-  //     fetchNews();
-  //   }, [news, url]);
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                const response = await fetch("http://localhost:3000/api/news");
+                if (response.ok) {
+                    const data = await response.json();
+                    setNews(data);
+                } else {
+                    console.error("Error fetching news");
+                }
+            } catch (error: any) {
+                console.error(error);
+            }
+        };
+        fetchNews();
+    }, []);
 
-  const deleteNews = async (id: number) => {
-    try {
-      await fetch(`https://localhost:7164/News/ById/${id}`, {
-        method: "DELETE",
-      });
-    } catch (error: any) {
-      console.error(error)
-    }
-  };
-  const showDelete = (pId: any) => {
-    setDelNewsId(pId);
-    setDeleteShown((prev) => !prev);
-  };
+    const deleteNews = async (id: string) => {
+        try {
+            await fetch(`http://localhost:3000/api/news/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id }),
+            });
+            // Update the state after successful deletion
+            setNews(news.filter((item) => item.id !== id));
+        } catch (error: any) {
+            console.error(error);
+        }
+    };
 
-  const truncateText = (text: string, maxLength: number) => {
-    if (text.length > maxLength) {
-      return text.substring(0, maxLength) + "...";
-    } else {
-      return text;
-    }
-  };
+    const edit = async (id: string) => {
+        try {
+            const newNews: News = {
+                title,
+                description: desc,
+                img,
+            };
+            const response = await fetch(
+                `http://localhost:3000/api/news/${id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(newNews),
+                }
+            );
 
-  return (
-    <SideBarLayout>
-      <div className={`${nunito.className} ${styles.container}`}>
-        <div
-          className={
-            deleteShown ? `${styles.deleteForm}` : `${styles.containerHidden}`
-          }
-        >
-          <DeleteForm
-            setDeleteShown={setDeleteShown}
-            deleteThis={() => deleteNews(delNewsId)}
-          />
-        </div>
-        <div
-          className={
-            deleteShown ? styles.containerHidden : styles.containerHeader
-          }
-        >
-          <div className={styles.containerTitle}>
-            <div className={styles.iconContainer}>
-              <h1 className={styles.heading}>All news</h1>
-              <Image src="/news.svg" alt="News icon" height={40} width={40} />
-            </div>
-            <CreateBtn
-              onClick={() => router.push("/postNews")}
-              symbol="+"
-              title="Create"
-            />
-          </div>
-        </div>
-        <div className={deleteShown ? styles.containerHidden : styles.news}>
-          {news.length > 0 ? (
-            news.map((p: Product) => (
-              <div className={styles.horizontal} key={p.id}>
-                {p.combinedImage == null ? (
-                  <div className={styles.imgContainer}></div>
-                ) : (
-                  <Image
-                    className={styles.imgContainer}
-                    src={p.combinedImage}
-                    alt="News image"
-                    width={280}
-                    height={220}
-                  />
-                )}
+            if (!response.ok) {
+                throw new Error("Error updating news");
+            }
 
-                <div className={styles.productContent}>
-                  <div className={styles.productTitle}>
-                    <h2 className={styles.title}>{p.name}</h2>
+            const updatedNews = await response.json();
 
-                    <div className={styles.btns}>
-                      <CreateBtn
-                        onClick={() => router.push(`/manageNews/${p.id}`)}
-                        symbol={pencil}
-                        title="Edit"
-                      />
-                      <CreateBtn
-                        onClick={() => showDelete(p.id)}
-                        symbol={trashCan}
-                        title="Delete"
-                      />
-                    </div>
-                  </div>
+            // Here you can update your local state or fetch the updated news
+            // For example:
+            // setNews(updatedNews);
+        } catch (error: any) {
+            console.error(error);
+        }
+    };
 
-                  <h2 className={styles.id}>Id 1C: {p.id1C}</h2>
-                  <h6 className={styles.title}>
-                    Is public: {Boolean(p.isPublic).toString()}
-                  </h6>
-                  <p className={styles.desc}>
-                    {truncateText(p.description, 550)}
-                  </p>
+    const showDelete = (pId: any) => {
+        setDelNewsId(pId);
+        setDeleteShown((prev) => !prev);
+    };
+
+    const truncateText = (text: string, maxLength: number) => {
+        if (text.length > maxLength) {
+            return text.slice(0, maxLength) + "...";
+        }
+        return text;
+    };
+
+    return (
+        <SideBarLayout>
+            <div className={`${nunito.className} ${styles.container}`}>
+                <div
+                    className={
+                        deleteShown
+                            ? `${styles.deleteForm}`
+                            : `${styles.containerHidden}`
+                    }
+                >
+                    <DeleteForm
+                        setDeleteShown={setDeleteShown}
+                        deleteThis={() => deleteNews(delNewsId)}
+                    />
                 </div>
-              </div>
-            ))
-          ) : (
-            <div className={styles.containerNone}>
-              <p className={styles.nonewsText}>No news yet ƪ(˘⌣˘)ʃ</p>
+                <div
+                    className={
+                        deleteShown
+                            ? styles.containerHidden
+                            : styles.containerHeader
+                    }
+                >
+                    <div className={styles.containerTitle}>
+                        <div className={styles.iconContainer}>
+                            <h1 className={styles.heading}>All news</h1>
+                            <Image
+                                src="/news.svg"
+                                alt="News icon"
+                                height={40}
+                                width={40}
+                            />
+                        </div>
+                        <CreateBtn
+                            onClick={() => router.push("/postNews")}
+                            symbol="+"
+                            title="Create"
+                        />
+                    </div>
+                </div>
+                <div
+                    className={
+                        deleteShown ? styles.containerHidden : styles.news
+                    }
+                >
+                    {news.length > 0 ? (
+                        news.map((p: News) => (
+                            <div className={styles.horizontal} key={p.id}>
+                                {p.imageFile == null ? (
+                                    <div className={styles.imgContainer}></div>
+                                ) : (
+                                    <Image
+                                        className={styles.imgContainer}
+                                        src={`data:image/jpeg;base64,${p.imageFile}`}
+                                        alt="News image"
+                                        width={280}
+                                        height={220}
+                                    />
+                                )}
+
+                                <div className={styles.productContent}>
+                                    <div className={styles.productTitle}>
+                                        <h2 className={styles.title}>
+                                            {p.title}
+                                        </h2>
+
+                                        <div className={styles.btns}>
+                                            <CreateBtn
+                                                onClick={() =>
+                                                    router.push(
+                                                        `/manageNews/${p.id}`
+                                                    )
+                                                }
+                                                symbol={pencil}
+                                                title="Edit"
+                                            />
+                                            <CreateBtn
+                                                onClick={() => showDelete(p.id)}
+                                                symbol={trashCan}
+                                                title="Delete"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <p className={styles.description}>
+                                        {truncateText(p.description, 200)}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className={styles.containerNone}>
+                            <p className={styles.nonewsText}>
+                                No news yet ƪ(˘⌣˘)ʃ
+                            </p>
+                        </div>
+                    )}
+                </div>
             </div>
-          )}
-        </div>
-      </div>
-    </SideBarLayout>
-  );
+        </SideBarLayout>
+    );
 };
 export default ManageNews;
