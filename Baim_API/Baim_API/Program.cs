@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Sieve.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,8 @@ var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("BAIM") ?? throw new InvalidOperationException("Connection string 'BaimContext' not found.");
 builder.Services.AddDbContext<BaimContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddSingleton<AspNetUser>();
+// filter sort paggination
+builder.Services.AddSingleton<SieveProcessor>();
 
 builder.Services.AddIdentity<AspNetUser, IdentityRole>()
 	.AddEntityFrameworkStores<BaimContext>().AddDefaultTokenProviders();

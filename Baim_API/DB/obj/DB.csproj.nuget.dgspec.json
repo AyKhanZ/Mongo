@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Baim Project\\Baim_API\\DB\\DB.csproj": {}
+    "D:\\Baim Project\\Back\\Baim_API\\DB\\DB.csproj": {}
   },
   "projects": {
-    "D:\\Baim Project\\Baim_API\\DB\\DB.csproj": {
+    "D:\\Baim Project\\Back\\Baim_API\\DB\\DB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Baim Project\\Baim_API\\DB\\DB.csproj",
+        "projectUniqueName": "D:\\Baim Project\\Back\\Baim_API\\DB\\DB.csproj",
         "projectName": "DB",
-        "projectPath": "D:\\Baim Project\\Baim_API\\DB\\DB.csproj",
+        "projectPath": "D:\\Baim Project\\Back\\Baim_API\\DB\\DB.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "D:\\Baim Project\\Baim_API\\DB\\obj\\",
+        "outputPath": "D:\\Baim Project\\Back\\Baim_API\\DB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -62,6 +62,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.17, )"
+            },
+            "Sieve": {
+              "target": "Package",
+              "version": "[2.5.5, )"
             }
           },
           "imports": [

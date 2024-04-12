@@ -1,7 +1,10 @@
-﻿using DB.DbContexts;
+﻿using Baim_API.Models.Product;
+using DB.DbContexts;
 using DB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace Baim_API.Controllers;
 [ApiController]
@@ -9,19 +12,21 @@ namespace Baim_API.Controllers;
 public class ProductController : Controller
 {  
 	private readonly BaimContext _dbContext;
+	private readonly SieveProcessor _sieveProcessor;
 
-	public ProductController(BaimContext dbContext)
+	public ProductController(BaimContext dbContext,
+			SieveProcessor sieveProcessor)
 	{
 		_dbContext = dbContext;
+		_sieveProcessor = sieveProcessor;
 	}
 
 	// GET: api/Product
 	[HttpGet("")]
-	public async Task<ActionResult<List<Product>>> GetProducts()
+	public async Task<ActionResult<List<Product>>> GetProducts([FromQuery] SieveModel model)
 	{
-		var products = await _dbContext.Products
-			//.Where(p => p.IsPublic == true)
-			.ToListAsync();
+		var products = _dbContext.Products.AsQueryable();
+		products = _sieveProcessor.Apply(model, products);
 
 		return Ok(products);
 	}
@@ -34,8 +39,19 @@ public class ProductController : Controller
 
 		if (product == null) return NotFound();
 
+		ProductModel productModel = new() { 
+			Id = product.Id,
+			Id1C = product.Id1C,
+			Name= product.Name,
+			Description= product.Description,
+			ProductType= product.ProductType,
+			IsPublic= product.IsPublic,
+			Image= product.CombinedImage,
+		};
+
 		return Ok(product);
 	}
+	 
 
 	// GET: api/Product/ById1C/{id1C}
 	[HttpGet("ById1C/{id1C}")]
@@ -50,11 +66,11 @@ public class ProductController : Controller
 	 
 
 	[HttpPost("")]
-	public async Task<ActionResult<Product>> AddProduct(Product product)
+	public async Task<ActionResult<Product>> AddProduct(ProductModel productModel)
 	{
 		if (!ModelState.IsValid) return BadRequest(ModelState);
 
-		var existingProduct = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id1C == product.Id1C);
+		var existingProduct = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id1C == productModel.Id1C);
 		if (existingProduct != null)
 		{
 			ModelState.AddModelError("Id1C", "Product with this Id1C already exists.");
@@ -63,6 +79,20 @@ public class ProductController : Controller
 
 		try
 		{
+			string imageType = productModel.Image!.Split(',')[0] + ","; 
+			byte[] imageBytes = Convert.FromBase64String(productModel.Image!.Split(',')[1]); 
+
+			Product product = new Product() 
+			{
+				Id1C = productModel.Id1C,
+				Name = productModel.Name,
+				Description= productModel.Description,
+				Image = imageBytes,
+				ImageType = imageType,
+				IsPublic = productModel.IsPublic,
+				ProductType = productModel.ProductType,
+			}; 
+
 			_dbContext.Products.Add(product);
 			await _dbContext.SaveChangesAsync();
 
@@ -74,11 +104,27 @@ public class ProductController : Controller
 		}
 	}
 
+
 	 
 	// PUT: api/Product/ById/{id}
 	[HttpPut("ById/{id}")]
-	public async Task<ActionResult<Product>> UpdateProduct(int id, Product updatedProduct)
+	public async Task<ActionResult<Product>> UpdateProduct(int id, ProductModel productModel)
 	{
+		string imageType = productModel.Image!.Split(',')[0] + ","; 
+		byte[] imageBytes = Convert.FromBase64String(productModel.Image!.Split(',')[1]); 
+
+		Product updatedProduct = new Product()
+		{
+			Id = productModel.Id,
+			Id1C = productModel.Id1C,
+			Name = productModel.Name,
+			Description = productModel.Description,
+			Image = imageBytes,
+			ImageType = imageType,
+			IsPublic = productModel.IsPublic,
+			ProductType = productModel.ProductType,
+		};
+
 		if (id != updatedProduct.Id)
 		{
 			return BadRequest("ID in the request body doesn't match the ID in the URL.");

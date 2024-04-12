@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "CjyaA9Fodi1Mq7e9i3tJUsOUH4/bIyS0AQyUTNAuNHw=",
+  "Hash": "SnX3iqGq750amm6XeXnIPP9dNhLv0pqh1SfRFWQ8+ls=",
   "Source": "Baim_API",
   "BasePath": "_content/Baim_API",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "Baim_API\\wwwroot",
       "Source": "Baim_API",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "Pattern": "**"
     }
@@ -1037,10 +1037,10 @@
       "OriginalItemSpec": "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\7.0.17\\staticwebassets\\V5\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\css\\Style.css",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\css\\Style.css",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "css/Style.css",
       "AssetKind": "All",
@@ -1054,10 +1054,10 @@
       "OriginalItemSpec": "wwwroot\\css\\Style.css"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\forgotPasswordLink.html",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\forgotPasswordLink.html",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "forgotPasswordLink.html",
       "AssetKind": "All",
@@ -1071,10 +1071,10 @@
       "OriginalItemSpec": "wwwroot\\forgotPasswordLink.html"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons.rar",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons.rar",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons.rar",
       "AssetKind": "All",
@@ -1088,10 +1088,10 @@
       "OriginalItemSpec": "wwwroot\\icons.rar"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\Agile.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\Agile.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/Agile.png",
       "AssetKind": "All",
@@ -1105,10 +1105,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\Agile.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-facebook.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\black-facebook.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/black-facebook.png",
       "AssetKind": "All",
@@ -1122,10 +1122,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\black-facebook.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-instagram.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\black-instagram.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/black-instagram.png",
       "AssetKind": "All",
@@ -1139,10 +1139,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\black-instagram.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-linkedin.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\black-linkedin.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/black-linkedin.png",
       "AssetKind": "All",
@@ -1156,10 +1156,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\black-linkedin.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-twitter.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\black-twitter.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/black-twitter.png",
       "AssetKind": "All",
@@ -1173,10 +1173,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\black-twitter.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\black-youtube.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\black-youtube.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/black-youtube.png",
       "AssetKind": "All",
@@ -1190,10 +1190,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\black-youtube.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\Deadline.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\Deadline.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/Deadline.png",
       "AssetKind": "All",
@@ -1207,10 +1207,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\Deadline.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\fb.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\fb.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/fb.png",
       "AssetKind": "All",
@@ -1224,10 +1224,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\fb.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\fb_gray.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\fb_gray.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/fb_gray.png",
       "AssetKind": "All",
@@ -1241,10 +1241,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\fb_gray.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\IMG_8073.PNG",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\IMG_8073.PNG",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/IMG_8073.PNG",
       "AssetKind": "All",
@@ -1258,10 +1258,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\IMG_8073.PNG"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\insta.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\insta.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/insta.png",
       "AssetKind": "All",
@@ -1275,10 +1275,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\insta.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\insta_gray.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\insta_gray.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/insta_gray.png",
       "AssetKind": "All",
@@ -1292,10 +1292,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\insta_gray.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\LogIn.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\LogIn.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/LogIn.png",
       "AssetKind": "All",
@@ -1309,10 +1309,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\LogIn.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\logo_baim.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\logo_baim.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/logo_baim.png",
       "AssetKind": "All",
@@ -1326,10 +1326,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\logo_baim.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\Settings.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\Settings.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/Settings.png",
       "AssetKind": "All",
@@ -1343,10 +1343,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\Settings.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\telegram.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\telegram.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/telegram.png",
       "AssetKind": "All",
@@ -1360,10 +1360,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\telegram.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\telegram_gray.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\telegram_gray.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/telegram_gray.png",
       "AssetKind": "All",
@@ -1377,10 +1377,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\telegram_gray.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-facebook.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\white-facebook.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/white-facebook.png",
       "AssetKind": "All",
@@ -1394,10 +1394,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\white-facebook.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-instagram.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\white-instagram.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/white-instagram.png",
       "AssetKind": "All",
@@ -1411,10 +1411,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\white-instagram.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-linkedin.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\white-linkedin.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/white-linkedin.png",
       "AssetKind": "All",
@@ -1428,10 +1428,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\white-linkedin.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-twitter.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\white-twitter.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/white-twitter.png",
       "AssetKind": "All",
@@ -1445,10 +1445,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\white-twitter.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\white-youtube.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\white-youtube.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/white-youtube.png",
       "AssetKind": "All",
@@ -1462,10 +1462,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\white-youtube.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\youtube.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\youtube.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/youtube.png",
       "AssetKind": "All",
@@ -1479,10 +1479,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\youtube.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\icons\\youtube_gray.png",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\icons\\youtube_gray.png",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "icons/youtube_gray.png",
       "AssetKind": "All",
@@ -1496,10 +1496,10 @@
       "OriginalItemSpec": "wwwroot\\icons\\youtube_gray.png"
     },
     {
-      "Identity": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\index.html",
+      "Identity": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\index.html",
       "SourceId": "Baim_API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Baim Project\\Baim_API\\Baim_API\\wwwroot\\",
+      "ContentRoot": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\wwwroot\\",
       "BasePath": "_content/Baim_API",
       "RelativePath": "index.html",
       "AssetKind": "All",

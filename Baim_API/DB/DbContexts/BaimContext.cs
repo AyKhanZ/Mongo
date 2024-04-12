@@ -79,10 +79,11 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 			entity.Property(p => p.Name).IsRequired()
 				.HasAnnotation("ErrorMessage", "The Name field is required.");
 			entity.Property(p => p.Description);
-			entity.Property(p => p.Image);
 			entity.Property(p => p.IsPublic).HasDefaultValue(false);
 			entity.Property(p => p.ProductType).IsRequired()
 				.HasAnnotation("ErrorMessage", "The ProductType field is required!");
+			entity.Property(p => p.Image).IsRequired();
+			entity.Property(p => p.ImageType).HasDefaultValue("data:image/png;base64,");
 
 			entity.HasIndex(p => p.Id1C).IsUnique();
 		});

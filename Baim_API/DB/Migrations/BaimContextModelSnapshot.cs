@@ -45,6 +45,7 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -103,6 +104,7 @@ namespace DB.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -310,7 +312,14 @@ namespace DB.Migrations
                         .HasAnnotation("ErrorMessage", "The Id 1C field is required!");
 
                     b.Property<byte[]>("Image")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("data:image/png;base64,");
 
                     b.Property<bool>("IsPublic")
                         .ValueGeneratedOnAdd()
@@ -479,21 +488,21 @@ namespace DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0928d3e0-eae4-4eac-bc22-8d411098980b",
+                            Id = "f723b7b3-7cf7-4c17-a416-c0b8948a0527",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "be8a15a6-f0ea-4c6c-a459-758190ac7ee2",
+                            Id = "46087e17-91b7-477b-a49b-0c496b2c7cc7",
                             ConcurrencyStamp = "2",
                             Name = "User",
                             NormalizedName = "User"
                         },
                         new
                         {
-                            Id = "e115a374-190e-47a7-baaa-d02d43ea3e04",
+                            Id = "044cd5be-3664-4aac-bee9-0c6150d9d719",
                             ConcurrencyStamp = "3",
                             Name = "Employer",
                             NormalizedName = "Employer"

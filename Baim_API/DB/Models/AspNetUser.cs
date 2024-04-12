@@ -1,13 +1,33 @@
 ﻿using DB.Services.Classes;
 using Microsoft.AspNetCore.Identity;
+using Sieve.Attributes; 
+
 namespace DB.Models;
 
 public partial class AspNetUser : IdentityUser
 {
+
+	[Sieve(CanFilter = true, CanSort = true)]
 	public string Id1C { get; set; } = string.Empty;
 
-	// Del ?
+
+	[Sieve(CanFilter = true, CanSort = true)]
+	// Del ? 
 	public int? Age { get; set; }
+
+
+	[Sieve(CanFilter = true, CanSort = true)]
+	public string UserName { get; set; } 
+
+
+	[Sieve(CanFilter = true, CanSort = true)]
+	public string Role { get; set; } = "User";
+
+
+	[Sieve(CanFilter = true, CanSort = true)]
+	public string Email { get; set; }
+
+
 	public byte[]? Image { get; set; }
 
 	public string Description { get; set; } = string.Empty;
@@ -16,7 +36,8 @@ public partial class AspNetUser : IdentityUser
 	public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; } = new List<AspNetUserClaim>();
 	public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; } = new List<AspNetUserLogin>();
 	public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; set; } = new List<AspNetUserToken>();
-	public string Role { get; set; } = "User";
+   
+
 
 	public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();  
 	 
