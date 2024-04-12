@@ -75,7 +75,7 @@ const PostProduct = () => {
         body: JSON.stringify(productToEdit),
       });
     } catch (error: any) {
-      throw new Error(error);
+      console.error(error);
     }
 
     router.push("/manageProducts");

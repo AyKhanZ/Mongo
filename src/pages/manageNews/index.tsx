@@ -27,7 +27,7 @@ const ManageNews = () => {
   //       const data = await response.json();
   //       setNews(data);
   //   } catch (error:any) {
-  //     throw new Error(error);
+   //   console.error(error)
   //   }
   //   };
   //   useEffect(() => {
@@ -40,7 +40,7 @@ const ManageNews = () => {
         method: "DELETE",
       });
     } catch (error: any) {
-      throw new Error(error);
+      console.error(error)
     }
   };
   const showDelete = (pId: any) => {

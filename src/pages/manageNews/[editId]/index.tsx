@@ -27,7 +27,7 @@ const PostProduct = () => {
       setTitle(data.title);
       setDesc(data.description);
     } catch (error: any) {
-      throw new Error(error);
+      console.error(error);
     }
   };
 

@@ -37,7 +37,7 @@ const ManageProducts = () => {
         method: "DELETE",
       });
     } catch (error: any) {
-      throw new Error(error);
+      console.error(error);
     }
   };
 
