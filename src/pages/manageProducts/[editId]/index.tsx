@@ -32,16 +32,19 @@ const PostProduct = () => {
   const params = useParams();
 
   const getProduct = async (id: number) => {
-    const response = await fetch(`https://localhost:7164/Product/ById/${id}`);
-    const data = await response.json();
+    try {
+      const response = await fetch(`https://localhost:7164/Product/ById/${id}`);
+      const data = await response.json();
 
-    setIsPublic(data.isPublic);
-    setImg(data.image);
-    setId1C(data.id1C);
-    setType(data.productType);
-    setName(data.name);
-    setDesc(data.description);
-    console.log(isPublic);
+      setIsPublic(data.isPublic);
+      setImg(data.image);
+      setId1C(data.id1C);
+      setType(data.productType);
+      setName(data.name);
+      setDesc(data.description);
+    } catch (error: any) {
+      throw new Error(error);
+    }
   };
 
   useEffect(() => {
@@ -53,23 +56,27 @@ const PostProduct = () => {
   };
 
   const edit = async (id: number) => {
-    const productToEdit = {
-      id: params.editId,
-      id1C: id1C,
-      name: name,
-      description: desc,
-      productType: type,
-      isPublic: isPublic,
-      image: img,
-    };
+    try {
+      const productToEdit = {
+        id: params.editId,
+        id1C: id1C,
+        name: name,
+        description: desc,
+        productType: type,
+        isPublic: isPublic,
+        image: img,
+      };
 
-    await fetch(`https://localhost:7164/Product/ById/${params.editId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productToEdit),
-    });
+      await fetch(`https://localhost:7164/Product/ById/${params.editId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productToEdit),
+      });
+    } catch (error: any) {
+      throw new Error(error);
+    }
 
     router.push("/manageProducts");
   };
@@ -125,7 +132,7 @@ const PostProduct = () => {
             </div>
             <div className={styles.imageContainer}>
               <label className={styles.label}>Image</label>
-              <UploadImage setImg={setImg} />
+              <UploadImage setImg={setImg} img={img} />
 
               {isPublic ? (
                 <CheckBox
@@ -153,17 +160,3 @@ const PostProduct = () => {
 };
 
 export default PostProduct;
-
-{
-  /* <button onClick={() => editProduct(Number(params.editId))}>
-  Edit product
-</button> */
-}
-{
-  /* <input
-  className={styles.input}
-  onChange={(ev) => setImg(ev.target.value)}
-  placeholder="productImg"
-  type="file"
-/> */
-}

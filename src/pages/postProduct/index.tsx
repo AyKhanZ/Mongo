@@ -1,14 +1,9 @@
 import SideBarLayout from "@/components/SideBarLayout/SideBarLayout";
 import styles from "./PostProduct.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { Product } from "@/types";
 import { Nunito } from "next/font/google";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
-import { faPencil as pencil } from "@fortawesome/free-solid-svg-icons";
-import { faTrashCan as trashCan } from "@fortawesome/free-solid-svg-icons";
-import DeleteForm from "@/components/DeleteForm/DeleteForm";
-import Image from "next/image";
 import { faLeftLong as back } from "@fortawesome/free-solid-svg-icons";
 import UploadImage from "@/components/UploadImage/UploadImage";
 import CheckBox from "@/components/CheckBox/CheckBox";
@@ -20,9 +15,10 @@ const PostProduct = () => {
   const [id1C, setId1C] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-  const [data, setData] = useState({});
-
   const [type, setType] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
+  const [img, setImg] = useState("");
+
   const productTypes = [
     "Флагманские продукты",
     "Услуги",
@@ -31,16 +27,9 @@ const PostProduct = () => {
     "1С:ИТС",
   ];
 
-  const [isPublic, setIsPublic] = useState(false);
-  const [img, setImg] = useState("");
-
   const handleTypeSelect = (ProductType: string) => {
     setType(ProductType);
   };
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   const router = useRouter();
 
@@ -61,8 +50,6 @@ const PostProduct = () => {
       },
       body: JSON.stringify(productToPost),
     });
-
-    setData(productToPost);
 
     router.push("/manageProducts");
   };
