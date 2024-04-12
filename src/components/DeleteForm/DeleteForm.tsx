@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./DeleteForm.module.css";
 
-const DeleteForm = ({ setDeleteShown, deleteThisProduct }: any) => {
-  
+const DeleteForm = ({ setDeleteShown, deleteThis }: any) => {
   const cancelDelete = () => {
-    setDeleteShown(false)
-  }
+    setDeleteShown(false);
+  };
 
   return (
     <div className={`${styles.mainContainer}`}>
@@ -13,7 +12,7 @@ const DeleteForm = ({ setDeleteShown, deleteThisProduct }: any) => {
         <svg
           fill="currentColor"
           viewBox="0 0 20 20"
-          className={`${styles.trash}`} 
+          className={`${styles.trash}`}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -28,8 +27,18 @@ const DeleteForm = ({ setDeleteShown, deleteThisProduct }: any) => {
         </p>
       </div>
       <div className={` ${styles.btnsContainer}`}>
-        <button onClick={cancelDelete} className={`${styles.cancelButton}`}>Cancel</button>
-        <button onClick={() => {cancelDelete();deleteThisProduct()}} className={`${styles.confirmButton}`}>Confirm</button>
+        <button onClick={cancelDelete} className={`${styles.cancelButton}`}>
+          Cancel
+        </button>
+        <button
+          onClick={() => {
+            cancelDelete();
+            deleteThis();
+          }}
+          className={`${styles.confirmButton}`}
+        >
+          Confirm
+        </button>
       </div>
     </div>
   );

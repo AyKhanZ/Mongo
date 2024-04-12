@@ -34,23 +34,25 @@ const PostProduct = () => {
   const router = useRouter();
 
   const postProduct = async () => {
-    const productToPost = {
-      id1C: id1C,
-      name: name,
-      description: desc,
-      productType: type,
-      isPublic: isPublic,
-      image: img,
-    };
-
-    await fetch("https://localhost:7164/Product", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productToPost),
-    });
-
+    try {
+      const productToPost = {
+        id1C: id1C,
+        name: name,
+        description: desc,
+        productType: type,
+        isPublic: isPublic,
+        image: img,
+      };
+      await fetch("https://localhost:7164/Product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productToPost),
+      });
+    } catch (error: any) {
+      throw new Error(error);
+    }
     router.push("/manageProducts");
   };
 
