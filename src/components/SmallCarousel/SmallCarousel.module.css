@@ -1,0 +1,80 @@
+@keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 7));
+    }
+  }
+  
+  .blueBlock {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 20px);
+    padding: 20px 0;
+    text-align: center;
+    margin: 100px 0;
+  }
+  
+  .scroll-element.blueBlock {
+    width: 80vw;
+    margin: 0;
+  }
+  
+  .slider {
+    background: white;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    height: 200px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .sliderImg {
+    height: 180px;
+  }
+  
+  .slider::before, .slider::after {
+    background: linear-gradient(to right, white 0%, rgba(83, 178, 177, 0) 100%);
+    content: "";
+    height: 200px;
+    position: absolute;
+    width: 200px;
+    z-index:  0.9;
+  }
+  .slider::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+  .slider::before {
+    left: 0;
+    top: 0;
+  }
+  .slider .slideTrack {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+  }
+  
+  .slider .slide {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin: 0 50px;
+    height: 100px;
+    width: 250px;
+  }
+  
+  .blueBlock.app {
+    margin: 20px 0;
+    border: 2px solid #EFEFEF;
+    background-color: #EFEFEF;
+    color: #326b6a;
+  }
+  

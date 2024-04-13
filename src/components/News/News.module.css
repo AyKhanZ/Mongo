@@ -1,0 +1,40 @@
+.twoHalves {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.twoHalves.large {
+  width: initial;
+  margin: 0;
+  padding: 0;
+  margin-left: 0;
+  margin-bottom: 100px;
+}
+
+.half {
+  width: calc(40vw - 20px);
+  display: block;
+  margin: 5px;
+}
+
+.horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.centeredHeading {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.circleImg {
+    margin: 5px;
+}
+
+.link {
+  color: #3d8584;
+}

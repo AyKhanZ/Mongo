@@ -1,0 +1,159 @@
+.container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  padding: 10px 20px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  color: grey;
+  justify-content: center;
+  font-size: 16px;
+  margin: 10px 0;
+}
+.inputDesc {
+  resize: none;
+  min-height: 200px;
+  padding: 10px 20px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  color: grey;
+  font-size: 16px;
+  margin: 10px 0;
+}
+.imageContainer {
+  width: 38%;
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+}
+.label {
+  margin: 20px 0 0 5px;
+  font-size: 18px;
+  font-weight: 800;
+}
+.heading {
+  font-weight: 800;
+  margin: 30px 0;
+}
+.title {
+  font-weight: 400;
+  width: 80%;
+}
+.id {
+  margin-bottom: 10px;
+}
+.desc {
+  width: 90%;
+}
+.products {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 96%;
+}
+.containerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: "100%";
+  padding: 0 0 0 20px;
+}
+.hr {
+  border: 2px solid #3d8584;
+  margin: 20px 30px;
+}
+
+.show {
+  display: none;
+}
+
+.horizontal {
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+}
+.imgContainer {
+  border-radius: 15px;
+  background-color: #eaebef;
+  width: 280px;
+  height: 220px;
+}
+.productTitle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.productContent {
+  padding-left: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 220px;
+}
+
+.containerNone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  border-radius: 15px;
+  border: 1px dashed #cbccce;
+}
+
+.noProductsText {
+  font-size: 22px;
+  color: #cbccce;
+}
+
+.deleteForm {
+  display: block !important;
+  position: absolute;
+  z-index: 1;
+  top: 200px;
+  left: calc(50vw - 125px);
+}
+
+.containerHidden {
+  display: none;
+}
+
+.editBtn {
+  display: block;
+  color: #3d8584;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 220px;
+}
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 60vh;
+}
+.inputs {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+}

@@ -1,0 +1,38 @@
+
+
+.carouselImages {
+  display: block;
+  position: absolute;
+  top: 310px;
+  height: calc(100vh - 340px);
+  width: calc(100vw - 30px);
+  padding: 0 2px;
+  border-radius: 20px;
+}
+  
+.carouselCircles {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #66d3d1;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.activeCircle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #3d8584;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+}

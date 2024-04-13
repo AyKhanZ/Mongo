@@ -1,0 +1,25 @@
+.plan {
+  width: 80%;
+  margin: 30px 10%;
+  min-width: 240px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background-color: #3d8584;
+  color: white;
+  padding: 15px 0;
+  z-index: 0.9;
+  text-align: center;
+}
+
+.threeColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  color: #3d8584;
+}
+
+.col {
+  margin: 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+}

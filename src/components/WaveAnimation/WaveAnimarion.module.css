@@ -1,0 +1,40 @@
+.box {
+    position: fixed;
+    top: -100px;
+    transform: rotate(80deg); 
+    left: 90%;
+  }
+  
+  .w {
+    position: absolute;
+    opacity: .4;
+    width: 1200px;
+    height: 1000px;
+    margin-top: -50px;
+    margin-left: 100px;
+    border-radius: 43%;
+    z-index: 0.7;
+    border: 2px solid white;
+  }
+  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
+  }
+  
+  .w.one {
+    animation: rotate 5s  linear;
+    opacity: .8;
+  }
+  
+  .w.two {
+    animation: rotate 11s  linear;
+    transform: rotate(30deg);
+    opacity: .8;
+  }
+  
+  .w.three {
+    animation: rotate 8s  linear;
+    transform: rotate(60deg);
+  }
+  

@@ -1,0 +1,41 @@
+.textAndImg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 100px 10%;
+  }
+
+  .list {
+    border: 1px solid transparent;
+    border-radius: 20px;
+    width: 100%;
+    padding: 0 50px;
+    background-color: #EFEFEF;
+    color: #326b6a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 246px;
+  }
+
+  .lst {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .widthContent {
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .lstImg {
+    width: 400px;
+    height: 250px;
+    border-radius: 20px;
+  }
+
+  .heading {
+    margin: 10px;
+  }

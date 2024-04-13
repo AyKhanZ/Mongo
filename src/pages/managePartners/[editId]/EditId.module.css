@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100%;
+}
+.products {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  width: 96%;
+}
+.containerTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: "100%";
+  padding: 0 0 0 20px;
+}
+.heading {
+  font-weight: 800;
+  margin: 30px 0;
+}
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 60vh;
+}
+.inputs {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+}
+.imageContainer {
+  width: 38%;
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+}
+.input {
+  padding: 10px 20px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  color: grey;
+  justify-content: center;
+  font-size: 16px;
+  margin: 10px 0;
+}
+.inputDesc {
+  resize: none;
+  min-height: 200px;
+  padding: 10px 20px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  color: grey;
+  font-size: 16px;
+}
+.label {
+  margin: 20px 0 0 5px;
+  font-size: 18px;
+  font-weight: 800;
+}
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 220px;
+}

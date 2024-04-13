@@ -1,0 +1,10 @@
+.select {
+  padding: 10px 20px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  color: grey;
+  justify-content: center;
+  font-size: 16px;
+  margin: 10px 0;
+}
