@@ -1,0 +1,64 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.header,
+.cell {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+.cellActions {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  width: 220px;
+}
+
+.firstRowHeader {
+  border-bottom: none;
+}
+
+.row:last-child .cell {
+  border-bottom: none;
+}
+
+.actionButton {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  background-color: #0056b3;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.headerActions {
+  font-weight: bold;
+  padding: 8px 40px;
+  border-bottom: 1px solid #ddd;
+  text-align: end;
+}
+
+.containerNone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  border-radius: 15px;
+  border: 1px dashed #cbccce;
+}
+
+.noProductsText {
+  font-size: 22px;
+  color: #cbccce;
+}

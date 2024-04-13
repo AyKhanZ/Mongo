@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Shamsaddin Vahabli",
+    "position": "CEO",
+    "isOpen": true,
+    "children": [
+      {
+        "name": "Alice Smith",
+        "position": "Director",
+        "isOpen": true,
+        "workers": [
+          { "name": "John Doe", "position": "Manager", "isOpen": false },
+          { "name": "Alice Smith", "position": "Coordinator", "isOpen": false },
+          { "name": "Bob Johnson", "position": "Analyst", "isOpen": false }
+        ]
+      },
+      {
+        "name": "Emily Brown",
+        "position": "Director",
+        "isOpen": true,
+        "workers": [
+          { "name": "Emily Brown", "position": "Supervisor", "isOpen": false },
+          {
+            "name": "Michael Davis",
+            "position": "Consultant",
+            "isOpen": false
+          },
+          { "name": "Emma Wilson", "position": "Assistant", "isOpen": false }
+        ]
+      },
+      {
+        "name": "Oliver Taylor",
+        "position": "Director",
+        "isOpen": true,
+        "workers": [
+          {
+            "name": "Oliver Taylor",
+            "position": "Specialist",
+            "isOpen": false
+          },
+          {
+            "name": "Sophia Martinez",
+            "position": "Coordinator",
+            "isOpen": false
+          },
+          { "name": "William Garcia", "position": "Analyst", "isOpen": false }
+        ]
+      }
+    ]
+  }
+]

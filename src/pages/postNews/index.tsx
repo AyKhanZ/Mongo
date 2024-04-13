@@ -10,31 +10,53 @@ import UploadImage from "@/components/UploadImage/UploadImage";
 const nunito = Nunito({ subsets: ["latin"] });
 
 const PostNews = () => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [img, setImg] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [desc, setDesc] = useState<string>("");
+  const [image, setImage] = useState<string>("");
+  const [imageFile, setImageFile] = useState<File>();
   const router = useRouter();
 
-  const postNews = async () => {
-    const newsToPost = {
-      title: title,
-      description: desc,
-      image: img,
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    try {
-      await fetch("https://localhost:7164/Product", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newsToPost),
-      });
-    } catch (error: any) {
-      throw new Error(error);
+    if (!imageFile) {
+      alert("Please select an image file");
+      return;
     }
 
-    router.push("/manageNews");
+    const reader = new FileReader();
+    reader.readAsDataURL(imageFile);
+    reader.onload = async () => {
+      const base64Image = reader.result as string;
+
+      try {
+        const response = await fetch("http://localhost:3000/api/news", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            description: desc,
+
+            img: base64Image,
+          }),
+        });
+
+        if (response.ok) {
+          router.push("/manageNews");
+        } else {
+          const text = await response.text();
+          console.error(
+            `Request failed with status code ${response.status} and body: ${text}`
+          );
+          throw new Error("Error creating news");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Error creating news");
+      }
+    };
   };
 
   return (
@@ -49,7 +71,7 @@ const PostNews = () => {
                 symbol={back}
                 title="Back"
               />
-              <CreateBtn onClick={postNews} symbol="+" title="Create" />
+              <CreateBtn onClick={handleSubmit} symbol="+" title="Create" />
             </div>
           </div>
           <div className={styles.form}>
@@ -70,7 +92,7 @@ const PostNews = () => {
             </div>
             <div className={styles.imageContainer}>
               <label className={styles.label}>Image</label>
-              <UploadImage setImg={setImg} />
+              <UploadImage setImg={setImageFile} />
             </div>
           </div>
         </div>

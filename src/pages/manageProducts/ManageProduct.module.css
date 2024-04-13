@@ -100,7 +100,7 @@
 }
 .imgContainer {
   border-radius: 15px;
-  background-color: #eaebef;
+  background-color: transparent;
   height: 220px;
   min-width: 280px;
 }

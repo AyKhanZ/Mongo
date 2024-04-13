@@ -180,7 +180,7 @@ const SideNavBar = () => {
             </div>
             <div className={`${styles.menu_title} ${styles.flex}`}>
               <span className={styles.title}>
-                <Link className={styles.link} href="/manageNews">
+                <Link className={styles.link} href="/manageUsers">
                   <FontAwesomeIcon
                     icon={users}
                     className={`${styles.fa_solid} ${styles.fa_bars} ${styles.bx} ${styles.bx_lock_alt}`}

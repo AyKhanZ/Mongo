@@ -16,6 +16,7 @@ const Combobox: React.FC<ComboboxProps> = ({ options, onSelect }) => {
 
   return (
     <select
+      required
       className={styles.select}
       value={selectedOption || ""}
       onChange={(e) => handleSelect(e.target.value)}

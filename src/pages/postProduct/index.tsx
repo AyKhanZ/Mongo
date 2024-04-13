@@ -2,12 +2,12 @@ import SideBarLayout from "@/components/SideBarLayout/SideBarLayout";
 import styles from "./PostProduct.module.css";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { Nunito } from "next/font/google";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import { faLeftLong as back } from "@fortawesome/free-solid-svg-icons";
 import UploadImage from "@/components/UploadImage/UploadImage";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import ComboBox from "@/components/ComboBox/ComboBox";
+import { Nunito } from "next/font/google";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -51,7 +51,7 @@ const PostProduct = () => {
         body: JSON.stringify(productToPost),
       });
     } catch (error: any) {
-      throw new Error(error);
+      console.error(error);
     }
     router.push("/manageProducts");
   };
