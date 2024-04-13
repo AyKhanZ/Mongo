@@ -12,6 +12,7 @@ using System;
 using Sieve.Models;
 using Sieve.Services;
 using Microsoft.Extensions.Hosting;
+using Baim_API.Models.UserManagement;
 
 namespace Baim_API.Controllers
 {
@@ -43,13 +44,60 @@ namespace Baim_API.Controllers
 		}
 
 
+		//[HttpGet("GetUsers")]
+		//public async Task<IActionResult> GetUsers([FromQuery] SieveModel model)
+		//{
+		//	var quantity = await _dbContext.Users.CountAsync();
+		//	var users = _dbContext.Users.AsQueryable();
+		//	users = _sieveProcessor.Apply(model, users);
+
+		//	var response = new
+		//	{
+		//		TotalUsersCount = quantity,
+		//		Users = users
+		//	};
+
+		//	return Ok(response);
+		//}
+
+
+
 		[HttpGet("GetUsers")]
-		public async Task<IActionResult> GetUsers([FromQuery] SieveModel model)
+		public async Task<IActionResult> GetUsers([FromQuery] SieveModel model, string? orFilter = null)
 		{
-			var users = _dbContext.Users.AsQueryable();
-			users = _sieveProcessor.Apply(model, users);
-			 
-			return Ok(users);
+			var usersQuery = _dbContext.Users.AsQueryable();
+			var quantity = usersQuery.Count();
+
+			usersQuery = _sieveProcessor.Apply(model, usersQuery);
+			var filteredCount = 0;
+
+			if (!string.IsNullOrEmpty(orFilter))
+			{
+				var orFilters = orFilter.Split('|');
+				foreach (var filter in orFilters)
+				{
+					var filterParts = filter.Split("@=");
+					if (filterParts.Length == 2)
+					{ 
+						var value = filterParts[1]; 
+						usersQuery = usersQuery.Where(u => EF.Functions.Like(u.UserName, $"%{value}%")
+															|| EF.Functions.Like(u.LastName, $"%{value}%")
+															|| EF.Functions.Like(u.Email, $"%{value}%"));
+						filteredCount = usersQuery.Count();
+					}
+				}
+			}
+
+			var users = await usersQuery.ToListAsync();
+
+			var response = new
+			{
+				TotalUsersCount = quantity,
+				TotalFilteredCount = filteredCount,
+				Users = users
+			};
+
+			return Ok(response);
 		}
 	}
 }

@@ -62,6 +62,10 @@ namespace DB.Migrations
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -92,7 +96,7 @@ namespace DB.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("User");
+                        .HasDefaultValue("Client");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -488,21 +492,21 @@ namespace DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f723b7b3-7cf7-4c17-a416-c0b8948a0527",
+                            Id = "079f9b6d-382c-4739-ac77-e27529c69938",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "46087e17-91b7-477b-a49b-0c496b2c7cc7",
+                            Id = "b26761c3-ed92-4209-9ca1-1c21eae36474",
                             ConcurrencyStamp = "2",
-                            Name = "User",
-                            NormalizedName = "User"
+                            Name = "Client",
+                            NormalizedName = "Client"
                         },
                         new
                         {
-                            Id = "044cd5be-3664-4aac-bee9-0c6150d9d719",
+                            Id = "5ccfa643-ed46-4442-a3a9-0333e47605c7",
                             ConcurrencyStamp = "3",
                             Name = "Employer",
                             NormalizedName = "Employer"

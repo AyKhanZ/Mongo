@@ -10,6 +10,7 @@
         "dependencies": {
           "Bussines": "1.0.0",
           "DB": "1.0.0",
+          "LinqKit.Microsoft.EntityFrameworkCore": "7.1.5",
           "Microsoft.AspNet.WebApi.Cors": "5.3.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.17",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.17",
@@ -64,6 +65,26 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "LinqKit.Core/1.2.5": {
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Core.dll": {
+            "assemblyVersion": "1.2.5.0",
+            "fileVersion": "1.2.5.0"
+          }
+        }
+      },
+      "LinqKit.Microsoft.EntityFrameworkCore/7.1.5": {
+        "dependencies": {
+          "LinqKit.Core": "1.2.5",
+          "Microsoft.EntityFrameworkCore": "7.0.17"
+        },
+        "runtime": {
+          "lib/net7.0/LinqKit.Microsoft.EntityFrameworkCore.dll": {
+            "assemblyVersion": "7.1.5.0",
+            "fileVersion": "7.1.5.0"
           }
         }
       },
@@ -907,6 +928,20 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "LinqKit.Core/1.2.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+5UKyagtVX33TSeOGorYzDXus/ypAISfM7HFfrix4BEmuuGF+nhSjf8P9csejLQ79ny5ms33M5/lQ2SkwC0Jxw==",
+      "path": "linqkit.core/1.2.5",
+      "hashPath": "linqkit.core.1.2.5.nupkg.sha512"
+    },
+    "LinqKit.Microsoft.EntityFrameworkCore/7.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NyHAADS9a1AWsY9/G6UEPnRwjv+Y0o15xeiwczpQEFI4Y5ChPx7mnV+wH/eRdHtYhVfFqTrdjEICZ5B2VfPkFA==",
+      "path": "linqkit.microsoft.entityframeworkcore/7.1.5",
+      "hashPath": "linqkit.microsoft.entityframeworkcore.7.1.5.nupkg.sha512"
     },
     "MailKit/3.2.0": {
       "type": "package",

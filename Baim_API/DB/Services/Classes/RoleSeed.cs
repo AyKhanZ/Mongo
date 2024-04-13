@@ -8,7 +8,7 @@ public static class RoleSeed
 	{
 		builder.Entity<IdentityRole>().HasData(
 			new IdentityRole() { Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
-			new IdentityRole() { Name = "User", ConcurrencyStamp = "2", NormalizedName = "User" },
+			new IdentityRole() { Name = "Client", ConcurrencyStamp = "2", NormalizedName = "Client" },
 			new IdentityRole() { Name = "Employer", ConcurrencyStamp = "3", NormalizedName = "Employer" }
 		);
 	}

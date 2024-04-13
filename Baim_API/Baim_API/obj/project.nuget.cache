@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "LEV5Eai7o7bFGFXvRqVNS7pC5ATVaJ73LVHJ+CDR1pSk0fLaDSxHXW+nGkN4a0sD567lOXSejadTtEp5pxuumg==",
+  "dgSpecHash": "oNtIdORD7vD6tGT6WFXDnZtAxu5JswLq/TCC3MQ/MROFyVM6W5/AaGpdOvZcEqlFUnENz7huJN3rgocVBHFSug==",
   "success": true,
   "projectFilePath": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\Baim_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\linqkit.core\\1.2.5\\linqkit.core.1.2.5.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\linqkit.microsoft.entityframeworkcore\\7.1.5\\linqkit.microsoft.entityframeworkcore.7.1.5.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mailkit\\3.2.0\\mailkit.3.2.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnet.cors\\5.3.0\\microsoft.aspnet.cors.5.3.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnet.webapi.client\\6.0.0\\microsoft.aspnet.webapi.client.6.0.0.nupkg.sha512",

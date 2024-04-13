@@ -51,7 +51,6 @@ public class AuthenticationController : ControllerBase
 	[HttpPost("Registration")]
 	public async Task<IActionResult> Registration([FromBody] RegisterUser model)
 	{
-		string role = "User";
 		if (!ModelState.IsValid) return BadRequest("Invalid model state");
 
 		var emailCheckResult = AuthValidation.CheckEmail(model.Email);
@@ -67,12 +66,13 @@ public class AuthenticationController : ControllerBase
 			Id1C = model.Id1C,
 			Email = model.Email,
 			UserName = model.UserName,
+			LastName = model.LastName,
 			NormalizedEmail = model.Email.ToUpper(),
-			Role = role
+			Role = model.Role
 		};
 
 		var result = new IdentityResult();
-		if (await _roleManager.RoleExistsAsync(role))
+		if (await _roleManager.RoleExistsAsync(model.Role))
 		{
 			await _userStore.SetUserNameAsync(newUser, model.Email, CancellationToken.None);
 			await _userManager.GetUserIdAsync(newUser);
@@ -83,7 +83,7 @@ public class AuthenticationController : ControllerBase
 				return StatusCode(StatusCodes.Status500InternalServerError,
 					new Response { Status = "Error", Message = "User failed to create!" });
 			}
-			await _userManager.AddToRoleAsync(newUser, role);
+			await _userManager.AddToRoleAsync(newUser, model.Role);
 
 			var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
 			var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = newUser.Email }, Request.Scheme);

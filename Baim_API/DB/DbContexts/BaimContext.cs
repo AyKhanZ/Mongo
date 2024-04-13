@@ -30,11 +30,12 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 			entity.HasKey(u => u.Id);
 			entity.Property(u => u.Id1C);
 			entity.Property(u => u.Age);
+			entity.Property(u => u.LastName).IsRequired();
 			entity.Property(u => u.Image);
 			entity.Property(u => u.Description);
 			entity.Property(u => u.TaskState);
 			entity.Property(u => u.PhoneNumber);
-			entity.Property(u => u.Role).HasDefaultValue("User");
+			entity.Property(u => u.Role).HasDefaultValue("Client");
 
 			entity.HasIndex(u => u.PhoneNumber).IsUnique();
 

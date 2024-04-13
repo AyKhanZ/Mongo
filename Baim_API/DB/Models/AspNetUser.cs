@@ -11,13 +11,14 @@ public partial class AspNetUser : IdentityUser
 	public string Id1C { get; set; } = string.Empty;
 
 
-	[Sieve(CanFilter = true, CanSort = true)]
 	// Del ? 
 	public int? Age { get; set; }
 
 
 	[Sieve(CanFilter = true, CanSort = true)]
 	public string UserName { get; set; } 
+	[Sieve(CanFilter = true, CanSort = true)]
+	public string LastName { get; set; }
 
 
 	[Sieve(CanFilter = true, CanSort = true)]
