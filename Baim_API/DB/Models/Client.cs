@@ -18,6 +18,6 @@ public class Client
 
 	public bool IsPublic { get; set; } = false; 
 	public byte[]? ClientFeedback { get; set; } 
-	public byte[]? ClientConfirm { get; set; } 
-	public string YoutubeLink { get; set; } 
+	public byte[]? ClientConfirm { get; set; }
+	public string? YoutubeLink { get; set; } = string.Empty;
 }

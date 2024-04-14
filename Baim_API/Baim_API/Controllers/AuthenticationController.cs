@@ -87,7 +87,7 @@ public class AuthenticationController : ControllerBase
 
 			if (model.Role == "Client")
 			{
-				Client client = new() { User = newUser, UserId = newUser.Id,IsPublic=false };
+				Client client = new() { User = newUser, UserId = newUser.Id,IsPublic=true };
 				await _dbContext.Clients.AddAsync(client);
 			}
 			else if (model.Role == "Employer")
