@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import styles from "./Table.module.css";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import { faRightLong as moreDetails } from "@fortawesome/free-solid-svg-icons";
-import { ClientWrapper } from "@/types";
+import {ClientWrapper} from "@/types";
 import DisActiveBtn from "@/components/DisActiveBtn/DisActiveBtn";
 import {useRouter} from "next/router";
 import {useParams} from "next/navigation"; // Предполагается, что тип ClientWrapper правильно описывает структуру данных
+
 
 interface TableProps {
     clients: ClientWrapper[];
@@ -52,7 +53,7 @@ const Table: React.FC<TableProps> = ({ clients, activeStates, setActiveStates })
         </tr>
         </thead>
         <tbody className={styles.tbody}>
-        {clients.map(({ client }) => (
+        {clients.map(({client}:any) => (
             <tr key={client.id}>
               <td className={styles.cell}>{client.user.id1C}</td>
               <td className={styles.cell}>{`${client.user.userName} ${client.user.lastName}`}{client.user.patronimic != null ? client.user.patronimic : "..."}</td>

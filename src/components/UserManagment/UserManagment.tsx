@@ -133,7 +133,7 @@ const UserManagement: React.FC = () => {
                   :
                   <>
                     <div className={styles.tableContainer}>
-                      <Table clients={clients} activeStates={activeStates} setActiveStates={setActiveStates} />
+                      <Table clients={currentClients} activeStates={activeStates} setActiveStates={setActiveStates} />
                     </div>
                     <Pagination
                         currentPage={currentPage}

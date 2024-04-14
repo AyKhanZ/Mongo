@@ -7,6 +7,7 @@ import styles from "./InfoId.module.css";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import { faLeftLong as back } from "@fortawesome/free-solid-svg-icons";
 import {ClientWrapper} from "@/types";
+import ClientIcon from "@/components/ClientIcon/ClientIcon";
 import Image from "next/image";
 
 const nunito = Nunito({ subsets: ["latin"] });
@@ -46,30 +47,49 @@ const InfoId = () => {
                                 title="Back" />
                         </div>
                     </div>
+                </div>
+                <div className={styles.products}>
                     {client ? (
                         <div className={styles.form}>
                             <div className={styles.column}>
-                                {/* Используйте optional chaining для безопасного доступа к свойствам */}
-                                <label className={styles.label}>{client?.user?.userName}</label>
-                                <label className={styles.label}>{client?.user?.lastName}</label>
-                                <label className={styles.label}>{client?.user?.patronimic}</label>
-                                <label className={styles.label}>{client?.user?.phoneNumber}</label>
-                                <label className={styles.label}>{client?.user?.email}</label>
-                                <label className={styles.label}>{client?.businessPhoneNumber}</label>
-                                <label className={styles.label}>{client?.personalEmail}</label>
+                                <div className={styles.content}>
+                                    <label className={styles.label}>Name: </label>
+                                    <label className={styles.labelContent}>{client?.user?.userName}</label>
+                                </div>
+                                <div className={styles.content}>
+                                    <label className={styles.label}>Surname: </label>
+                                    <label className={styles.labelContent}>{client?.user?.lastName}</label>
+                                </div>
+                                <div className={styles.content}>
+                                    <label className={styles.label}>Patronimic: </label>
+                                    <label className={styles.labelContent}>{!client?.user?.patronimic ? "Not set" : client?.user?.patronimic}</label>
+                                </div>
+                                <div className={styles.content}>
+                                    <label className={styles.label}>Phone number: </label>
+                                    <label className={styles.labelContent}>{!client?.user?.phoneNumber ? "Not set" :client?.user?.phoneNumber}</label>
+                                </div>
+                                <div className={styles.content}>
+                                    <label className={styles.label}>Business phone number: </label>
+                                    <label className={styles.labelContent}>{!client?.businessPhoneNumber ? "Not set" : client?.businessPhoneNumber}</label>
+                                </div>
+                                <div className={styles.content}>
+                                    <label className={styles.label}>Email: </label>
+                                    <label className={styles.labelContent}>{client?.user?.email}</label>
+                                </div>
+                                <div className={styles.content}>
+                                    <label className={styles.label}>Personal email: </label>
+                                    <label className={styles.labelContent}>{!client?.personalEmail ? "Not set" : client?.personalEmail}</label>
+                                </div>
                             </div>
                             <div className={styles.column}>
                                 <div className={styles.imageContainer}>
-                                    <Image
-                                        src="/account-icon.svg"
-                                        alt="image"
-                                        width={300}
-                                        height={300}
-                                        layout="fixed"
-                                        objectFit="cover"
-                                        objectPosition="center"
-                                        className={styles.img}
-                                    />
+                                    <div className={!client.user.image? `${styles.borderContainer}` : ``}>
+                                        {!client.user.image ?
+                                            <ClientIcon className="icon-class" style={{ width: '300px', height: '300px', fill: 'grey' }} />:<Image className={styles.img} src={""} alt={"Photo"} height={300} width={300}/>
+
+                                        }
+                                    </div>
+
                                 </div>
                             </div>
 

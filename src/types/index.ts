@@ -52,7 +52,8 @@ export type ClientWrapper = {
     id1C: string;
     userName: string;
     lastName: string;
-    patronimic: boolean;
+    patronimic?: string;
+    image:any;
     role: string;
     email: string;
     phoneNumber?: string;
