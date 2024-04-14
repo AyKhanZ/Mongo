@@ -21,7 +21,8 @@ public class ProductController : Controller
 		_sieveProcessor = sieveProcessor;
 	}
 
-	// GET: api/Product
+
+
 	[HttpGet("")]
 	public async Task<ActionResult<List<Product>>> GetProducts([FromQuery] SieveModel model)
 	{
@@ -31,29 +32,16 @@ public class ProductController : Controller
 		return Ok(products);
 	}
 
-	// GET: api/Product/ById/{id}
 	[HttpGet("ById/{id}")]
 	public async Task<ActionResult<Product>> GetProductById(int id)
 	{
 		var product = await _dbContext.Products.FindAsync(id);
 
-		if (product == null) return NotFound();
-
-		ProductModel productModel = new() { 
-			Id = product.Id,
-			Id1C = product.Id1C,
-			Name= product.Name,
-			Description= product.Description,
-			ProductType= product.ProductType,
-			IsPublic= product.IsPublic,
-			Image= product.CombinedImage,
-		};
+		if (product == null) return NotFound(); 
 
 		return Ok(product);
 	}
-	 
 
-	// GET: api/Product/ById1C/{id1C}
 	[HttpGet("ById1C/{id1C}")]
 	public async Task<ActionResult<Product>> GetProductById1C(string id1C)
 	{
@@ -64,6 +52,7 @@ public class ProductController : Controller
 		return Ok(product);
 	}
 	 
+
 
 	[HttpPost("")]
 	public async Task<ActionResult<Product>> AddProduct(ProductModel productModel)
@@ -105,8 +94,8 @@ public class ProductController : Controller
 	}
 
 
-	 
-	// PUT: api/Product/ById/{id}
+
+
 	[HttpPut("ById/{id}")]
 	public async Task<ActionResult<Product>> UpdateProduct(int id, ProductModel productModel)
 	{
@@ -149,7 +138,6 @@ public class ProductController : Controller
 		}
 	}
 
-	// PUT: api/Product/ById1C/{id1C}
 	[HttpPut("ById1C/{id1C}")]
 	public async Task<ActionResult<Product>> UpdateProductById1C(string id1C, Product updatedProduct)
 	{
@@ -179,7 +167,6 @@ public class ProductController : Controller
 
 
 
-	// DELETE: api/Product/ById/{id}
 	[HttpDelete("ById/{id}")]
 	public async Task<ActionResult> DeleteProductById(int id)
 	{
@@ -193,7 +180,6 @@ public class ProductController : Controller
 		return NoContent();
 	}
 
-	// DELETE: api/Product/ById1C/{id1C}
 	[HttpDelete("ById1C/{id1C}")]
 	public async Task<ActionResult> DeleteProductById1C(string id1C)
 	{

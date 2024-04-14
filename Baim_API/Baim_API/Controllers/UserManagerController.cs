@@ -40,27 +40,8 @@ namespace Baim_API.Controllers
 			_signInManager = signInManager;
 			_roleManager = roleManager;
 			_configuration = configuration;
-			_sieveProcessor = sieveProcessor; 
+			_sieveProcessor = sieveProcessor;
 		}
-
-
-		//[HttpGet("GetUsers")]
-		//public async Task<IActionResult> GetUsers([FromQuery] SieveModel model)
-		//{
-		//	var quantity = await _dbContext.Users.CountAsync();
-		//	var users = _dbContext.Users.AsQueryable();
-		//	users = _sieveProcessor.Apply(model, users);
-
-		//	var response = new
-		//	{
-		//		TotalUsersCount = quantity,
-		//		Users = users
-		//	};
-
-		//	return Ok(response);
-		//}
-
-
 
 		[HttpGet("GetUsers")]
 		public async Task<IActionResult> GetUsers([FromQuery] SieveModel model, string? orFilter = null)
@@ -69,7 +50,6 @@ namespace Baim_API.Controllers
 			var quantity = usersQuery.Count();
 
 			usersQuery = _sieveProcessor.Apply(model, usersQuery);
-			var filteredCount = 0;
 
 			if (!string.IsNullOrEmpty(orFilter))
 			{
@@ -78,26 +58,107 @@ namespace Baim_API.Controllers
 				{
 					var filterParts = filter.Split("@=");
 					if (filterParts.Length == 2)
-					{ 
-						var value = filterParts[1]; 
+					{
+						var value = filterParts[1];
 						usersQuery = usersQuery.Where(u => EF.Functions.Like(u.UserName, $"%{value}%")
 															|| EF.Functions.Like(u.LastName, $"%{value}%")
 															|| EF.Functions.Like(u.Email, $"%{value}%"));
-						filteredCount = usersQuery.Count();
 					}
 				}
 			}
 
 			var users = await usersQuery.ToListAsync();
 
-			var response = new
-			{
-				TotalUsersCount = quantity,
-				TotalFilteredCount = filteredCount,
-				Users = users
-			};
+			return Ok(new { TotalUsersCount = quantity, Users = users });
+		}
 
-			return Ok(response);
+
+
+		[HttpGet("GetClients")]
+		public async Task<IActionResult> GetClients([FromQuery] SieveModel model, string? orFilter = null)
+		{
+			var usersQuery = _dbContext.Clients.Include(u => u.User).Include(u => u.Company).AsQueryable();
+
+			var quantity = usersQuery.Count();
+
+			usersQuery = _sieveProcessor.Apply(model, usersQuery);
+
+			if (!string.IsNullOrEmpty(orFilter))
+			{
+				var orFilters = orFilter.Split('|');
+				foreach (var filter in orFilters)
+				{
+					var filterParts = filter.Split("@=");
+					if (filterParts.Length == 2)
+					{
+						var value = filterParts[1];
+						usersQuery = usersQuery.Where(u => EF.Functions.Like(u.User.UserName, $"%{value}%")
+															|| EF.Functions.Like(u.User.LastName, $"%{value}%")
+															|| EF.Functions.Like(u.User.Email, $"%{value}%"));
+					}
+				}
+			}
+			var users = await usersQuery.ToListAsync();
+
+			var result = users.Select(c => new { Client = c });
+
+			return Ok(new { TotalClientsCount = quantity, Users = result });
+		}
+
+
+		[HttpGet("GetStaff")]
+		public async Task<IActionResult> GetStaff([FromQuery] SieveModel model, string? orFilter = null)
+		{
+			var usersQuery = _dbContext.Employers.Include(u => u.User).AsQueryable();
+
+			var quantity = usersQuery.Count();
+
+			usersQuery = _sieveProcessor.Apply(model, usersQuery);
+
+			if (!string.IsNullOrEmpty(orFilter))
+			{
+				var orFilters = orFilter.Split('|');
+				foreach (var filter in orFilters)
+				{
+					var filterParts = filter.Split("@=");
+					if (filterParts.Length == 2)
+					{
+						var value = filterParts[1];
+						usersQuery = usersQuery.Where(u => EF.Functions.Like(u.User.UserName, $"%{value}%")
+															|| EF.Functions.Like(u.User.LastName, $"%{value}%")
+															|| EF.Functions.Like(u.User.Email, $"%{value}%"));
+					}
+				}
+			}
+			var users = await usersQuery.ToListAsync();
+
+			var result = users.Select(e => new { Employer = e });
+
+			return Ok(new { TotalStaffCount = quantity, Users = result });
+		}
+
+
+		[HttpPut("ById/{id}")]
+		public async Task<ActionResult<Client>> UpdateClientById(int id, bool isActive)
+		{
+			Client updatedClient = _dbContext.Clients.FirstOrDefault(c => c.Id == id);
+
+			updatedClient.IsPublic = isActive;	
+
+			var existingClient = await _dbContext.Clients.FirstOrDefaultAsync(c => c.Id == id);
+
+			if (existingClient == null) return NotFound("Client not found.");
+			try
+			{
+				_dbContext.Entry(existingClient).CurrentValues.SetValues(updatedClient);
+				await _dbContext.SaveChangesAsync();
+
+				return Ok(existingClient);
+			}
+			catch (DbUpdateException)
+			{
+				return StatusCode(500, "Error occurred while updating the client.");
+			}
 		}
 	}
 }

@@ -10,6 +10,7 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 	public DbSet<AspNetUser> Users { get; set; }
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<Employer> Employers { get; set; } 
+	public DbSet<Company> Companies { get; set; }
 	public DbSet<Mission> Missions { get; set; } 
 	public DbSet<Order> Orders { get; set; }
 	public DbSet<OrderProduct> OrderProducts { get; set; }
@@ -30,22 +31,22 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 			entity.HasKey(u => u.Id);
 			entity.Property(u => u.Id1C);
 			entity.Property(u => u.Age);
+			entity.Property(u => u.Gender);
+			entity.Property(u => u.Patronimic);
+			entity.Property(u => u.BirthDate);
 			entity.Property(u => u.LastName).IsRequired();
-			entity.Property(u => u.Image);
-			entity.Property(u => u.Description);
+			entity.Property(u => u.Image); 
 			entity.Property(u => u.TaskState);
 			entity.Property(u => u.PhoneNumber);
 			entity.Property(u => u.Role).HasDefaultValue("Client");
 
 			entity.HasIndex(u => u.PhoneNumber).IsUnique();
 
-			// 1 to 1 между AspNetUser & Client
 			entity.HasOne(u => u.Client)
 				.WithOne(c => c.User)
 				.HasForeignKey<Client>(c => c.UserId)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			// 1 to 1 AspNetUser & Employer
 			entity.HasOne(u => u.Employer)
 				.WithOne(e => e.User)
 				.HasForeignKey<Employer>(e => e.UserId)
@@ -56,10 +57,29 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 		{
 			entity.HasKey(op => op.Id);
 			entity.Property(op => op.Id).ValueGeneratedOnAdd();
+			entity.Property(с => с.BusinessPhoneNumber);
+			entity.Property(с => с.PersonalEmail);
+			entity.Property(с => с.IsDirector).HasDefaultValue(false);
 			entity.Property(с => с.IsPublic).HasDefaultValue(false);
 			entity.Property(с => с.ClientFeedback);
 			entity.Property(с => с.ClientConfirm);
 			entity.Property(с => с.YoutubeLink);
+
+			entity.HasOne(c => c.Company)
+			  .WithOne(c => c.Director)
+			  .HasForeignKey<Client>(c => c.CompanyId);
+		});
+
+		builder.Entity<Company>(entity =>
+		{
+			entity.HasKey(op => op.Id);
+			entity.Property(op => op.Id).ValueGeneratedOnAdd();
+			entity.Property(с => с.TypeOfActivity);
+			entity.Property(с => с.CompanyName).IsRequired();
+			entity.Property(с => с.VOEN).IsRequired(); 
+			entity.Property(o => o.StartDate);
+			entity.Property(с => с.Address);
+			 
 		});
 
 		builder.Entity<Employer>(entity =>

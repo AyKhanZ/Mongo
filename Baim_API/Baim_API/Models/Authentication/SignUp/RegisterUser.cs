@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Baim_API.Models.Authentication.SignUp;
 public class RegisterUser
@@ -13,5 +14,6 @@ public class RegisterUser
 	public string Email { get; set; }
 	[Required(ErrorMessage = "Role is required")]
 	public string Role { get; set; } = "Client";
+	[JsonIgnore]
 	public string Password { get; set; }  = string.Empty;   
 }

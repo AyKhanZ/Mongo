@@ -33,15 +33,14 @@ namespace DB.Migrations
                     b.Property<int?>("Age")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -54,6 +53,9 @@ namespace DB.Migrations
 
                     b.Property<int?>("EmployerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Id1C")
                         .IsRequired()
@@ -81,6 +83,9 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Patronimic")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -139,16 +144,30 @@ namespace DB.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("BusinessPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte[]>("ClientConfirm")
                         .HasColumnType("varbinary(max)");
 
                     b.Property<byte[]>("ClientFeedback")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDirector")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<bool>("IsPublic")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
+
+                    b.Property<string>("PersonalEmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -160,10 +179,50 @@ namespace DB.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId")
+                        .IsUnique()
+                        .HasFilter("[CompanyId] IS NOT NULL");
+
                     b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("DB.Models.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DirectorId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id1C")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TypeOfActivity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VOEN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("DB.Models.Employer", b =>
@@ -492,21 +551,21 @@ namespace DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "079f9b6d-382c-4739-ac77-e27529c69938",
+                            Id = "d68dad74-6cfe-4247-9f0f-4848eeb19e86",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "b26761c3-ed92-4209-9ca1-1c21eae36474",
+                            Id = "8988db8f-33d9-4870-a61b-844a24def9ac",
                             ConcurrencyStamp = "2",
                             Name = "Client",
                             NormalizedName = "Client"
                         },
                         new
                         {
-                            Id = "5ccfa643-ed46-4442-a3a9-0333e47605c7",
+                            Id = "463adf41-b2c3-4cd2-a940-90187f39c151",
                             ConcurrencyStamp = "3",
                             Name = "Employer",
                             NormalizedName = "Employer"
@@ -628,11 +687,17 @@ namespace DB.Migrations
 
             modelBuilder.Entity("DB.Models.Client", b =>
                 {
+                    b.HasOne("DB.Models.Company", "Company")
+                        .WithOne("Director")
+                        .HasForeignKey("DB.Models.Client", "CompanyId");
+
                     b.HasOne("DB.Models.AspNetUser", "User")
                         .WithOne("Client")
                         .HasForeignKey("DB.Models.Client", "UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Company");
 
                     b.Navigation("User");
                 });
@@ -796,6 +861,11 @@ namespace DB.Migrations
                     b.Navigation("UserProjects");
 
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("DB.Models.Company", b =>
+                {
+                    b.Navigation("Director");
                 });
 
             modelBuilder.Entity("DB.Models.Mission", b =>

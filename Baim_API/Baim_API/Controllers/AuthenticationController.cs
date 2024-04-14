@@ -85,6 +85,19 @@ public class AuthenticationController : ControllerBase
 			}
 			await _userManager.AddToRoleAsync(newUser, model.Role);
 
+			if (model.Role == "Client")
+			{
+				Client client = new() { User = newUser, UserId = newUser.Id,IsPublic=false };
+				await _dbContext.Clients.AddAsync(client);
+			}
+			else if (model.Role == "Employer")
+			{
+				Employer employer = new() { User = newUser, UserId = newUser.Id, Position = "Intern" };
+				await _dbContext.Employers.AddAsync(employer);
+			}
+			await _dbContext.SaveChangesAsync();
+
+
 			var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
 			var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = newUser.Email }, Request.Scheme);
 			if (confirmationLink != null)
@@ -144,13 +157,13 @@ public class AuthenticationController : ControllerBase
 			var result = await _userManager.ConfirmEmailAsync(user, token);
 			if (result.Succeeded)
 			{
-				return Redirect($"http://localhost:3000/email-confirmed"); 
+				return Redirect($"http://localhost:3000/email-confirmed");
 			}
 			else return BadRequest("Confirmation failed");
 		}
 		return StatusCode(StatusCodes.Status500InternalServerError,
 					new Response { Status = "Error", Message = "This user does not exist" });
-	} 
+	}
 
 
 
