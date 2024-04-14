@@ -31,7 +31,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
-
+.tbody{
+  font-size: 14px;
+}
 .actionButton:hover {
   background-color: #0056b3;
 }

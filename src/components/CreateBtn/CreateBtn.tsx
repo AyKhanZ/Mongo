@@ -25,7 +25,7 @@ const CreateBtn = ({ title, symbol, onClick }: Props) => {
           <div className={styles.text}>{title}</div>
         </button>
       );
-    } else if (title === "Delete") {
+    } else if (title === "Delete" ) {
       return (
         <button className={`${styles.Btn}  ${styles.delete}`} onClick={onClick}>
           <div className={styles.sign}>
@@ -34,13 +34,13 @@ const CreateBtn = ({ title, symbol, onClick }: Props) => {
           <div className={styles.text}>{title}</div>
         </button>
       );
-    } else if (title === "Back") {
+    } else if (title === "Back" || title === "Info") {
       return (
         <button className={`${styles.Btn}  ${styles.back}`} onClick={onClick}>
           <div className={styles.sign}>
             <FontAwesomeIcon icon={symbol} style={{ fontSize: 16 }} />
           </div>
-          <div className={styles.text}>{title}</div>
+                <div className={styles.text}>{title}</div>
         </button>
       );
     }

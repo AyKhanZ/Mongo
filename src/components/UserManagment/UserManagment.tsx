@@ -7,48 +7,35 @@ import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import Table from "@/components/Table/Table";
 import Pagination from "@/components/Pagination/Pagination";
 import { useRouter } from "next/router";
-import {Console} from "inspector";
+import {ClientWrapper} from "@/types";
 
 const UserManagement: React.FC = () => {
   const router = useRouter();
-  const [users, setUsers] = useState([]);
+  const [clients, setClients] = useState<ClientWrapper[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(7);
-  const [totalUsersCount, setTotalUsersCount] = useState(1);
+  const [totalClientsCount, setTotalClientsCount] = useState(1);
   const [searchText, setSearchText] = useState("");
-  const [url, setUrl] = useState(
-    `https://localhost:7164/GetUsers?Page=1&PageSize=${pageSize}`
-  );
-
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const filtersList = [
-    { value: "A", label: "Option A" },
-    { value: "B", label: "Option B" },
-    { value: "C", label: "Option C" },
-    { value: "D", label: "Option D" },
-  ];
-
-  const fetchUsers = async () => {
+  const [activeStates, setActiveStates] = useState<{ [id: number]: boolean }>({});
+  const fetchClients = async () => {
     try {
       if(searchText == ""){
         const response = await fetch(
-            `https://localhost:7164/GetUsers?Page=${currentPage}&PageSize=${pageSize}`
+            `https://localhost:7164/GetClients?Page=${currentPage}&PageSize=${pageSize}`
         );
         const data = await response.json();
-        setUsers(data.users);
-        setTotalUsersCount(data.totalUsersCount);
+        setClients(data.users);
+        setTotalClientsCount(data.totalClientsCount);
       }
       else{
         const encodedSearchText = encodeURIComponent(searchText.trim());
-        // Предполагаем, что ваш API поддерживает фильтрацию по нескольким полям через разделитель |
         const filterQuery = encodedSearchText ? `&orFilter=userName%40%3D${encodedSearchText}%7Cemail%40%3D${encodedSearchText}%7ClastName%40%3D${encodedSearchText}` : '';
         const response = await fetch(
-            `https://localhost:7164/GetUsers?${filterQuery}`
+            `https://localhost:7164/GetClients?${filterQuery}`
         );
         const data = await response.json();
-        setUsers(data.users);
-        setTotalUsersCount(data.totalUsersCount);
+        setClients(data.users);
+        setTotalClientsCount(data.totalClientsCount);
       }
 
     } catch (error: any) {
@@ -58,11 +45,11 @@ const UserManagement: React.FC = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      fetchUsers();
+      fetchClients();
     }, 100); // Задержка в 300 мс
 
     return () => clearTimeout(delayDebounceFn);
-  }, [searchText, currentPage, pageSize]);
+  }, [searchText, currentPage, pageSize,activeStates]);
 
   useEffect(() => {
     if (searchText !== "") setCurrentPage(1);
@@ -70,8 +57,7 @@ const UserManagement: React.FC = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   const indexOfLastUser = currentPage * pageSize;
   const indexOfFirstUser = indexOfLastUser - pageSize;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-  const handleInputChange = () => {};
+  const currentClients = clients.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
     <div className={styles.mainContainer}>
@@ -121,30 +107,6 @@ const UserManagement: React.FC = () => {
                 />
               </div>
             </div>
-            <div className={styles.searchPart}>
-              <h4 className={styles.subText}>Filter users</h4>
-
-              <div>
-                <select
-                  value={selectedOption}
-                  // onChange={handleSelectChange}
-                  className={styles.filterBtn}
-                >
-                  <option className={styles.subText} value="">
-                    All users
-                  </option>
-                  {/* {filtersList.map((filter) => (
-                    <option
-                      className={styles.subText}
-                      key={filter.value}
-                      value={filter.value}
-                    >
-                      {filter.label}
-                    </option>
-                  ))} */}
-                </select>
-              </div>
-            </div>
           </div>
           <div>
             <CreateBtn
@@ -160,22 +122,22 @@ const UserManagement: React.FC = () => {
               {searchText == "" ?
                   <>
                     <div className={styles.tableContainer}>
-                      <Table users={users} />
+                      <Table clients={clients} activeStates={activeStates} setActiveStates={setActiveStates} />
                     </div>
                     <Pagination
                       currentPage={currentPage}
-                      totalPages={Math.ceil(totalUsersCount / pageSize)}
+                      totalPages={Math.ceil(totalClientsCount / pageSize)}
                       paginate={paginate}
                     />
                   </>
                   :
                   <>
                     <div className={styles.tableContainer}>
-                      <Table users={currentUsers} />
+                      <Table clients={clients} activeStates={activeStates} setActiveStates={setActiveStates} />
                     </div>
                     <Pagination
                         currentPage={currentPage}
-                        totalPages={Math.ceil(users.length / pageSize)}
+                        totalPages={Math.ceil(clients.length / pageSize)}
                         paginate={paginate}/>
                   </>
               }
