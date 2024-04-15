@@ -1,17 +1,17 @@
 export const Products = [
     {
-      id: 1,
+      id: 1, 
       name: "BAIM:Бухгалтерия для Азербайджана",
       desc: "somth ....",
       img: 'image',
-      productType: "Флагманские продукты BAIM",
+      productType: "Флагманские продукты",
     }, 
     {
       id: 2, 
       name: "BAIM: Комплексная Автоматизация",
       desc: "somth ....",
       img: 'image',
-      productType: "Флагманские продукты BAIM",
+      productType: "Флагманские продукты",
     },
 
 

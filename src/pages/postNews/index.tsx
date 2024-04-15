@@ -17,7 +17,7 @@ const PostNews = () => {
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault(); 
 
         if (!imageFile) {
           alert("Please select an image file");

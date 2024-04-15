@@ -3,13 +3,18 @@
     flex-direction: column;
     align-items: center;
     color: #3d8584;
+    width: 100%;
+    font-size: 2rem;
+    padding: 30px 0;
+    font-weight: 600;
 }
 
 .numbers {
     display: flex;
     justify-content: space-evenly;
     max-width: 100vw;
-    margin: 50px;
+    border: 2px solid #3d8584;
+    background-color: #3d8584;
 }
 
 .circle {
@@ -17,12 +22,17 @@
     align-items: center;
     justify-content: center;
     margin: 20px;
-    height: 80px;
-    width: 80px;
-    border: 8px solid transparent;
+    height: 120px;
+    width: 120px;
+    border: 16px solid transparent;
     border-radius: 50%;
     background: 
     linear-gradient(white 0 0) padding-box, /*this is your grey background*/
     linear-gradient(to right, #3d8584, #17f0ec) border-box;
-    font-size: 20px;
+    box-shadow: #17f0ec 0px 5px 15px;
+}
+
+.circleTitle {
+    color: white;
+    font-size: 2rem;
 }

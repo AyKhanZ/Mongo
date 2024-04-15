@@ -3,10 +3,9 @@ import Image from 'next/image'
 
 const SmallCarousel = () => {
   return (
-    <div className='a fade-left'>
         <div className={styles.blueBlock}>
-                <h2>Нас уже выбрали</h2>
-                <div className={styles.slider}>
+                <h2 className={styles.heading}>Нас уже выбрали:</h2>
+                <div className={styles.slider}> 
                     <div className={styles.slideTrack}>
                         <div className={styles.slide}>
                             <Image className={styles.sliderImg} width={500} height={300} alt='1c' src='/ads/189.png' />
@@ -42,7 +41,6 @@ const SmallCarousel = () => {
                     </div>
                 </div>
             </div>
-        </div>
   )
 }
 

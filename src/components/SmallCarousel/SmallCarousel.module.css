@@ -7,13 +7,17 @@
     }
   }
   
+  .heading {
+    font-size: 2rem;
+  }
+
   .blueBlock {
     display: flex;
     flex-direction: column;
-    width: calc(100vw - 20px);
-    padding: 20px 0;
+    padding: 50px 0;
     text-align: center;
-    margin: 100px 0;
+    color: #3d8584;
+    background-color: #EFEFEF;
   }
   
   .scroll-element.blueBlock {
@@ -24,28 +28,27 @@
   .slider {
     background: white;
     border: 1px solid transparent;
-    border-radius: 10px;
-    height: 200px;
     margin: auto;
     overflow: hidden;
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 2px);
     margin-top: 20px;
   }
   
   .sliderImg {
-    height: 180px;
+    height: 80px;
   }
   
   .slider::before, .slider::after {
     background: linear-gradient(to right, white 0%, rgba(83, 178, 177, 0) 100%);
     content: "";
-    height: 200px;
+    height: 100px;
     position: absolute;
     width: 200px;
     z-index:  0.9;
+
   }
   .slider::after {
     right: 0;
@@ -57,18 +60,18 @@
     top: 0;
   }
   .slider .slideTrack {
-    animation: scroll 40s linear infinite;
+    animation: scroll 15s linear infinite;
     display: flex;
-    width: calc(250px * 14);
+    width: 250px;
   }
   
   .slider .slide {
     display: flex;
     text-align: center;
     align-items: center;
-    margin: 0 50px;
+    margin: 0 110px;
     height: 100px;
-    width: 250px;
+    width: 100px;
   }
   
   .blueBlock.app {

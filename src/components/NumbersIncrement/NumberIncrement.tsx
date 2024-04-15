@@ -1,7 +1,12 @@
 import styles from './NumberIncrement.module.css';
 import React, { useEffect, useState } from 'react';
 
-const NumberIncrement = ({title}:any) => {
+interface Props {
+  title: string,
+  num: number
+}
+
+const NumberIncrement = ({title, num}: Props) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const [number, setNumber] = useState(0);
 
@@ -16,7 +21,7 @@ const NumberIncrement = ({title}:any) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           if (!showAnimation) {
-            startIncrementAnimation(100);
+            startIncrementAnimation(num);
             setShowAnimation(true);
           }
         } else {
@@ -38,7 +43,7 @@ const NumberIncrement = ({title}:any) => {
         observer.unobserve(numberElement);
       }
     };
-  }, [showAnimation]);
+  }, [showAnimation, num]);
 
   const startIncrementAnimation = (endNumber: number, speed = 10) => {
     setNumber(0);

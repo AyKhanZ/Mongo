@@ -12,7 +12,7 @@ import { Nunito } from "next/font/google";
 import ProductFilters from "@/components/ProductFilters/ProductFilters";
 
 const nunito = Nunito({ subsets: ["latin"] });
-
+ 
 const ManageProducts = () => {
   const [url, setUrl] = useState("https://localhost:7164/Product");
   const [products, setProducts] = useState([]);
@@ -20,7 +20,7 @@ const ManageProducts = () => {
   const [deleteShown, setDeleteShown] = useState(false);
 
   const router = useRouter();
-
+ 
   const fetchProducts = async () => {
     try {
       const response = await fetch(url);

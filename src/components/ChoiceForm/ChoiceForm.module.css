@@ -3,19 +3,20 @@
     border: 2px solid #EFEFEF; 
     background-color: #EFEFEF;
     color: #326b6a;
-    border-radius: 20px;
-    padding-top: 30px;
+    padding: 50px;
     height: auto;
-    width: 80vw;
-    margin: 100px 10vw;
+    margin: 100px 0;
+    font-size: 1.2rem;
+  }
+
+  .img {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: end;
   }
 
   .form {
     display:flex;
-    width: 60%;
+    width: 10%;
     flex-direction: column;
     justify-content: space-between;
     text-align: left;
@@ -23,13 +24,14 @@
 
   .textAndImage {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
   }
 
   .place {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     align-items: center;
     margin: 10px 0;
  }
@@ -106,7 +108,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #3d8584;;
+  background: #3d8584;
   cursor: pointer;
   box-shadow: -407px 0 0 400px #3d8584;;
 }
@@ -117,8 +119,8 @@
   padding: 10px;
   width: 80%;
   margin-left: 10%;
+  margin-top: 30px ;
   height: inherit;
   color: white;
   border-radius: 10px;
-  margin-top: 10px;
 }

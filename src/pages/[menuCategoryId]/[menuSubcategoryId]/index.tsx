@@ -2,15 +2,52 @@ import NavBar from "@/components/NavBar/NavBar";
 import { Products } from "../../../../lib/data";
 import { useRouter } from "next/navigation";
 import PositionRelative from "@/components/PositionRelativeLayout/PositionRelativeLayout";
+import Product from "@/components/Product/Product";
+import { useEffect, useState } from "react";
 
-const MenuSubcategoryDetails = ({productsData}: any) => {
 
+const MenuSubcategoryDetails = ({category}: any) => {
+  const [data, setData] = useState([])
 
-  return (
+  const filterProducts = (arr: any) => {
+    const newArr = arr.filter((p: any) => p.productType === category)
+    return newArr
+  }
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("https://localhost:7164/Product");
+      const res = await response.json();
+      setData(filterProducts(res))
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
+
+  const fetchNews = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/news');
+      const res = await response.json();
+      setData(res);
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  }
+
+  useEffect(() => {
+    if (category !=='Новости'){
+    fetchProducts()}
+    if (category === 'Новости'){
+      fetchNews()
+      
+    }
+  }, [data])
+
+  return ( 
     <>
       <NavBar />
       <PositionRelative>
-        {productsData.map((p:any) => <h2 key={p.id}>{p.name}</h2>)}
+        {data.map((p:any) => <Product category={category} key={p.id} product={p} />)}
       </PositionRelative>
     </>
   )
@@ -23,13 +60,13 @@ export async function getStaticPaths() {
         paths: [
             {
                 params: {
-                    menuCategoryId: 'products',
+                    menuCategoryId: 'Продукты',
                     menuSubcategoryId: 'BAIM: Комплексная Автоматизация'
                   }
             },
             {
                 params: {
-                    menuCategoryId: 'products',
+                    menuCategoryId: 'Продуктыs',
                     menuSubcategoryId: 'BAIM:Бухгалтерия для Азербайджана'
                   }
             }
@@ -40,13 +77,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: any) {
     const {params} = context;
- 
+
     const productsData = Products.filter(p => p.productType === params.menuSubcategoryId)
-    console.log(productsData)
 
     return {
         props: {
-            productsData
+            category: params.menuSubcategoryId
         }
     }
 

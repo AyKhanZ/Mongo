@@ -6,8 +6,10 @@ import { faUser as user } from "@fortawesome/free-solid-svg-icons";
 import { faBars as bars } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import styles from "./NavBar.module.css";
+import { useRouter } from "next/navigation";
 
 function NavBar() {
+  const router = useRouter()
   return (
     <div className={styles.banner}>
       <div className={styles.wave}>
@@ -48,9 +50,9 @@ function NavBar() {
                   className="fa-solid fa-magnifying-glass"
                   icon={magnifyingGlass}
                 />
-              </span>
+              </span> 
             </div>
-            <button className={`${styles.whiteBtn} ${styles.cabinet}`}>
+            <button onClick={() => router.push('/login')} className={`${styles.whiteBtn} ${styles.cabinet}`}>
               Личный кабинет
             </button>
           </div>

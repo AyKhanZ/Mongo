@@ -1,4 +1,5 @@
-import { News, Product } from "@/types";
+import { News } from "@/types";
+import NewsModel from "../../../lib/models/NewsModel";
 import { useEffect, useState } from "react";
 import styles from "./ManageNews.module.css";
 import SideBarLayout from "@/components/SideBarLayout/SideBarLayout";
@@ -9,7 +10,6 @@ import DeleteForm from "@/components/DeleteForm/DeleteForm";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Nunito } from "next/font/google";
-import { useParams } from "next/navigation";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -46,40 +46,7 @@ const ManageNews = () => {
                 },
                 body: JSON.stringify({ id }),
             });
-            // Update the state after successful deletion
-            setNews(news.filter((item) => item.id !== id));
-        } catch (error: any) {
-            console.error(error);
-        }
-    };
-
-    const edit = async (id: string) => {
-        try {
-            const newNews: News = {
-                title,
-                description: desc,
-                img,
-            };
-            const response = await fetch(
-                `http://localhost:3000/api/news/${id}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(newNews),
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Error updating news");
-            }
-
-            const updatedNews = await response.json();
-
-            // Here you can update your local state or fetch the updated news
-            // For example:
-            // setNews(updatedNews);
+            setNews(news.filter((item) => item._id !== id));
         } catch (error: any) {
             console.error(error);
         }
@@ -142,14 +109,22 @@ const ManageNews = () => {
                     }
                 >
                     {news.length > 0 ? (
-                        news.map((p: News) => (
-                            <div className={styles.horizontal} key={p.id}>
-                                {p.imageFile == null ? (
-                                    <div className={styles.imgContainer}></div>
+                        news.map((news: News) => (
+                            <div className={styles.horizontal} key={news._id}>
+                                {news.imageFile == null ? (
+                                    <div className={styles.imgContainer}>
+                                        <Image
+                                            className={styles.imgContainer}
+                                            src={news.img as string}
+                                            alt="News image"
+                                            width={280}
+                                            height={220}
+                                        />
+                                    </div>
                                 ) : (
                                     <Image
                                         className={styles.imgContainer}
-                                        src={`data:image/jpeg;base64,${p.imageFile}`}
+                                        src={news.img as string}
                                         alt="News image"
                                         width={280}
                                         height={220}
@@ -159,21 +134,23 @@ const ManageNews = () => {
                                 <div className={styles.productContent}>
                                     <div className={styles.productTitle}>
                                         <h2 className={styles.title}>
-                                            {p.title}
+                                            {news.title}
                                         </h2>
 
                                         <div className={styles.btns}>
                                             <CreateBtn
                                                 onClick={() =>
                                                     router.push(
-                                                        `/manageNews/${p.id}`
+                                                        `/manageNews/${news._id}`
                                                     )
                                                 }
                                                 symbol={pencil}
                                                 title="Edit"
                                             />
                                             <CreateBtn
-                                                onClick={() => showDelete(p.id)}
+                                                onClick={() =>
+                                                    showDelete(news._id)
+                                                }
                                                 symbol={trashCan}
                                                 title="Delete"
                                             />
@@ -181,7 +158,7 @@ const ManageNews = () => {
                                     </div>
 
                                     <p className={styles.description}>
-                                        {truncateText(p.description, 200)}
+                                        {truncateText(news.description, 200)}
                                     </p>
                                 </div>
                             </div>
