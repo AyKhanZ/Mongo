@@ -8,6 +8,7 @@ import UploadImage from "@/components/UploadImage/UploadImage";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import ComboBox from "@/components/ComboBox/ComboBox";
 import { Nunito } from "next/font/google";
+import { productTypes } from "../../../lib/productsOptions";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -15,17 +16,9 @@ const PostProduct = () => {
   const [id1C, setId1C] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
-  const [type, setType] = useState("");
+  const [type, setType] = useState(productTypes[0]);
   const [isPublic, setIsPublic] = useState(false);
   const [img, setImg] = useState("");
-
-  const productTypes = [
-    "Флагманские продукты",
-    "Услуги",
-    "Пользовательские лицензии",
-    "Серверные лицензии",
-    "1С:ИТС",
-  ];
 
   const handleTypeSelect = (ProductType: string) => {
     setType(ProductType);
@@ -94,7 +87,11 @@ const PostProduct = () => {
                 placeholder="Description"
               />
               <label className={styles.label}>Product type</label>
-              <ComboBox options={productTypes} onSelect={handleTypeSelect} />
+              <ComboBox
+                defValue={""}
+                options={productTypes}
+                onSelect={handleTypeSelect}
+              />
             </div>
             <div className={styles.imageContainer}>
               <label className={styles.label}>Image</label>

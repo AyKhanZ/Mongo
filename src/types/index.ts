@@ -81,3 +81,28 @@ export type ResponseData = {
   totalUsersCount: number;
   users: ClientWrapper[];
 };
+
+
+export type StaffWrapper = {
+  id: number;
+  userId: string;
+  user: {
+    id: string;
+    id1C: string;
+    userName: string;
+    lastName: string;
+    patronimic?: string;
+    image:any;
+    role: string;
+    email: string;
+    phoneNumber?: string;
+    emailConfirmed: boolean;
+  };
+  isDismissed: boolean;
+  Experience?: number;
+  certificates?: string;
+  position?: string;
+}
+export type employer ={
+  employer:StaffWrapper;
+}

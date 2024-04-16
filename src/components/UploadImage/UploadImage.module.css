@@ -54,7 +54,7 @@
 }
 .deleteBtn:hover {
   cursor: pointer;
-  margin: 0 10px 0 0;
+  transform: translateY(-2px);
   color: red;
   border: none;
   background-color: transparent;

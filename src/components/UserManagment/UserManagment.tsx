@@ -17,6 +17,7 @@ const UserManagement: React.FC = () => {
   const [totalClientsCount, setTotalClientsCount] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [activeStates, setActiveStates] = useState<{ [id: number]: boolean }>({});
+
   const fetchClients = async () => {
     try {
       if(searchText == ""){
@@ -43,6 +44,7 @@ const UserManagement: React.FC = () => {
     }
   };
 
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetchClients();
@@ -51,9 +53,11 @@ const UserManagement: React.FC = () => {
     return () => clearTimeout(delayDebounceFn);
   }, [searchText, currentPage, pageSize,activeStates]);
 
+
   useEffect(() => {
     if (searchText !== "") setCurrentPage(1);
   }, [searchText]);
+
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
   const indexOfLastUser = currentPage * pageSize;
   const indexOfFirstUser = indexOfLastUser - pageSize;
@@ -69,23 +73,6 @@ const UserManagement: React.FC = () => {
           </div>
           <h4 className={styles.subText}>View, search for and add new user</h4>
         </div>
-        <div className={styles.account}>
-          <div className={styles.imgContainer}>
-            <Image
-              src="/account-icon.svg"
-              alt="image"
-              width={40}
-              height={40}
-              layout="fixed"
-              objectFit="cover"
-              objectPosition="center"
-              className={styles.img}
-            />
-          </div>
-          <div className={styles.userDetails}>
-            <h4 className={styles.name}>Medina Abasova</h4>
-          </div>
-        </div>
       </div>
       <div className={styles.secondSection}>
         <div className={styles.firstLevel}>
@@ -94,24 +81,20 @@ const UserManagement: React.FC = () => {
               <h4 className={styles.subText}>Quick search a user</h4>
               <div className={styles.searchContainer}>
                 <input
-                  type="text"
-                  placeholder="Search..."
+                  type="text" placeholder="Search..."
                   value={searchText}
                   onChange={(ev) => setSearchText(ev.target.value)}
                   className={styles.input}
                 />
                 <FaSearch
-                  width={1}
-                  color="grey"
+                  width={1} color="grey"
                   className={styles.searchIcon}
                 />
               </div>
             </div>
           </div>
           <div>
-            <CreateBtn
-              title={"Create"}
-              symbol={"+"}
+            <CreateBtn title={"Create"} symbol={"+"}
               onClick={() => router.push("/registerUser")}
             />
           </div>

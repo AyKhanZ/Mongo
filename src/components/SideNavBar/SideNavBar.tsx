@@ -1,17 +1,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock as lock } from "@fortawesome/free-solid-svg-icons";
-import { faUnlock as unlock } from "@fortawesome/free-solid-svg-icons";
-import { faBriefcase as bcase } from "@fortawesome/free-solid-svg-icons";
-import { faUserTie as staff } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope as message } from "@fortawesome/free-solid-svg-icons";
-import { faTasks as tasks } from "@fortawesome/free-solid-svg-icons";
-import { faHandshake as hands } from "@fortawesome/free-solid-svg-icons";
-import { faUsers as users } from "@fortawesome/free-solid-svg-icons";
-import { faNewspaper as news } from "@fortawesome/free-solid-svg-icons";
-import { faDolly as dolly } from "@fortawesome/free-solid-svg-icons";
-import { faGear as settings } from "@fortawesome/free-solid-svg-icons";
+import { faLock as lock,
+  faUnlock as unlock,
+  faBriefcase as bcase,
+  faUserTie as staff,
+  faEnvelope as message,
+  faTasks as tasks,
+  faHandshake as hands,
+  faUsers as users,
+  faNewspaper as news,
+  faDolly as dolly,
+  faGear as settings } from "@fortawesome/free-solid-svg-icons";
 import styles from "./SideNavBar.module.css";
 
 const SideNavBar = () => {
@@ -163,7 +163,7 @@ const SideNavBar = () => {
             </div>
             <div className={`${styles.menu_title} ${styles.flex}`}>
               <span className={styles.title}>
-                <Link className={styles.link} href="/manageNews">
+                <Link className={styles.link} href="/manageStaff">
                   <FontAwesomeIcon
                     icon={staff}
                     className={`${styles.fa_solid} ${styles.fa_bars} ${styles.bx} ${styles.bx_lock_alt}`}

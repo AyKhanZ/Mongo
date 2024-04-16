@@ -18,7 +18,6 @@ const ManageProducts = () => {
   const [products, setProducts] = useState([]);
   const [delProductId, setDelProductId] = useState(0);
   const [deleteShown, setDeleteShown] = useState(false);
-  //make function of decimal
   const router = useRouter();
 
   const fetchProducts = async () => {
