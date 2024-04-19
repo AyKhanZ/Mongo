@@ -1,26 +1,28 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useRouter } from "next/router";
 import styles from "./RegisterUser.module.css";
 import Combobox from "@/components/ComboBox/ComboBox";
 import { Nunito } from "next/font/google";
 import Link from "next/link";
+import {useAuth} from "@/context/AuthContext";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
 const RegisterUser = () => {
-  const roles = ["Employer", "Client"];
-  const [role, setRole] = useState("");
+  const roles = ["Client", "Employer"];
+  const [role, setRole] = useState("Client");
   const [id1C, setId1C] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
+  const { token, setToken, isTokenExpired ,userData,setUserData} = useAuth();
 
   const registerUser = async () => {
     try {
       const userToPost = {
         id1C: id1C,
-        userName: name,
+        name: name,
         lastName: lastName,
         email: email,
         role: role,
@@ -32,12 +34,15 @@ const RegisterUser = () => {
         },
         body: JSON.stringify(userToPost),
       });
-      console.log(userToPost);
     } catch (error: any) {
       console.log(error);
     }
     router.push("/manageUsers");
   };
+  useEffect(() => {
+    console.log(token)
+    console.log(userData)
+  }, []);
 
   return (
     <div className={`${nunito.className} ${styles.container}`}>
@@ -85,7 +90,7 @@ const RegisterUser = () => {
           <span>Email</span>
         </label>
 
-        <Combobox options={roles} onSelect={setRole} />
+        <Combobox defValue={""} options={roles} onSelect={setRole} />
 
         <button className={styles.submit} onClick={registerUser}>
           Register

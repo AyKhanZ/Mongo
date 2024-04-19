@@ -27,12 +27,14 @@ export type User = {
   id1C: string;
   age: number | 18;
   userName: string;
+  password?:string;
   lastName: string;
   patronimic: string;
   role: string;
   email: string;
   phoneNumber: string | null;
   emailConfirmed: boolean;
+  accessFailedCount?:number;
 };
 export type Company = {
   id: string;

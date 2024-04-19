@@ -47,7 +47,7 @@ const PostNews = () => {
         } else {
           const text = await response.text();
           console.error(
-              `Request failed with status code ${response.status} and body: ${text}`
+            `Request failed with status code ${response.status} and body: ${text}`
           );
           throw new Error("Error creating news");
         }
@@ -59,48 +59,44 @@ const PostNews = () => {
   };
 
   return (
-      <SideBarLayout>
-        <div className={`${nunito.className} ${styles.container}`}>
-          <div className={styles.products}>
-            <div className={styles.containerTitle}>
-              <h1 className={styles.heading}>Add news</h1>
-              <div className={styles.btns}>
-                <CreateBtn
-                    onClick={() => router.push("/manageNews")}
-                    symbol={back}
-                    title="Back"
-                />
-                <CreateBtn
-                    onClick={handleSubmit}
-                    symbol="+"
-                    title="Create"
-                />
-              </div>
+    <SideBarLayout>
+      <div className={`${nunito.className} ${styles.container}`}>
+        <div className={styles.products}>
+          <div className={styles.containerTitle}>
+            <h1 className={styles.heading}>Add news</h1>
+            <div className={styles.btns}>
+              <CreateBtn
+                onClick={() => router.push("/manageNews")}
+                symbol={back}
+                title="Back"
+              />
+              <CreateBtn onClick={handleSubmit} symbol="+" title="Create" />
             </div>
-            <div className={styles.form}>
-              <div className={styles.inputs}>
-                <label className={styles.label}>Title</label>
-                <input
-                    onChange={(ev) => setTitle(ev.target.value)}
-                    placeholder="Title"
-                    className={styles.input}
-                    type="text"
-                />
-                <label className={styles.label}>Description</label>
-                <textarea
-                    className={styles.inputDesc}
-                    onChange={(ev) => setDesc(ev.target.value)}
-                    placeholder="Description"
-                />
-              </div>
-              <div className={styles.imageContainer}>
-                <label className={styles.label}>Image</label>
-                <UploadImage setImg={setImageFile} />
-              </div>
+          </div>
+          <div className={styles.form}>
+            <div className={styles.inputs}>
+              <label className={styles.label}>Title</label>
+              <input
+                onChange={(ev) => setTitle(ev.target.value)}
+                placeholder="Title"
+                className={styles.input}
+                type="text"
+              />
+              <label className={styles.label}>Description</label>
+              <textarea
+                className={styles.inputDesc}
+                onChange={(ev) => setDesc(ev.target.value)}
+                placeholder="Description"
+              />
+            </div>
+            <div className={styles.imageContainer}>
+              <label className={styles.label}>Image</label>
+              <UploadImage setImg={setImageFile} />
             </div>
           </div>
         </div>
-      </SideBarLayout>
+      </div>
+    </SideBarLayout>
   );
 };
 

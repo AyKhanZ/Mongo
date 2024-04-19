@@ -1,4 +1,4 @@
-import { Product } from "@/types";
+import { News } from "@/types";
 import { useEffect, useState } from "react";
 import styles from "./ManageNews.module.css";
 import SideBarLayout from "@/components/SideBarLayout/SideBarLayout";
@@ -21,18 +21,18 @@ const ManageNews = () => {
 
   const router = useRouter();
 
-  //   const fetchNews = async () => {
-  //     try {
-  //       const response = await fetch(url);
-  //       const data = await response.json();
-  //       setNews(data);
-  //   } catch (error:any) {
-  //   console.error(error)
-  //   }
-  //   };
-  //   useEffect(() => {
-  //     fetchNews();
-  //   }, [news, url]);
+  const fetchNews = async () => {
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setNews(data);
+    } catch (error: any) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchNews();
+  }, [news, url]);
 
   const deleteNews = async (id: number) => {
     try {
@@ -88,14 +88,14 @@ const ManageNews = () => {
         </div>
         <div className={deleteShown ? styles.containerHidden : styles.news}>
           {news.length > 0 ? (
-            news.map((p: Product) => (
+            news.map((p: News) => (
               <div className={styles.horizontal} key={p.id}>
-                {p.combinedImage == null ? (
-                  <div className={styles.imgContainer}></div>
+                {p.img == null ? (
+                  <></>
                 ) : (
                   <Image
                     className={styles.imgContainer}
-                    src={p.combinedImage}
+                    src={p.img}
                     alt="News image"
                     width={280}
                     height={220}
