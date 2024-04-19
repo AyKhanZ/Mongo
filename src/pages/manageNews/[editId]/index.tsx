@@ -20,8 +20,8 @@ const PostProduct = () => {
 
   const getNews = async (id: number) => {
     try {
-      const response = await fetch(`https://localhost:7164/News/ById/${id}`);
-      const data = await response.json();
+      const response = await fetch(`http://localhost:3000/api/news/${id}`);
+      const data = await response.json()
 
       setImg(data.image);
       setTitle(data.title);
@@ -44,7 +44,7 @@ const PostProduct = () => {
         image: img,
       };
 
-      await fetch(`https://localhost:7164/News/ById/${params.editId}`, {
+      await fetch(`http://localhost:3000/api/news/${params.editId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

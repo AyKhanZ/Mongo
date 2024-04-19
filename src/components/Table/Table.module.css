@@ -2,6 +2,9 @@
   width: 100%;
   border-collapse: collapse;
 }
+.tableHidden{
+  display: none;
+}
 .header,
 .cell {
   padding: 8px;
