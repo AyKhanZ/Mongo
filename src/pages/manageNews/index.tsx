@@ -14,7 +14,7 @@ import ProductFilters from "@/components/ProductFilters/ProductFilters";
 const nunito = Nunito({ subsets: ["latin"] });
 
 const ManageNews = () => {
-  const [url, setUrl] = useState("https://localhost:7164/Product");
+  const [url, setUrl] = useState("http://localhost:3000/api/news");
   const [news, setNews] = useState([]);
   const [delNewsId, setDelNewsId] = useState(0);
   const [deleteShown, setDeleteShown] = useState(false);
@@ -36,7 +36,7 @@ const ManageNews = () => {
 
   const deleteNews = async (id: number) => {
     try {
-      await fetch(`https://localhost:7164/News/ById/${id}`, {
+      await fetch(`http://localhost:3000/api/news/${id}`, {
         method: "DELETE",
       });
     } catch (error: any) {

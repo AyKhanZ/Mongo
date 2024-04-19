@@ -129,7 +129,10 @@
   margin: 0 10px 0 0;
   width: 200px;
 }
-.filterBtn:focus {
+.filterBtn:focus,
+.filterBtn:active,
+.filterBtn option:focus,
+.filterBtn option:active {
   border: 2px solid #007bff;
 }
 .filterTitle {
@@ -164,4 +167,16 @@
 }
 .tableContainer {
   height: 70vh;
+}
+.containerNone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  border-radius: 15px;
+  border: 1px dashed #cbccce;
+}
+.noProductsText {
+  font-size: 22px;
+  color: #cbccce;
 }

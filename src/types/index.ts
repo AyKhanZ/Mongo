@@ -33,16 +33,16 @@ export type User = {
   email: string;
   phoneNumber: string | null;
   emailConfirmed: boolean;
-}
+};
 export type Company = {
   id: string;
-  id1C: string| "";
-  companyName: string| null;
+  id1C: string | "";
+  companyName: string | null;
   voen: string | null;
   typeOfActivity: string | null;
   startDate: string | null;
   address: string | null;
-}
+};
 
 export type ClientWrapper = {
   id: number;
@@ -53,7 +53,7 @@ export type ClientWrapper = {
     userName: string;
     lastName: string;
     patronimic?: string;
-    image:any;
+    image: any;
     role: string;
     email: string;
     phoneNumber?: string;
@@ -75,13 +75,12 @@ export type ClientWrapper = {
   clientFeedback?: any;
   clientConfirm?: any;
   youtubeLink?: string;
-}
+};
 
 export type ResponseData = {
   totalUsersCount: number;
   users: ClientWrapper[];
 };
-
 
 export type StaffWrapper = {
   id: number;
@@ -92,7 +91,7 @@ export type StaffWrapper = {
     userName: string;
     lastName: string;
     patronimic?: string;
-    image:any;
+    image: any;
     role: string;
     email: string;
     phoneNumber?: string;
@@ -102,7 +101,7 @@ export type StaffWrapper = {
   Experience?: number;
   certificates?: string;
   position?: string;
-}
-export type employer ={
-  employer:StaffWrapper;
-}
+};
+export type employer = {
+  employer: StaffWrapper;
+};

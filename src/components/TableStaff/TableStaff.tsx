@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import styles from "./TableStaff.module.css";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
-import { faPen as edit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPen as edit,
+  faCheck as check,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 import { employer } from "@/types";
 import DisActiveBtn from "@/components/DisActiveBtn/DisActiveBtn";
-import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface TableProps {
   staff: employer[];
@@ -12,22 +16,25 @@ interface TableProps {
   setActiveStates: React.Dispatch<
     React.SetStateAction<{ [id: number]: boolean }>
   >;
+  positionEdited: string;
+  setPositionEdited: (email: string) => void;
 }
 
 const TableStaff: React.FC<TableProps> = ({
   staff,
   activeStates,
   setActiveStates,
+  positionEdited,
+  setPositionEdited,
 }) => {
-  const router = useRouter();
+  const [position, setPosition] = useState("Intern");
 
   const handleDisable = async (id: number) => {
     setActiveStates((prev) => ({ ...prev, [id]: !prev[id] }));
 
-    console.log(`${id} + ${activeStates[id]}`);
     try {
       await fetch(
-        `https://localhost:7164/Client/DismissEmployer/${id}?isDismissed=${!activeStates[
+        `https://localhost:7164/Employer/Dismiss/${id}?isDismissed=${!activeStates[
           id
         ]}`,
         {
@@ -37,6 +44,28 @@ const TableStaff: React.FC<TableProps> = ({
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleEdit = (email: string) => {
+    setPositionEdited(email);
+  };
+
+  const changePosition = (e: any) => {
+    setPosition(e.target.value);
+  };
+
+  const handlePosition = async (email: string, position: string) => {
+    try {
+      await fetch(
+        `https://localhost:7164/Employer/ChangePosition/${email}?position=${position}`,
+        {
+          method: "PUT",
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+    setPositionEdited("");
   };
 
   return (
@@ -70,7 +99,21 @@ const TableStaff: React.FC<TableProps> = ({
                 ? staffMember.employer.user.phoneNumber
                 : "..."}
             </td>
-            <td className={styles.cell}>{staffMember.employer.position}</td>
+            <td className={styles.cell}>
+              <>
+                {positionEdited == staffMember.employer.user.email ? (
+                  <input
+                    placeholder="Set position"
+                    className={styles.input}
+                    onChange={changePosition}
+                  />
+                ) : (
+                  <p className={styles.position}>
+                    {staffMember.employer.position}
+                  </p>
+                )}
+              </>
+            </td>
             <td className={styles.cell}>
               {staffMember.employer.Experience
                 ? staffMember.employer.Experience
@@ -86,14 +129,40 @@ const TableStaff: React.FC<TableProps> = ({
             </td>
             <td className={styles.cellActions}>
               <div className={styles.btns}>
-                {/* Раскомментируйте и реализуйте логику кнопок, когда будете готовы */}
-                <CreateBtn
-                  onClick={() =>
-                    router.push(`/manageStaff/${staffMember.employer.id}`)
-                  }
-                  symbol={edit}
-                  title="Edit"
-                />
+                <>
+                  {positionEdited == staffMember.employer.user.email ? (
+                    <>
+                      <button
+                        onClick={() =>
+                          handlePosition(
+                            staffMember.employer.user.email,
+                            position
+                          )
+                        }
+                        className={styles.btnCheck}
+                      >
+                        <FontAwesomeIcon
+                          icon={check}
+                          style={{ fontSize: 22 }}
+                        />
+                      </button>
+                      <button
+                        onClick={() => handleEdit("")}
+                        className={styles.btnCansel}
+                      >
+                        <FontAwesomeIcon icon={faX} style={{ fontSize: 20 }} />
+                      </button>
+                    </>
+                  ) : (
+                    <CreateBtn
+                      onClick={() =>
+                        handleEdit(staffMember.employer.user.email)
+                      }
+                      symbol={edit}
+                      title="Edit"
+                    />
+                  )}
+                </>
                 <DisActiveBtn
                   onClick={() => handleDisable(staffMember.employer.id)}
                   isActive={

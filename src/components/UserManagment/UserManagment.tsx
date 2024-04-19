@@ -22,7 +22,7 @@ const UserManagement: React.FC = () => {
     try {
       if(searchText == ""){
         const response = await fetch(
-            `https://localhost:7164/GetClients?Page=${currentPage}&PageSize=${pageSize}`
+            `https://localhost:7164/Client/GetClients?Page=${currentPage}&PageSize=${pageSize}`
         );
         const data = await response.json();
         setClients(data.users);
@@ -32,7 +32,7 @@ const UserManagement: React.FC = () => {
         const encodedSearchText = encodeURIComponent(searchText.trim());
         const filterQuery = encodedSearchText ? `&orFilter=userName%40%3D${encodedSearchText}%7Cemail%40%3D${encodedSearchText}%7ClastName%40%3D${encodedSearchText}` : '';
         const response = await fetch(
-            `https://localhost:7164/GetClients?${filterQuery}`
+            `https://localhost:7164/Client/GetClients?${filterQuery}`
         );
         const data = await response.json();
         setClients(data.users);
@@ -101,30 +101,36 @@ const UserManagement: React.FC = () => {
         </div>
         <div className={styles.secondLevel}>
           <div className={styles.listContainer}>
-            <div className={styles.table}>
-              {searchText == "" ?
-                  <>
-                    <div className={styles.tableContainer}>
-                      <Table clients={clients} activeStates={activeStates} setActiveStates={setActiveStates} />
-                    </div>
-                    <Pagination
-                      currentPage={currentPage}
-                      totalPages={Math.ceil(totalClientsCount / pageSize)}
-                      paginate={paginate}
-                    />
-                  </>
-                  :
-                  <>
-                    <div className={styles.tableContainer}>
-                      <Table clients={currentClients} activeStates={activeStates} setActiveStates={setActiveStates} />
-                    </div>
-                    <Pagination
-                        currentPage={currentPage}
-                        totalPages={Math.ceil(clients.length / pageSize)}
-                        paginate={paginate}/>
-                  </>
-              }
-            </div>
+            {clients.length > 0 ?
+              <div className={styles.table}>
+                {searchText == "" ?
+                   <>
+                     <div className={styles.tableContainer}>
+                       <Table clients={clients} activeStates={activeStates} setActiveStates={setActiveStates} />
+                     </div>
+                     <Pagination
+                       currentPage={currentPage}
+                       totalPages={Math.ceil(totalClientsCount / pageSize)}
+                       paginate={paginate}
+                     />
+                   </>
+                   :
+                   <>
+                     <div className={styles.tableContainer}>
+                       <Table clients={currentClients} activeStates={activeStates} setActiveStates={setActiveStates} />
+                     </div>
+                     <Pagination
+                         currentPage={currentPage}
+                         totalPages={Math.ceil(clients.length / pageSize)}
+                         paginate={paginate}/>
+                   </>
+                }
+              </div>
+                :
+              <div className={styles.containerNone}>
+                <p className={styles.noProductsText}>No clients yet ƪ(˘⌣˘)ʃ</p>
+              </div>
+            }
           </div>
         </div>
       </div>
