@@ -168,9 +168,11 @@ public class AuthenticationController : ControllerBase
 		return Ok("Password changed successfully");
 	}
 
+	 
+
 	[HttpPost("forgot-password")]
 	[AllowAnonymous]
-	public async Task<IActionResult> ForgotPassword([FromBody]ForgotPasswordRequest model)
+	public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest model)
 	{
 		var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
 		if (user == null) return BadRequest("Email could not be found");
@@ -186,29 +188,27 @@ public class AuthenticationController : ControllerBase
 			{
 				UserId = user.Id,
 				Token = resetToken,
-				ExpiryDate = DateTime.UtcNow.AddHours(24)  
+				ExpiryDate = DateTime.UtcNow.AddHours(24)
 			};
 			_dbContext.PasswordResetTokens.Add(passwordResetEntry);
 			await _dbContext.SaveChangesAsync();
 		}
-
-		var forgotPasswordLink = Url.Action(nameof(ResetPassword), "Authentication", new { token = resetToken, email = user.Email }, Request.Scheme);
-
-		if (forgotPasswordLink == null) return BadRequest("Failed to create password link!");
+		var resetPasswordUrl = $"http://localhost:3000/resetPassword?token={Uri.EscapeDataString(resetToken)}&email={Uri.EscapeDataString(user.Email)}";
 
 		try
 		{
-			var message = new Message(new string[] { user.Email }, "Forgot password link", forgotPasswordLink);
-			message.HtmlFilePath = "./wwwroot/ForgotPasswordLink.html"; 
-			_emailService.SendEmail(message, forgotPasswordLink);
+			var message = new Message(new string[] { user.Email }, "Reset password link", resetPasswordUrl);
+			message.HtmlFilePath = "./wwwroot/ForgotPasswordLink.html";
+			_emailService.SendEmail(message, resetPasswordUrl);
+			return Redirect(resetPasswordUrl);
 		}
 		catch (Exception ex)
 		{
 			return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Could not send link to email, please try again" });
 		}
-
-		return Ok(new Response { Status = "Success", Message = $"Password change request is sent on email {user.Email}. Please open the email & click the link." });
 	}
+
+
 
 	[HttpPost("reset-password")]
 	[AllowAnonymous]
