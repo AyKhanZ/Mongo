@@ -8,13 +8,13 @@ namespace DB.Models;
 public partial class AspNetUser : IdentityUser
 {
 	[Sieve(CanFilter = true, CanSort = true)]
-	public string Id1C { get; set; } = string.Empty;
+	public string? Id1C { get; set; } = string.Empty;
 
 	[Sieve(CanFilter = true, CanSort = true)]
 	public string UserName { get; set; } 
 
 	[Sieve(CanFilter = true, CanSort = true)]
-	public string LastName { get; set; }
+	public string? LastName { get; set; }
 
 	[Sieve(CanFilter = true, CanSort = true)]
 	public string Role { get; set; } = "Client";
@@ -23,8 +23,6 @@ public partial class AspNetUser : IdentityUser
 	[Sieve(CanFilter = true, CanSort = true)]
 	public string Email { get; set; }
 
-	public string? Patronimic { get; set; }
-	public byte[]? Image { get; set; }
 
 	public Enums.TaskState TaskState { get; set; } = Enums.TaskState.None;
 
@@ -37,9 +35,13 @@ public partial class AspNetUser : IdentityUser
 	[JsonIgnore]
 	public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
 
+	public string? Patronimic { get; set; }
     public DateTime? BirthDate { get; set; }
     public string? Gender { get; set; }
 	public int? Age { get; set; }
+	public byte[]? Image { get; set; }
+
+
 
 	[JsonIgnore]
 	public Client? Client { get; set; }
@@ -52,5 +54,5 @@ public partial class AspNetUser : IdentityUser
 	[JsonIgnore]
 	public virtual ICollection<UserRole>? UserRoles { get; set; } = new List<UserRole>();
 	[JsonIgnore]
-	public IEnumerable<UserProject> UserProjects { get; set; } = new List<UserProject>();
+	public IEnumerable<UserProject>? UserProjects { get; set; } = new List<UserProject>();
 }

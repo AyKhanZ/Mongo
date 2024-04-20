@@ -19,6 +19,7 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 	public DbSet<UserProject> UserProjects { get; set; }
 	public DbSet<UserRole> UserRoles { get; set; }
 	public DbSet<Role> Roles { get; set; }
+	public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
 
 
 	public BaimContext(DbContextOptions<BaimContext> options)
@@ -34,7 +35,7 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 			entity.Property(u => u.Gender);
 			entity.Property(u => u.Patronimic);
 			entity.Property(u => u.BirthDate);
-			entity.Property(u => u.LastName).IsRequired();
+			entity.Property(u => u.LastName);
 			entity.Property(u => u.Image); 
 			entity.Property(u => u.TaskState);
 			entity.Property(u => u.PhoneNumber);
@@ -86,6 +87,7 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 		{
 			entity.HasKey(op => op.Id);
 			entity.Property(op => op.Id).ValueGeneratedOnAdd();
+			entity.Property(e => e.IsDismissed).HasDefaultValue(false);
 			entity.Property(e => e.Position).IsRequired().HasMaxLength(50);
 			entity.Property(e => e.Experience).IsRequired();
 			entity.Property(e => e.Certificates);

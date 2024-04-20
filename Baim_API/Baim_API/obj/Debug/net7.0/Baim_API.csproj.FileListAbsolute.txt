@@ -201,3 +201,4 @@ D:\Baim Project\Back\Baim_API\Baim_API\obj\Debug\net7.0\ref\Baim_API.dll
 D:\Baim Project\Back\Baim_API\Baim_API\bin\Debug\net7.0\Sieve.dll
 D:\Baim Project\Back\Baim_API\Baim_API\bin\Debug\net7.0\LinqKit.Core.dll
 D:\Baim Project\Back\Baim_API\Baim_API\bin\Debug\net7.0\LinqKit.Microsoft.EntityFrameworkCore.dll
+D:\Baim Project\Back\Baim_API\Baim_API\bin\Debug\net7.0\BCrypt.Net-Next.dll

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "oNtIdORD7vD6tGT6WFXDnZtAxu5JswLq/TCC3MQ/MROFyVM6W5/AaGpdOvZcEqlFUnENz7huJN3rgocVBHFSug==",
+  "dgSpecHash": "Au+9WN+wLvYb8RfTFVQ0tPGrzC1fNKmkKV+/UM/HhCIigdOtx+5A9anTeO4ycZnkms6xyfSvpZdsCP5/BktjFQ==",
   "success": true,
   "projectFilePath": "D:\\Baim Project\\Back\\Baim_API\\Baim_API\\Baim_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\linqkit.core\\1.2.5\\linqkit.core.1.2.5.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\linqkit.microsoft.entityframeworkcore\\7.1.5\\linqkit.microsoft.entityframeworkcore.7.1.5.nupkg.sha512",

@@ -7,7 +7,7 @@ public class RegisterUser
 	[Required(ErrorMessage = "Id 1C is required")]
 	public string Id1C { get; set; } 
 	[Required(ErrorMessage = "User name is required")]
-	public string UserName { get; set; }
+	public string Name { get; set; }
 	[Required(ErrorMessage = "Last name is required")]
 	public string LastName { get; set; }
 	[Required(ErrorMessage = "Email is required")]

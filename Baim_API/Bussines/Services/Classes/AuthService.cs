@@ -7,29 +7,46 @@ using System.Text;
 
 namespace Bussines.Services.Classes;
 public static class AuthService
-{
-	public static string GenerateTokenString(AspNetUser user, string role,IConfiguration _configuration)
+{  
+	public static string GenerateJwtToken(AspNetUser user, IConfiguration _configuration)
 	{
-		var claims = new List<Claim>
+		var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
+		var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+		var claims = new[]
 		{
-			new Claim(ClaimTypes.Email,user.UserName),
-			new Claim(ClaimTypes.NameIdentifier,user.Id),
-			new Claim(ClaimTypes.Role, role),
+			new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+			new Claim(ClaimTypes.Role, user.Role),
 		};
 
-		var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-
-		var signingCred = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-
-		var securityToken = new JwtSecurityToken(
-			claims: claims,
-			expires: DateTime.Now.AddMinutes(60),
+		var token = new JwtSecurityToken(
 			issuer: _configuration["Jwt:Issuer"],
 			audience: _configuration["Jwt:Audience"],
-			signingCredentials: signingCred);
+			claims: claims,
+			expires: DateTime.Now.AddHours(3),
+			signingCredentials: credentials
+		);
 
-		string tokenString = new JwtSecurityTokenHandler().WriteToken(securityToken);
-		return tokenString;
+		return new JwtSecurityTokenHandler().WriteToken(token);
 	}
 
+	public static string GenerateEmailConfirmationToken(AspNetUser user, IConfiguration _configuration)
+	{
+		var tokenHandler = new JwtSecurityTokenHandler();
+		var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]!);
+		var tokenDescriptor = new SecurityTokenDescriptor
+		{
+			Subject = new ClaimsIdentity(new Claim[]
+			{
+			new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+			new Claim("id", user.Id.ToString()),
+			new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+			}),
+			Expires = DateTime.UtcNow.AddDays(1),
+			SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+		};
+		var token = tokenHandler.CreateToken(tokenDescriptor);
+		return tokenHandler.WriteToken(token);
+	}
 }

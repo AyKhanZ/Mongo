@@ -1,4 +1,4 @@
-using Bussines.Models;
+﻿using Bussines.Models;
 using Bussines.Services.Classes;
 using Bussines.Services.Interfaces;
 using DB.DbContexts;
@@ -19,14 +19,12 @@ builder.Services.AddSwaggerGen();
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("BAIM") ?? throw new InvalidOperationException("Connection string 'BaimContext' not found.");
 builder.Services.AddDbContext<BaimContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddSingleton<AspNetUser>();
-// filter sort paggination
+builder.Services.AddSingleton<AspNetUser>();	
 builder.Services.AddSingleton<SieveProcessor>();
 
 builder.Services.AddIdentity<AspNetUser, IdentityRole>()
 	.AddEntityFrameworkStores<BaimContext>().AddDefaultTokenProviders();
 
-// ????????? CORS
 builder.Services.AddCors(options =>
 {
 	options.AddDefaultPolicy(builder =>
@@ -37,11 +35,16 @@ builder.Services.AddCors(options =>
 	});
 });
 
-// Added 
-builder.Services.Configure<IdentityOptions>(
-	options => options.SignIn.RequireConfirmedEmail =  true
-);
-// Added 
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+	// Настройка блокировки
+	options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+	options.Lockout.MaxFailedAccessAttempts = 5;
+
+	// Требовать подтверждения по электронной почте
+	options.SignIn.RequireConfirmedEmail = true;
+});
 builder.Services.Configure<DataProtectionTokenProviderOptions>(optionts => optionts.TokenLifespan = TimeSpan.FromHours(10));
 
 builder.Services.AddAuthentication(options =>
@@ -69,7 +72,6 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 
-// ????????? CORS
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseStaticFiles();
@@ -82,6 +84,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();  
 app.UseAuthorization();
 
 app.MapControllers();

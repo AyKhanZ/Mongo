@@ -58,14 +58,12 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Id1C")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -174,7 +172,6 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("YoutubeLink")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -239,6 +236,11 @@ namespace DB.Migrations
 
                     b.Property<int>("Experience")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDismissed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Position")
                         .IsRequired()
@@ -355,6 +357,32 @@ namespace DB.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderProducts");
+                });
+
+            modelBuilder.Entity("DB.Models.PasswordResetToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PasswordResetTokens");
                 });
 
             modelBuilder.Entity("DB.Models.Product", b =>
@@ -551,21 +579,21 @@ namespace DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d68dad74-6cfe-4247-9f0f-4848eeb19e86",
+                            Id = "a54fcb74-d607-436e-bb69-d267698f1c88",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "8988db8f-33d9-4870-a61b-844a24def9ac",
+                            Id = "f389aac9-3cdf-4f55-bbe8-cff7ac56fd35",
                             ConcurrencyStamp = "2",
                             Name = "Client",
                             NormalizedName = "Client"
                         },
                         new
                         {
-                            Id = "463adf41-b2c3-4cd2-a940-90187f39c151",
+                            Id = "35cd5671-3d86-4efb-9369-ada66cba1a99",
                             ConcurrencyStamp = "3",
                             Name = "Employer",
                             NormalizedName = "Employer"
@@ -752,6 +780,17 @@ namespace DB.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DB.Models.PasswordResetToken", b =>
+                {
+                    b.HasOne("DB.Models.AspNetUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DB.Models.Role", b =>

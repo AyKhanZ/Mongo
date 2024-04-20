@@ -7,14 +7,13 @@ using Bussines.Services.Interfaces;
 using DB.DbContexts;
 using DB.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt; 
+using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 
 namespace Baim_API.Controllers;
 
@@ -23,26 +22,14 @@ namespace Baim_API.Controllers;
 public class AuthenticationController : ControllerBase
 {
 	private readonly BaimContext _dbContext;
-	private readonly UserManager<AspNetUser> _userManager;
-	private readonly RoleManager<IdentityRole> _roleManager;
-	private readonly SignInManager<AspNetUser> _signInManager;
-	private readonly IUserStore<AspNetUser> _userStore;
 	private readonly IConfiguration _configuration;
 	private readonly IEmailService _emailService;
 
 	public AuthenticationController(BaimContext dbContext,
-		UserManager<AspNetUser> userManager,
-		IUserStore<AspNetUser> userStore,
-		SignInManager<AspNetUser> signInManager,
-		RoleManager<IdentityRole> roleManager,
 		IConfiguration configuration,
 		IEmailService emailService)
 	{
 		_dbContext = dbContext;
-		_userManager = userManager;
-		_userStore = userStore;
-		_signInManager = signInManager;
-		_roleManager = roleManager;
 		_configuration = configuration;
 		_emailService = emailService;
 	}
@@ -59,222 +46,216 @@ public class AuthenticationController : ControllerBase
 		model.Password = "ARnold151618&";
 		//model.Password = GeneratePassword.GenerateTemporaryPassword();
 
-		if (await _dbContext.Users.AnyAsync(a => a.Email == model.Email)) return BadRequest("User already exists");
+		if (await _dbContext.Users.AnyAsync(u => u.Email == model.Email)) return BadRequest("User already exists");
 
+		var passwordHasher = new PasswordHasher<AspNetUser>();
 		var newUser = new AspNetUser
 		{
-			Id1C = model.Id1C,
 			Email = model.Email,
-			UserName = model.UserName,
-			LastName = model.LastName,
+			UserName = model.Name,
 			NormalizedEmail = model.Email.ToUpper(),
+			LastName = model.LastName,
+			Id1C = model.Id1C,
 			Role = model.Role
 		};
+		newUser.PasswordHash = passwordHasher.HashPassword(newUser, model.Password);
 
-		var result = new IdentityResult();
-		if (await _roleManager.RoleExistsAsync(model.Role))
+
+		if (model.Role == "" || model.Role == "Client")
 		{
-			await _userStore.SetUserNameAsync(newUser, model.Email, CancellationToken.None);
-			await _userManager.GetUserIdAsync(newUser);
-			result = await _userManager.CreateAsync(newUser, model.Password);
-
-			if (!result.Succeeded)
-			{
-				return StatusCode(StatusCodes.Status500InternalServerError,
-					new Response { Status = "Error", Message = "User failed to create!" });
-			}
-			await _userManager.AddToRoleAsync(newUser, model.Role);
-
-			if (model.Role == "Client")
-			{
-				Client client = new() { User = newUser, UserId = newUser.Id,IsPublic=true };
-				await _dbContext.Clients.AddAsync(client);
-			}
-			else if (model.Role == "Employer")
-			{
-				Employer employer = new() { User = newUser, UserId = newUser.Id, Position = "Intern" };
-				await _dbContext.Employers.AddAsync(employer);
-			}
-			await _dbContext.SaveChangesAsync();
-
-
-			var token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-			var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = newUser.Email }, Request.Scheme);
-			if (confirmationLink != null)
-			{
-				var message = new Message(new string[] { newUser.Email }, "Confirmation email and password setup", confirmationLink);
-
-				message.HtmlFilePath = "./wwwroot/index.html";
-				_emailService.SendEmail(message, confirmationLink);
-				return StatusCode(StatusCodes.Status200OK,
-						new Response { Status = "Success", Message = $"User created & email sent to {newUser.Email} Successfully! " });
-			}
-			return StatusCode(StatusCodes.Status500InternalServerError,
-					new Response { Status = "Error", Message = "Confirmation link does not exist!" });
+			Client client = new() { User = newUser, UserId = newUser.Id, IsPublic = true };
+			newUser.Client = client;
+			newUser.ClientId = client.Id;
+			await _dbContext.Clients.AddAsync(client);
 		}
-		else
+		else if (model.Role == "Employer")
 		{
-			return StatusCode(StatusCodes.Status500InternalServerError,
-					new Response { Status = "Error", Message = "This role does not exist!" });
+			Employer employer = new() { User = newUser, UserId = newUser.Id, Position = "Intern" };
+			newUser.Employer = employer;
+			newUser.EmployerId = employer.Id;
+			await _dbContext.Employers.AddAsync(employer);
 		}
+		else return BadRequest("Role does not exist!");
+		await _dbContext.Users.AddAsync(newUser);
+		await _dbContext.SaveChangesAsync();
+
+
+		var token = AuthService.GenerateEmailConfirmationToken(newUser,_configuration);
+		var confirmationLink = Url.Action(nameof(ConfirmEmail), "Authentication", new { token, email = newUser.Email }, Request.Scheme);
+
+		if (confirmationLink == null) return BadRequest("Failed to create confirmation tokent");
+
+		var message = new Message(new string[] { newUser.Email }, "Confirmation your email ", confirmationLink);
+		message.HtmlFilePath = "./wwwroot/index.html";
+		_emailService.SendEmail(message, confirmationLink);
+
+		return Ok(new { Message = $"User created & email sent to {newUser.Email} Successfully! " } );
 	}
 
 	[HttpPost("Login")]
 	public async Task<IActionResult> Login([FromBody] LoginUser model)
 	{
-		if (ModelState.IsValid)
-		{
-			var user = await _userManager.FindByEmailAsync(model.Email);
-			if (user != null)
-			{
-				if (!await _userManager.IsEmailConfirmedAsync(user)) return BadRequest("Email is not confirmed");
+		if (!ModelState.IsValid) return BadRequest("Not valid attempt");
+		
+		var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+		
+		if (user == null) return BadRequest("User not found");
 
-				var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: true);
-				if (result.Succeeded)
-				{
-					var roles = await _userManager.GetRolesAsync(user);
-					var role = roles.FirstOrDefault();
+		if (!user.EmailConfirmed) return BadRequest("Email is not confirmed");
 
-					if (role == null) return BadRequest("User does not have any roles!");
+		var passwordHasher = new PasswordHasher<AspNetUser>();
+		var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, model.Password);
+		if (result != PasswordVerificationResult.Success) return BadRequest("Incorrect password!");
 
-					var tokenString = AuthService.GenerateTokenString(user, role, _configuration);
-					return Ok(new { UserId = user.Id, Token = tokenString });
-				}
-				return BadRequest("Invalid login attempt");
-			}
-		}
-		return BadRequest("Not valid attempt");
+		var tokenString = AuthService.GenerateJwtToken(user,_configuration);
+		return Ok(new {User = user, Token = tokenString });
 	}
+	 
 
-	// GetRedirect
 	[HttpGet("ConfirmEmail")]
 	public async Task<IActionResult> ConfirmEmail(string token, string email)
 	{
-		var user = await _userManager.FindByEmailAsync(email);
+		var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+		if (user == null) return BadRequest("User does't exist!");
 
-		if (user != null)
+		var tokenHandler = new JwtSecurityTokenHandler();
+		var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]!);
+		try
 		{
-			var result = await _userManager.ConfirmEmailAsync(user, token);
-			if (result.Succeeded)
+			tokenHandler.ValidateToken(token, new TokenValidationParameters
 			{
-				return Redirect($"http://localhost:3000/email-confirmed");
-			}
-			else return BadRequest("Confirmation failed");
+				ValidateIssuerSigningKey = true,
+				IssuerSigningKey = new SymmetricSecurityKey(key),
+				ValidateIssuer = false,
+				ValidateAudience = false,
+				ClockSkew = TimeSpan.Zero
+			}, out SecurityToken validatedToken);
+
+			var jwtToken = (JwtSecurityToken)validatedToken;
+			var userId = jwtToken.Claims.First(x => x.Type == "id").Value;
+
+			if (userId != user.Id.ToString()) return BadRequest("Invalid Token");
+
+			user.EmailConfirmed = true;
+			await _dbContext.SaveChangesAsync();
+
+			return Redirect($"http://localhost:3000/email-confirmed");
 		}
-		return StatusCode(StatusCodes.Status500InternalServerError,
-					new Response { Status = "Error", Message = "This user does not exist" });
-	}
-
-
-
-
-
-
+		catch
+		{
+			return BadRequest("Invalid Token");
+		}
+	} 
 
 	[HttpPut("ChangePassword")]
 	public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
 	{
-		var user = await _dbContext.Users.FirstOrDefaultAsync(p => p.Id1C == model.Id1C);
+		var user = await _dbContext.Users.FirstOrDefaultAsync(p => p.Email == model.Email);
 		if (user == null) return BadRequest("User not found");
 
 		var passwordCheckResult = AuthValidation.CheckPassword(model.NewPassword);
-		if (passwordCheckResult == false) return BadRequest("Password must be more than 6 and less than 40 characters long and special symbol");
+		if (!passwordCheckResult) return BadRequest("Password must be more than 6 and less than 40 characters long and include a special symbol");
 
-		var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+		var passwordHasher = new PasswordHasher<AspNetUser>();
+		var verificationResult = passwordHasher.VerifyHashedPassword(user, user.PasswordHash!, model.OldPassword);
+		if (verificationResult != PasswordVerificationResult.Success) return BadRequest("Old password is incorrect");
 
-		if (!result.Succeeded) return BadRequest("Failed to change password");
+		var newPasswordHash = passwordHasher.HashPassword(user, model.NewPassword);
+		user.PasswordHash = newPasswordHash;
+		_dbContext.Users.Update(user);
+		await _dbContext.SaveChangesAsync();
 
 		return Ok("Password changed successfully");
 	}
 
-
-
 	[HttpPost("forgot-password")]
 	[AllowAnonymous]
-	public async Task<IActionResult> ForgotPassword([Required] string email)
+	public async Task<IActionResult> ForgotPassword([FromBody]ForgotPasswordRequest model)
 	{
-		var user = await _userManager.FindByEmailAsync(email);
-		if (user != null)
-		{
-			var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-			var forgotPasswordLink = Url.Action(nameof(ResetPassword), "Authentication", new { token, email = user.Email }, Request.Scheme);
-			if (forgotPasswordLink != null)
-			{
-				var message = new Message(new string[] { user.Email! }, "Forgot password link", forgotPasswordLink);
+		var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+		if (user == null) return BadRequest("Email could not be found");
 
-				message.HtmlFilePath = "./wwwroot/ForgotPasswordLink.html";
-				_emailService.SendEmail(message, forgotPasswordLink);
-				return StatusCode(StatusCodes.Status200OK,
-						new Response { Status = "Success", Message = $"Password change request is sent on email {user.Email} .Please open the email & click the link " });
-			}
-			return StatusCode(StatusCodes.Status500InternalServerError,
-					new Response { Status = "Error", Message = "Could not sent link to email,please try again" });
+		string resetToken = "";
+		using (var rngCryptoServiceProvider = new RNGCryptoServiceProvider())
+		{
+			var randomBytes = new byte[32];
+			rngCryptoServiceProvider.GetBytes(randomBytes);
+			resetToken = Convert.ToBase64String(randomBytes);
+
+			var passwordResetEntry = new PasswordResetToken
+			{
+				UserId = user.Id,
+				Token = resetToken,
+				ExpiryDate = DateTime.UtcNow.AddHours(24)  
+			};
+			_dbContext.PasswordResetTokens.Add(passwordResetEntry);
+			await _dbContext.SaveChangesAsync();
 		}
-		return BadRequest("Email cound not found");
+
+		var forgotPasswordLink = Url.Action(nameof(ResetPassword), "Authentication", new { token = resetToken, email = user.Email }, Request.Scheme);
+
+		if (forgotPasswordLink == null) return BadRequest("Failed to create password link!");
+
+		try
+		{
+			var message = new Message(new string[] { user.Email }, "Forgot password link", forgotPasswordLink);
+			message.HtmlFilePath = "./wwwroot/ForgotPasswordLink.html"; 
+			_emailService.SendEmail(message, forgotPasswordLink);
+		}
+		catch (Exception ex)
+		{
+			return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Could not send link to email, please try again" });
+		}
+
+		return Ok(new Response { Status = "Success", Message = $"Password change request is sent on email {user.Email}. Please open the email & click the link." });
 	}
+
+	[HttpPost("reset-password")]
+	[AllowAnonymous]
+	public async Task<IActionResult> ResetPassword([FromBody]ResetPassword model)
+	{
+		var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
+		if (user == null) return BadRequest("Invalid request");
+
+		var tokenEntry = await _dbContext.PasswordResetTokens
+			.FirstOrDefaultAsync(t => t.Token == model.Token && t.UserId == user.Id);
+		if (tokenEntry == null || tokenEntry.ExpiryDate < DateTime.UtcNow) return BadRequest("Invalid or expired password reset token");
+
+		var passwordHasher = new PasswordHasher<AspNetUser>(); 
+		user.PasswordHash = passwordHasher.HashPassword(user, model.Password);
+
+		_dbContext.Users.Update(user);
+		await _dbContext.SaveChangesAsync();
+
+		_dbContext.PasswordResetTokens.Remove(tokenEntry);
+		await _dbContext.SaveChangesAsync();
+
+		return Ok(new { Message = "Password has been changed successfully." });
+	}
+
 
 	[HttpGet("reset-password")]
 	public async Task<IActionResult> ResetPassword(string token, string email)
 	{
 		var model = new ResetPassword { Token = token, Email = email };
-		return Ok(new
-		{
-			model
-		});
-	}
 
-	[HttpPost("reset-password")]
-	[AllowAnonymous]
-	public async Task<IActionResult> ResetPassword(ResetPassword resetPassword)
-	{
-		var user = await _userManager.FindByEmailAsync(resetPassword.Email);
-		if (user != null)
-		{
-			var resetPasswordResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
-
-			if (!resetPasswordResult.Succeeded)
-			{
-				foreach (var error in resetPasswordResult.Errors)
-				{
-					ModelState.AddModelError(error.Code, error.Description);
-				}
-				return Ok(ModelState);
-			}
-			return StatusCode(StatusCodes.Status200OK,
-					new Response { Status = "Success", Message = "Password has been change" });
-		}
-		return StatusCode(StatusCodes.Status400BadRequest,
-				new Response { Status = "Error", Message = "Could not sent link to email,please try again" });
-	}
-
-
+		return Ok(new { model });
+	} 
 
 	[HttpGet("Users")]
 	public async Task<IActionResult> GetUsers()
 	{
 		try
 		{
-			var users = await _userManager.Users.ToListAsync();
+			var users = await _dbContext.Users.ToListAsync();
 			return Ok(users);
 		}
 		catch (Exception ex)
 		{
 			return StatusCode(StatusCodes.Status500InternalServerError, $"Failed to get users: {ex.Message}");
 		}
-	}
+	} 
 
-	// GET: api/User/ById1C/{id1C}
-	[HttpGet("ById1C/{id1C}")]
-	public async Task<ActionResult<Product>> GetUserById1C(string id1C)
-	{
-		var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id1C == id1C);
-
-		if (user == null) return NotFound();
-
-		return Ok(user);
-	}
-
-	// GET: api/User/ById1C/{id1C}
 	[HttpGet("ById/{id}")]
 	public async Task<ActionResult<Product>> GetUserById(string id)
 	{
@@ -284,5 +265,4 @@ public class AuthenticationController : ControllerBase
 
 		return Ok(user);
 	}
-
 }
