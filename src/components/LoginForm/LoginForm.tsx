@@ -5,8 +5,6 @@ import { useState } from "react";
 import { User } from "@/types";
 import {useAuth} from "@/context/AuthContext";
 
-interface Props {
-}
 
 const LoginForm = () => {
   const router = useRouter();
@@ -39,31 +37,23 @@ const LoginForm = () => {
     }
   };
 
-
-
   return (
-    <div className={styles.form}>
-       <h1 className={styles.heading}>Log In</h1>
-       <input
-           className={styles.input}
-           placeholder="Email"
-           onChange={(e) => setUser((prevUser:any) => ({ ...prevUser, email: e.target.value }))}
-           type="text"
-           name="email"
-       />
-       <input
-         className={styles.input}
-         placeholder="Password"
-         onChange={(e) => setUser((prevUser:any) => ({ ...prevUser, password: e.target.value }))}
-         type="password"
-         name="desc"
-       />
-       <Link href="/forgetPassword" className={styles.forget}>
-         Forgot password?
-       </Link>
-       <button onClick={fetchData}>Log in</button>
-    </div>
+      <form className={styles.form}>
+                <p className={styles.title}>Sign in </p>
+          <label >
+              <input required placeholder="" type="email" className={styles.input}
+                     onChange={(e) => setUser((prevUser:any) => ({ ...prevUser, email: e.target.value }))}/>
+                  <span>Email</span>
+          </label>
+
+          <label >
+              <input required placeholder="" type="password" className={styles.input}
+                     onChange={(e) => setUser((prevUser:any) => ({ ...prevUser, password: e.target.value }))}/>
+                  <span>Password</span>
+          </label>
+            <button onClick={fetchData} className={styles.submit}>Submit</button>
+            <p className={styles.link}><Link href="/forgetPassword">Forgot password?</Link></p>
+      </form>
   );
 };
-
 export default LoginForm;

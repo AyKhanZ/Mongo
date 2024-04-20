@@ -16,10 +16,12 @@ export type Partner = {
 };
 export type News = {
   id: string;
+  id1C: string;
   title: string;
   description: string;
   img?: string;
   imageFile?: File;
+  isPublic:boolean;
 };
 
 export type User = {
@@ -107,3 +109,32 @@ export type StaffWrapper = {
 export type employer = {
   employer: StaffWrapper;
 };
+
+
+
+
+export interface FormErrorsStep1 {
+  birthDate?: string;
+  patronymic?:string;
+  password?: string;
+  confirmPassword?: string;
+  personalEmail?: string;
+  phoneNumber?: string;
+  businessPhoneNumber?: string;
+  gender?:string;
+}
+export interface FormErrorsStep2 {
+  voen?: string;
+}
+export interface FormInputStep3 {
+  id: number;
+  name: string;
+  lastName: string;
+  email: string;
+}
+export interface FormInputErrorStep3 {
+  [key: string]: string | undefined;
+  name?: string;
+  lastName?: string;
+  email?: string;
+}

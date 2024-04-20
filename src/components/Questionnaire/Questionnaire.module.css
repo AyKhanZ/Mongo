@@ -1,0 +1,612 @@
+.mainContainer{
+    display: flex;
+    width:50vw;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+}
+.formTitle {
+    color: #00c5b2;
+    font-size: 22px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 15px 0px 30px 0px;
+}
+
+.formTitleSc {
+    color: #2c3638;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 15px 0px 20px 0px;
+}
+.genderInnerContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+
+
+}
+.genderContainer{
+    width: 100%;
+    gap:1em;
+    margin-bottom:33px;
+    margin-top:12px
+
+}
+.label{
+    color: #c2c2c2;
+    font-size: 16px;
+}
+.label::after { content:" *"; }
+
+.labelGender{
+    font-size: 16px;
+}
+
+
+.gender{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+.genderInput{
+
+accent-color: cadetblue;
+}
+
+.form {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    padding: 15px 30px;
+    background: white;
+    box-shadow: 0px 0px 3px rgb(208 208 208 / 30%);
+    border-radius: 4px;
+}
+
+.formControll {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.formControll:not(:last-of-type) {
+    margin-bottom: 33px;
+}
+.formControll.dateControll{
+    margin-top: 15px;
+
+}
+.formInput {
+    position: relative;
+    width: 100%;
+}
+
+.formInput input,
+.formInput textarea {
+    font-size: 16px;
+    position: relative;
+    width: 100%;
+    padding: 8px 0px;
+    outline: 1px solid transparent;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #c2c2c2;
+    background: transparent !important;
+    z-index: 9;
+    color: #2c3638;
+    justify-content: center;
+}
+
+.formControll label {
+    position: absolute;
+    left: 0px;
+    bottom: 10px;
+    color: #c2c2c2;
+    font-size: 16px;
+    z-index: 1;
+    transition: all 0.1s ease-in;
+}
+.formControll .phoneLabel {
+    position: absolute;
+    left: 46px;
+    bottom: 10px;
+    color: #c2c2c2;
+    font-size: 16px;
+    z-index: 1;
+    transition: all 0.1s ease-in;
+}
+.code {
+    font-size: 18px;
+}
+.uploadIn{
+    height:115px;
+    max-width:300px;
+}
+.formControll .required:after {
+   content:" *";
+
+}
+.formInput input:focus + .phoneLabel,
+.formInput input:valid + .phoneLabel{
+    bottom: 100%;
+    z-index: 9;
+    transition: all 0.1s ease-in-out;
+    left:0px;
+}
+.formInput input:focus + label,
+.formInput input:valid + label,
+.formInput textarea:focus + label,
+.formInput textarea:valid + label {
+    bottom: 100%;
+    z-index: 9;
+    transition: all 0.1s ease-in-out;
+}
+.formTextarea {
+    resize: none;
+    min-height: 50px;
+}
+
+.formInput:focus {
+    border-bottom: 1px solid #00c5b2;
+}
+.formInput.error {
+    border-bottom: 1px solid red;
+}
+.formInput.error:focus {
+    border-bottom: 1px solid red;
+}
+.errorText{
+    margin-top: 1px;
+    color:red;
+    font-size: 14px;
+}
+.formSubmit {
+    position: relative;
+    width: 100%;
+    margin: 14px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.formSubmit .formBtn:disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+.formSubmit .formBtn,.formSubmit .findBtn {
+    width: 100%;
+    padding: 8px;
+    background: #00c5b191;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 0.5px;
+    color: #FFF;
+    cursor: pointer;
+
+}
+.addBtn {
+    width: 150px;
+    padding: 8px;
+    background: #00c5b191;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 0.5px;
+    color: #FFF;
+    cursor: pointer;
+    margin:30px 0
+}
+.formSubmit .findBtn{margin-bottom: 10px}
+
+.formSubmit .formBtn:hover, .formSubmit .findBtn:hover {
+    background: #00c5b2;
+    transition: all 0.2s ease-out;
+}
+.formFindBtn{
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 33px;
+}
+.grid2 {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+}
+
+.passwordShowHide {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    display: grid;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 99;
+}
+
+.passwordShowHide .icon {
+    grid-row: 1/2;
+    grid-column: 1/2;
+}
+
+.passwordShowHide .icon path {
+    fill: #c2c2c2;
+    transition: all 0.2s ease;
+}
+
+.passwordShowHide:hover .icon path {
+    fill: #2c3638;
+    transition: all 0.2s ease;
+}
+
+.passwordShowHide .icon.showPassword {
+    opacity: 1;
+    z-index: 9;
+}
+
+.passwordShowHide .icon.hidePassword {
+    opacity: 1;
+    z-index: 9;
+}
+
+.passwordShowHide.hide .icon.showPassword {
+    opacity: 0;
+    z-index: -1;
+}
+
+.passwordShowHide.hide .icon.hidePassword {
+    z-index: 9;
+    opacity: 1;
+}
+
+/* Steps */
+
+.stepTabItems {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    justify-content: center;
+}
+
+.stepTabItems .stepItem {
+    position: relative;
+    list-style: none;
+    width: 45px;
+    height: 45px;
+    background: #e2e2e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+    font-size: 16px;
+}
+
+.stepTabItems .stepItem.active {
+    background: #00c5b2;
+}
+
+.stepTabItems .stepItem:not(:last-child) {
+    margin-right: 70px;
+}
+
+.stepTabItems .stepItem:not(:last-of-type)::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 2px;
+    background: rgb(241, 239, 239);
+    left: calc(100% + 10px);
+}
+
+.stepTabItems .stepItem.active::before {
+    background: #00c5b2;
+}
+
+.stepTabs .stepTab {
+    display: none;
+}
+
+.stepTabs .stepTab.active {
+    display: block;
+}
+.step1Container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    gap:50px;
+    margin-bottom:20px;
+    box-sizing: border-box;
+}
+.step1Left{
+    display: flex;
+    width: 50%;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    flex-direction: column;
+}
+.step1Right{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+}
+.photoLabel{
+    font-size: 16px;
+    color: #c2c2c2;
+
+}
+.phoneInput{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap : 10px
+}
+.step2Container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+.rowContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:2em;
+}
+.tableHeader tr:first-child{
+ margin-top: 100px;
+}
+.table {
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:7em;
+}
+.table {
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.headerData{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+}
+.cell{
+    text-align: start;
+}
+.formInputTable input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    position: relative;
+    width: 90%;
+    padding: 8px 0px;
+    outline: 1px solid transparent;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #c2c2c2;
+    background: transparent !important;
+    z-index: 9;
+    color: #2c3638;
+    justify-content: center;
+    max-height: 50px;
+}
+.btns {
+    display: flex;
+    justify-content: flex-end;
+    width: 100px;
+}
+.inputsInnerContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap:5em;
+    border: 1px solid black;
+    padding: 2em;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+.inputsStep3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+}
+.inputsContainer{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    width: 100%;
+}
+.btnDelete {
+    background-color: transparent;
+    position: relative;
+    border: none;
+}
+
+.btnDelete::after {
+    content: 'delete';
+    position: absolute;
+    top: -130%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(168, 7, 7);
+    padding: 4px 8px;
+    border-radius: 5px;
+    transition: .2s linear;
+    transition-delay: .2s;
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.icon {
+    transform: scale(1.2);
+    transition: .2s linear;
+}
+
+.btnDelete:hover > .icon {
+    transform: scale(1.5);
+}
+
+.btnDelete:hover > .icon path {
+    fill: rgb(168, 7, 7);
+}
+
+.btnDelete:hover::after {
+    visibility: visible;
+    opacity: 1;
+    top: -160%;
+}
+.buttonAdd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px;
+    gap: 4px;
+    height: 32px;
+    width: 50%;
+    border: none;
+    background: #00c5b2;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.labelAdd {
+    margin: 0px 10px ;
+    line-height: 22px;
+    font-size: 16px;
+    color: white;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.buttonAdd:hover {
+    background: #02af9f;
+}
+
+.buttonAdd:hover .svgicon {
+    animation: rotate 1.3s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+.containerConfetti {
+    width: 100%;
+    height: 100%;
+}
+.confetti {
+    width: 15px;
+    height: 15px;
+    background-color: #f2d74e;
+    position: absolute;
+    left: 50%;
+    animation: confetti 5s ease-in-out -2s infinite;
+    transform-origin: left top;
+}
+.confetti:nth-child(1) {
+    background-color: #f2d74e; left: 10%; animation-delay: 0;
+}
+.confetti:nth-child(2) {
+    background-color: #95c3de; left: 20%; animation-delay: -5s;
+}
+.confetti:nth-child(3) {
+    background-color: #ff9a91; left: 30%; animation-delay: -3s;
+}
+.confetti:nth-child(4) {
+    background-color: #f2d74e; left: 40%; animation-delay: -2.5s;
+}
+.confetti:nth-child(5) {
+    background-color: #95c3de; left: 50%; animation-delay: -4s;
+}
+.confetti:nth-child(6) {
+    background-color: #ff9a91; left: 60%; animation-delay: -6s;
+}
+.confetti:nth-child(7) {
+    background-color: #f2d74e; left: 70%; animation-delay: -1.5s;
+}
+.confetti:nth-child(8) {
+    background-color: #95c3de; left: 80%; animation-delay: -2s;
+}
+.confetti:nth-child(9) {
+    background-color: #ff9a91; left: 90%; animation-delay: -3.5s;
+}
+.confetti:nth-child(10) {
+    background-color: #f2d74e; left: 100%; animation-delay: -2.5s;
+}
+
+@keyframes confetti {
+    0% { transform: rotateZ(15deg) rotateY(0deg) translate(0,0); }
+    25% { transform: rotateZ(5deg) rotateY(360deg) translate(-5vw,20vh); }
+    50% { transform: rotateZ(15deg) rotateY(720deg) translate(5vw,60vh); }
+    75% { transform: rotateZ(5deg) rotateY(1080deg) translate(-10vw,80vh); }
+    100% { transform: rotateZ(15deg) rotateY(1440deg) translate(10vw,110vh); }
+}
+

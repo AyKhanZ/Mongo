@@ -1,16 +1,30 @@
 import { useRouter } from "next/router";
 import styles from "./ResetPasswordForm.module.css";
-import Link from "next/link";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { User } from "@/types";
-import {useAuth} from "@/context/AuthContext";
 
-interface Props {
-}
 const ResetPasswordForm = () => {
     const router = useRouter();
     const [user, setUser] = useState<User>();
-    const { token, setToken, isTokenExpired ,userData,setUserData} = useAuth();
+    const [messageText, setMessageText] = useState("");
+    const [pswd,pswdSet] = useState("")
+    const [confirmPswd,confirmPswdSet] = useState("")
+
+    function evaluatePasswordStrength(password: string): string {
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+
+        if (hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar && password.length >= 12) return "Strong";
+        else if (hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar && password.length >= 6) return "Norm";
+        else return "Easy";
+    }
+
+    useEffect(() => {
+        setMessageText(evaluatePasswordStrength(pswd));
+
+    }, [pswd,confirmPswd]);
 
     const fetchData = async () => {
         const loginData = {
@@ -29,8 +43,6 @@ const ResetPasswordForm = () => {
             })
             const data = await response.json();
             console.log(data)
-            setToken(data.token)
-            setUserData(data.user)
             router.push("/registerUser")
         }
         catch(err:any){
@@ -38,26 +50,27 @@ const ResetPasswordForm = () => {
         }
     };
 
-
     return (
-        <div className={styles.form}>
-            <h1 className={styles.heading}>Reset your password</h1>
-            <input
-                className={styles.input}
-                placeholder="New password"
-                type="password"
-                name="name"
-            />
-            <input
-                className={styles.input}
-                placeholder="Confirm new password"
-                type="password"
-                name="desc"
-            />
-            <button onClick={() => router.push("/login")} className={styles.btn}>
-                Log in
-            </button>
-        </div>
+        <form className={styles.form}>
+            <p className={styles.title}>Reset password</p>
+            <p className={styles.messageText}>Create new strong password!</p>
+            <label >
+                <input required placeholder="" type="password" className={styles.input}
+                       onChange={(e) => pswdSet(e.target.value)}/>
+                <span>New password</span>
+            </label>
+
+            <label >
+                <input required placeholder="" type="password" className={styles.input}
+                       onChange={(e) => confirmPswdSet(e.target.value)}/>
+                <span>Confirm new password</span>
+            </label>
+            {
+
+            }
+
+            <button onClick={fetchData} className={styles.submit}>Create new password   </button>
+        </form>
     );
 };
 

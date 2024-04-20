@@ -104,7 +104,7 @@ const ManageNews = () => {
 
                 <div className={styles.productContent}>
                   <div className={styles.productTitle}>
-                    <h2 className={styles.title}>{p.name}</h2>
+                    <h2 className={styles.title}>{p.title}</h2>
 
                     <div className={styles.btns}>
                       <CreateBtn
