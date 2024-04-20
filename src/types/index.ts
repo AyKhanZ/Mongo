@@ -15,8 +15,8 @@ export type Partner = {
   combinedImage: string;
 };
 export type News = {
-  id: string;
-  id1C: string;
+  _id?: string;
+  _id1C?: string;
   title: string;
   description: string;
   img?: string;

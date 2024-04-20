@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import NewsModel from "../../../../lib/models/NewsModel";
 import connectDB from "../../../../lib/db";
 
+// Ayxan
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<News[]>
