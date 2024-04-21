@@ -1,14 +1,15 @@
 import SideBarLayout from "@/components/SideBarLayout/SideBarLayout";
 import styles from "./PostNews.module.css";
-import {useState} from "react";
-import {useRouter} from "next/router";
-import {Nunito} from "next/font/google";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { Nunito } from "next/font/google";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
-import {faLeftLong as back} from "@fortawesome/free-solid-svg-icons";
+import { faLeftLong as back } from "@fortawesome/free-solid-svg-icons";
 import UploadImage from "@/components/UploadImage/UploadImage";
 
-const nunito = Nunito({subsets: ["latin"]});
+const nunito = Nunito({ subsets: ["latin"] });
 
+// Ayxan
 const PostNews = () => {
     const [title, setTitle] = useState<string>("");
     const [desc, setDesc] = useState<string>("");
@@ -23,7 +24,7 @@ const PostNews = () => {
             return;
         }
 
-        const reader = new FileReader();
+        const reader = new FileReader(); //никакой ошибки нету. У тебя очень страно…
         reader.readAsDataURL(imageFile);
         reader.onload = async () => {
             const base64Image = reader.result as string;
@@ -95,7 +96,7 @@ const PostNews = () => {
                         </div>
                         <div className={styles.imageContainer}>
                             <label className={styles.label}>Image</label>
-                            <UploadImage setImg={setImageFile}/>
+                            <UploadImage setImg={setImageFile} />
                         </div>
                     </div>
                 </div>
