@@ -6,8 +6,6 @@ import { Nunito } from "next/font/google";
 import CreateBtn from "@/components/CreateBtn/CreateBtn";
 import { faLeftLong as back } from "@fortawesome/free-solid-svg-icons";
 import UploadImage from "@/components/UploadImage/UploadImage";
-import CheckBox from "@/components/CheckBox/CheckBox";
-import ComboBox from "@/components/ComboBox/ComboBox";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -15,6 +13,7 @@ const PostPartner = () => {
   const [id1C, setId1C] = useState("");
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
+  const [type, setType] = useState("");
   const [img, setImg] = useState("");
   const router = useRouter();
 
@@ -23,10 +22,11 @@ const PostPartner = () => {
       const partnerToPost = {
         id1C: id1C,
         name: name,
+        typeOfActivity: type,
         description: desc,
         image: img,
       };
-      await fetch("https://localhost:7164/Partner", {
+      await fetch("https://localhost:7164/Partner/AddPartner", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,9 +34,9 @@ const PostPartner = () => {
         body: JSON.stringify(partnerToPost),
       });
     } catch (error: any) {
-      throw new Error(error);
+      console.error(error);
     }
-    router.push("/manageProducts");
+    router.push("/managePartners");
   };
 
   return (
@@ -60,6 +60,13 @@ const PostPartner = () => {
               <input
                 onChange={(ev) => setId1C(ev.target.value)}
                 placeholder="Id 1C"
+                className={styles.input}
+                type="text"
+              />
+              <label className={styles.label}>Type of activity</label>
+              <input
+                onChange={(ev) => setType(ev.target.value)}
+                placeholder="Type of activity"
                 className={styles.input}
                 type="text"
               />

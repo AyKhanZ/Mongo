@@ -11,6 +11,7 @@ export type Partner = {
   id: number;
   id1C: string;
   name: string;
+  typeOfActivity: string;
   description: string;
   combinedImage: string;
 };
@@ -21,7 +22,7 @@ export type News = {
   description: string;
   img?: string;
   imageFile?: File;
-  isPublic:boolean;
+  isPublic: boolean;
 };
 
 export type User = {
@@ -29,14 +30,14 @@ export type User = {
   id1C: string;
   age: number | 18;
   userName: string;
-  password?:string;
+  password?: string;
   lastName: string;
   patronimic: string;
   role: string;
   email: string;
   phoneNumber: string | null;
   emailConfirmed: boolean;
-  accessFailedCount?:number;
+  accessFailedCount?: number;
 };
 export type Company = {
   id: string;
@@ -110,18 +111,15 @@ export type employer = {
   employer: StaffWrapper;
 };
 
-
-
-
 export interface FormErrorsStep1 {
   birthDate?: string;
-  patronymic?:string;
+  patronymic?: string;
   password?: string;
   confirmPassword?: string;
   personalEmail?: string;
   phoneNumber?: string;
   businessPhoneNumber?: string;
-  gender?:string;
+  gender?: string;
 }
 export interface FormErrorsStep2 {
   voen?: string;

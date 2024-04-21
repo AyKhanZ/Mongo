@@ -54,7 +54,7 @@
   max-width: 100%; /* ограничивает ширину текста до 100% ширины контейнера */
 }
 
-.products {
+.partners {
   margin: 20px 0;
   padding: 20px;
   background-color: #ffffff;
@@ -104,12 +104,12 @@
   height: 220px;
   min-width: 280px;
 }
-.productTitle {
+.partnerTitle {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-.productContent {
+.partnerContent {
   padding-left: 20px;
   display: flex;
   width: 100%;
@@ -130,7 +130,7 @@
   border: 1px dashed #cbccce;
 }
 
-.noProductsText {
+.noPartnersText {
   font-size: 22px;
   color: #cbccce;
 }
