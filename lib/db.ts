@@ -9,7 +9,7 @@ const connectDB = async () => {
   }
 
   await mongoose.connect(
-    "mongodb+srv://diana:diana@baim.lkwgfw1.mongodb.net/?retryWrites=true&w=majority&appName=Baim"
+      "mongodb+srv://ayxan:toor@arnold.g32hq3f.mongodb.net/?retryWrites=true&w=majority&appName=Arnold"
   );
 
   connection.isConnected = mongoose.connections[0].readyState;

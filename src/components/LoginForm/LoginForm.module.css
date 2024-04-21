@@ -137,3 +137,21 @@
 .link:hover {
     text-decoration: underline rgb(60, 161, 159);
 }
+
+.hiddenTextError{
+    width: 100%;
+    color: #540000;
+    font-size: 14px;
+    padding: 10px 10px;
+}
+
+.errorContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    border: solid 1px #ed937c;
+    background-color: #FFEBE8;
+    margin-top: 10px;
+}
