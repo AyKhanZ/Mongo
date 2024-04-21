@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import NewsModel from "../../../../lib/models/NewsModel";
 import connectDB from "../../../../lib/db";
 
+// Ayxan
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<News[]>
@@ -19,8 +20,8 @@ export default async function handler(
                 return item;
             });
             return res.status(200).json(news);
-        } catch (error) {
-            return res.status(500).json({ error: "Error fetching news" });
+        } catch (error: any) {
+            return res.status(500).json(error);
         }
     }
 
@@ -35,9 +36,9 @@ export default async function handler(
         try {
             await news.save();
             return res.status(201).json(news);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            return res.status(500).json({ error: "Error creating news" });
+            return res.status(500).json(error);
         }
     }
 
@@ -46,22 +47,8 @@ export default async function handler(
         try {
             const news = await NewsModel.findByIdAndDelete(id);
             return res.status(200).json(news);
-        } catch (error) {
-            return res.status(500).json({ error: "Error deleting news" });
-        }
-    }
-
-    if (req.method === "PUT") {
-        const { id, title, description, img } = req.body;
-        try {
-            const news = await NewsModel.findByIdAndUpdate(id, {
-                title,
-                description,
-                img,
-            });
-            return res.status(200).json(news);
-        } catch (error) {
-            return res.status(500).json({ error: "Error updating news" });
+        } catch (error: any) {
+            return res.status(500).json(error);
         }
     }
 }

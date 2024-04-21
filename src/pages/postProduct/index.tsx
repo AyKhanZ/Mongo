@@ -8,7 +8,7 @@ import { faLeftLong as back } from "@fortawesome/free-solid-svg-icons";
 import UploadImage from "@/components/UploadImage/UploadImage";
 import CheckBox from "@/components/CheckBox/CheckBox";
 import ComboBox from "@/components/ComboBox/ComboBox";
-
+ 
 const nunito = Nunito({ subsets: ["latin"] });
 
 const PostProduct = () => {

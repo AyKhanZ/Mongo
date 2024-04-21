@@ -17,7 +17,7 @@ import Projects from "@/components/Plan/Plan";
 import News from "@/components/News/News";
  
 const HomePage = () => {
-  const images = ['/BA.png', '/BA2.png', '/BA.png', '/BA2.png',];
+  const images = ['/BA.png', '/BA2.png', '/BA2.png', '/BA.png',];
 
   return (
     <div className={nunito.className}> 
@@ -27,7 +27,7 @@ const HomePage = () => {
       <PositionRelative />
       {/* <div className="positionRelative">
         <NumbersIncrement />
-      </div> */}
+      </div> */} 
     </div>
   );
 };

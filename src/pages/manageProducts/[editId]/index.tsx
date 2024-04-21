@@ -12,7 +12,7 @@ import CheckBox from "@/components/CheckBox/CheckBox";
 import ComboBox from "@/components/ComboBox/ComboBox";
 
 const nunito = Nunito({ subsets: ["latin"] });
-
+ 
 const PostProduct = () => {
   const [id1C, setId1C] = useState("");
   const [type, setType] = useState("");

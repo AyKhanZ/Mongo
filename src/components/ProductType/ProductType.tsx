@@ -30,7 +30,7 @@ export default function ProductType({category, productType}: any) {
         <p className={styles.desc}>
           {productType.desc} 
         </p>
-        <Link className={styles.link} href={`/${category}/${productType.name}`}>Подробнее</Link>
+        {category !== "Услуги" ? <Link className={styles.link} href={`/${category}/${productType.name}`}>Подробнее</Link> : <></>}
       </div>
     </div>
   )

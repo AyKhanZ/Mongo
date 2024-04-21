@@ -15,14 +15,14 @@ function NavBar() {
       <div className={styles.wave}>
         <div className={`${styles.center} ${styles.circle}`}></div>
         <div className={styles.smooth}></div>
-        <button className={`${styles.btn} ${styles.circle}`}>
+        <button title="+994-55-529-29-66" className={`${styles.btn} ${styles.circle}`}>
           <FontAwesomeIcon
             style={{ fontSize: "1rem" }}
             className="fa-solid fa-phone m"
             icon={phone}
           />
         </button>
-      </div>
+      </div> 
 
       <div className={styles.pcAndTablet}>
         <div className={styles.row}>
@@ -30,28 +30,17 @@ function NavBar() {
             <div>
               <Image
                 className={styles.logo}
-                width={200}
-                height={100}
+                width={300}
+                height={150}
                 alt="BAIM logo"
                 src="/logo.jpg"
               />
-              <p className={`${styles.white} ${styles.larger}`}>
-                {" "}
-                +994-55-529-29-66
-              </p>
+              
             </div>
-            <NavMenu />
+            <NavMenu /> 
           </div>
           <div className={styles.row}>
-            <div className={`${styles.whiteAndCyan} ${styles.search}`}>
-              <input type="text" placeholder="Поиск" />
-              <span className={styles.white}>
-                <FontAwesomeIcon
-                  className="fa-solid fa-magnifying-glass"
-                  icon={magnifyingGlass}
-                />
-              </span> 
-            </div>
+            
             <button onClick={() => router.push('/login')} className={`${styles.whiteBtn} ${styles.cabinet}`}>
               Личный кабинет
             </button>

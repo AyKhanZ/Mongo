@@ -12,7 +12,7 @@ const Combobox: React.FC<ComboboxProps> = ({ options, onSelect }) => {
   const handleSelect = (option: string) => {
     setSelectedOption(option);
     onSelect(option);
-  };
+  }; 
 
   return (
     <select

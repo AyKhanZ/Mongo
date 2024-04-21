@@ -1,16 +1,21 @@
 import NavBar from "@/components/NavBar/NavBar";
-import { Products } from "../../../../lib/data";
-import { useRouter } from "next/navigation";
 import PositionRelative from "@/components/PositionRelativeLayout/PositionRelativeLayout";
 import Product from "@/components/Product/Product";
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
+import { productTypes } from "../../../../lib/data";
+import NoInfo from "@/components/NoInfo/NoInfo";
+import Error from "@/components/ErrorPage/ErrorPage";
 
 
-const MenuSubcategoryDetails = ({category}: any) => {
+const MenuSubcategoryDetails = ({category,subcategory,news}: any) => {
   const [data, setData] = useState([])
+  const [isLoaded, setIsLoaded] = useState(true);
+
+  const types = productTypes.map(p => p.name)
 
   const filterProducts = (arr: any) => {
-    const newArr = arr.filter((p: any) => p.productType === category)
+    const newArr = arr.filter((p: any) => p.productType === subcategory)
     return newArr
   }
 
@@ -20,71 +25,56 @@ const MenuSubcategoryDetails = ({category}: any) => {
       const res = await response.json();
       setData(filterProducts(res))
     } catch (error: any) {
-      throw new Error(error);
+      console.error(error)
     }
   };
 
-  const fetchNews = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/api/news');
-      const res = await response.json();
-      setData(res);
-    } catch (error: any) {
-      throw new Error(error)
-    }
-  }
 
   useEffect(() => {
-    if (category !=='Новости'){
+    if (types.some(p => p==subcategory)){
     fetchProducts()}
-    if (category === 'Новости'){
-      fetchNews()
-      
-    }
-  }, [data])
+    if (subcategory === 'Новости'){
+      setData(news)
+    } console.log(data)
+  }, [data]) 
+
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (data.length == 0) {
+        setIsLoaded(false);
+        console.log('hey')
+      }
+    }, 5000); 
+ 
+    return () => clearTimeout(timeout);
+  }, [data]);
 
   return ( 
+    <>{isLoaded ? 
     <>
-      <NavBar />
       <PositionRelative>
-        {data.map((p:any) => <Product category={category} key={p.id} product={p} />)}
+        {data.length > 0 ? data.map((p:any) => <Product category={category} subcategory={subcategory} key={p.id} product={p} />) : <NoInfo/>}
       </PositionRelative>
-    </>
+    </> :
+    <Error />
+    }</>
   )
 }
 
 export default MenuSubcategoryDetails
 
-export async function getStaticPaths() {
-    return {
-        paths: [
-            {
-                params: {
-                    menuCategoryId: 'Продукты',
-                    menuSubcategoryId: 'BAIM: Комплексная Автоматизация'
-                  }
-            },
-            {
-                params: {
-                    menuCategoryId: 'Продуктыs',
-                    menuSubcategoryId: 'BAIM:Бухгалтерия для Азербайджана'
-                  }
-            }
-        ],
-        fallback: 'blocking',
-    }
-}
-
-export async function getStaticProps(context: any) {
+export async function getServerSideProps(context: any) {
     const {params} = context;
-
-    const productsData = Products.filter(p => p.productType === params.menuSubcategoryId)
-
+  
+    const news = await fetch('http://localhost:3000/api/news')
+    const newsData = await news.json()
+    
     return {
         props: {
-            category: params.menuSubcategoryId
+            subcategory: params.menuSubcategoryId,
+            category: params.menuCategoryId,
+            news: newsData
         }
     }
-
 }
-

@@ -11,7 +11,7 @@ const Login = () => {
         </div>
         {/* <div className={styles.logoTitle}>
             <Image className={styles.bigImage} width={200} height={200} alt='BAIM logo' src='/logo.svg' />
-        </div> */}
+        </div>  */}
         <div className={styles.login}>
         <LoginForm kind='login' />
         </div>

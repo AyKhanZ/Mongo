@@ -49,13 +49,12 @@ function NavMenu() {
                 <li>
                    <Link className='navLink' href='/'>О компании</Link>
                    <menu>
-                      <li><a className='navLink'>Информация</a></li>
-                      <li><a className='navLink'>Наш коллектив</a></li>
+                      <li><Link className='navLink' href='/team'>Наш коллектив</Link></li>
                       <li><a className='navLink'>Карьера</a></li> 
-                      <li><a className='navLink'>Обратная связь</a></li>
+                      <li><Link className='navLink' href='/#crm'>Обратная связь</Link></li>
                    </menu>  
-                </li>
-
+                </li> 
+ 
                 <li id="demo2">
                     <Link className='navLink' href='/Продукты'>Продукты</Link>
                     <menu>
@@ -65,19 +64,15 @@ function NavMenu() {
 
                 <li id="demo2">
                     <Link className='navLink' href='/Услуги'>Услуги</Link>
-                    <menu>
-                        {drawSubcategories('/service',s)}
-                    </menu>
                 </li>
 
                 <li><Link className='navLink' href='/clients'>Наши клиенты</Link></li>
+                <li><Link className='navLink' href='/partners'>Наши партнёры</Link></li>
 
                 <li id="demo2">
-                    <Link className='navLink' href='/Полезные материалы'>Полезные материалы</Link>
+                    <Link className='navLink' href='/'>Полезные материалы</Link>
                     <menu>
                         <li><Link href='/Полезные материалы/Новости' className='navLink'>Новости</Link></li>
-                        <li><Link href='/' className='navLink'>Инструкции</Link></li>
-                        <li><Link href='/' className='navLink'>Видеоматериалы</Link></li>
                     </menu>
                 </li>
 

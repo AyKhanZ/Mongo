@@ -12,6 +12,8 @@ const connectDB = async () => {
         "mongodb+srv://diana:diana@baim.lkwgfw1.mongodb.net/?retryWrites=true&w=majority&appName=Baim"
     );
 
+ 
+
     connection.isConnected = mongoose.connections[0].readyState;
     console.log("Connection established");
 };

@@ -9,7 +9,7 @@ const UploadImage = ({ setImg }: any) => {
 
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file) { 
       const reader = new FileReader();
       reader.onloadend = () => {
         const result = reader.result;

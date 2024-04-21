@@ -9,7 +9,7 @@ export type Product = {
 };
 
 export type News = {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   img?: string;

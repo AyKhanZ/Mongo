@@ -8,7 +8,7 @@
 .iconContainer {
   display: flex;
   align-items: center;
-}
+} 
 .formContainer {
   display: flex; 
   flex-direction: column;

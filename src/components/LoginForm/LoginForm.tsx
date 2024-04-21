@@ -9,7 +9,7 @@ interface Props {
 const LoginForm = ({kind}: Props) => {
   const router = useRouter()
   return (
-
+ 
     <div className={styles.form}>
       {
       kind=='login'

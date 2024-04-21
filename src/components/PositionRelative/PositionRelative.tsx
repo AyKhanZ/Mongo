@@ -15,11 +15,12 @@ const PositionRelative = () => {
       <NumbersIncrement />
       <Plan />
       <SmallCarousel />
-      <TwoColumns />
+      <TwoColumns /> 
       <ChoiceForm />
       <News />
       <SmallCarousel />
       <CrmForm />
+      <div className={styles.empty}></div>
       <Modules />
       <Footer />
     </div>

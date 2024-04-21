@@ -36,7 +36,7 @@ const ManageProducts = () => {
       await fetch(`https://localhost:7164/Product/ById/${id}`, {
         method: "DELETE",
       });
-    } catch (error: any) {
+    } catch (error: any) { 
       console.error(error);
     }
   };
