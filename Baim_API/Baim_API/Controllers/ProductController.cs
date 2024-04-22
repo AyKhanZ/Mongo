@@ -59,7 +59,7 @@ public class ProductController : Controller
 	{
 		if (!ModelState.IsValid) return BadRequest(ModelState);
 
-		var existingProduct = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id1C == productModel.Id1C);
+		var existingProduct = await _dbContext.Products.FirstOrDefaultAsync(p => p.Id == productModel.Id);
 		if (existingProduct != null)
 		{
 			ModelState.AddModelError("Id1C", "Product with this Id1C already exists.");

@@ -14,26 +14,14 @@ namespace Baim_API.Controllers;
 public class ClientController : ControllerBase
 {
 	private readonly BaimContext _dbContext;
-	private readonly UserManager<AspNetUser> _userManager;
-	private readonly RoleManager<IdentityRole> _roleManager;
-	private readonly SignInManager<AspNetUser> _signInManager;
-	private readonly IUserStore<AspNetUser> _userStore;
 	private readonly IConfiguration _configuration;
 	private readonly SieveProcessor _sieveProcessor;
 
 	public ClientController(BaimContext dbContext,
-		UserManager<AspNetUser> userManager,
-		IUserStore<AspNetUser> userStore,
-		SignInManager<AspNetUser> signInManager,
-		RoleManager<IdentityRole> roleManager,
 		SieveProcessor sieveProcessor,
 		IConfiguration configuration)
 	{
 		_dbContext = dbContext;
-		_userManager = userManager;
-		_userStore = userStore;
-		_signInManager = signInManager;
-		_roleManager = roleManager;
 		_configuration = configuration;
 		_sieveProcessor = sieveProcessor;
 	}
@@ -118,7 +106,7 @@ public class ClientController : ControllerBase
 
 		if (client.Company != null)
 		{
-			client.Company.CompanyName = model.CompanyName;
+			client.Company.Name = model.CompanyName;
 			client.Company.VOEN = model.VOEN;
 			client.Company.TypeOfActivity = model.TypeOfActivity;
 			client.Company.StartDate = model.StartDate;
@@ -128,7 +116,7 @@ public class ClientController : ControllerBase
 		{
 			var company = new Company
 			{
-				CompanyName = model.CompanyName,
+				Name = model.CompanyName,
 				VOEN = model.VOEN,
 				TypeOfActivity = model.TypeOfActivity,
 				StartDate = model.StartDate,

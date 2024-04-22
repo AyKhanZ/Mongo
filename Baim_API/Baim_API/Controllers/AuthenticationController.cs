@@ -75,6 +75,7 @@ public class AuthenticationController : ControllerBase
 			newUser.EmployerId = employer.Id;
 			await _dbContext.Employers.AddAsync(employer);
 		}
+		else if (model.Role == "Admin") newUser.EmailConfirmed = true;
 		else return BadRequest("Role does not exist!");
 		await _dbContext.Users.AddAsync(newUser);
 		await _dbContext.SaveChangesAsync();
@@ -227,7 +228,7 @@ public class AuthenticationController : ControllerBase
 		_dbContext.Users.Update(user);
 		await _dbContext.SaveChangesAsync();
 
-		_dbContext.PasswordResetTokens.Remove(tokenEntry);
+		_dbContext.PasswordResetTokens.Remove(tokenEntry);	
 		await _dbContext.SaveChangesAsync();
 
 		return Ok(new { Message = "Password has been changed successfully." });

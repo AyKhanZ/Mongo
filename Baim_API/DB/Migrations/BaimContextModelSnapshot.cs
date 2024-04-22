@@ -197,15 +197,28 @@ namespace DB.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DirectorId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("DirectorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Id1C")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("data:image/png;base64,");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
@@ -218,6 +231,9 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Companies");
                 });
@@ -359,6 +375,46 @@ namespace DB.Migrations
                     b.ToTable("OrderProducts");
                 });
 
+            modelBuilder.Entity("DB.Models.Partner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id1C")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ImageType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("data:image/png;base64,");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TypeOfActivity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Partners");
+                });
+
             modelBuilder.Entity("DB.Models.PasswordResetToken", b =>
                 {
                     b.Property<int>("Id")
@@ -446,6 +502,9 @@ namespace DB.Migrations
                     b.Property<byte[]>("Avatar")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -459,6 +518,8 @@ namespace DB.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Projects");
                 });
@@ -579,21 +640,21 @@ namespace DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a54fcb74-d607-436e-bb69-d267698f1c88",
+                            Id = "abdca827-38b4-480d-85cb-11d73082974e",
                             ConcurrencyStamp = "1",
                             Name = "Admin",
                             NormalizedName = "Admin"
                         },
                         new
                         {
-                            Id = "f389aac9-3cdf-4f55-bbe8-cff7ac56fd35",
+                            Id = "52af32bb-b0e2-40f7-ab05-d1741f16d70b",
                             ConcurrencyStamp = "2",
                             Name = "Client",
                             NormalizedName = "Client"
                         },
                         new
                         {
-                            Id = "35cd5671-3d86-4efb-9369-ada66cba1a99",
+                            Id = "760b1a17-8cd0-48a0-8d32-4e9981887f0a",
                             ConcurrencyStamp = "3",
                             Name = "Employer",
                             NormalizedName = "Employer"
@@ -793,6 +854,16 @@ namespace DB.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DB.Models.Project", b =>
+                {
+                    b.HasOne("DB.Models.Company", "Company")
+                        .WithMany("Projects")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("DB.Models.Role", b =>
                 {
                     b.HasOne("DB.Models.UserRole", null)
@@ -905,6 +976,8 @@ namespace DB.Migrations
             modelBuilder.Entity("DB.Models.Company", b =>
                 {
                     b.Navigation("Director");
+
+                    b.Navigation("Projects");
                 });
 
             modelBuilder.Entity("DB.Models.Mission", b =>

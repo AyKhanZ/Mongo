@@ -11,6 +11,7 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 	public DbSet<Client> Clients { get; set; }
 	public DbSet<Employer> Employers { get; set; } 
 	public DbSet<Company> Companies { get; set; }
+	public DbSet<Partner> Partners { get; set; }
 	public DbSet<Mission> Missions { get; set; } 
 	public DbSet<Order> Orders { get; set; }
 	public DbSet<OrderProduct> OrderProducts { get; set; }
@@ -75,12 +76,31 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 		{
 			entity.HasKey(op => op.Id);
 			entity.Property(op => op.Id).ValueGeneratedOnAdd();
+			entity.Property(с => с.Id1C);
 			entity.Property(с => с.TypeOfActivity);
-			entity.Property(с => с.CompanyName).IsRequired();
+			entity.Property(с => с.Name).IsRequired();
 			entity.Property(с => с.VOEN).IsRequired(); 
+			entity.Property(o => o.Description);
+			entity.Property(p => p.Image).IsRequired();
+			entity.Property(p => p.ImageType).HasDefaultValue("data:image/png;base64,");
 			entity.Property(o => o.StartDate);
 			entity.Property(с => с.Address);
-			 
+
+			entity.HasIndex(u => u.Name).IsUnique();
+		});
+
+		builder.Entity<Partner>(entity =>
+		{
+			entity.HasKey(op => op.Id);
+			entity.Property(op => op.Id).ValueGeneratedOnAdd();
+			entity.Property(с => с.Id1C);
+			entity.Property(с => с.TypeOfActivity);
+			entity.Property(с => с.Name).IsRequired();
+			entity.Property(o => o.Description);
+			entity.Property(p => p.Image).IsRequired();
+			entity.Property(p => p.ImageType).HasDefaultValue("data:image/png;base64,");
+
+			entity.HasIndex(u => u.Name).IsUnique();
 		});
 
 		builder.Entity<Employer>(entity =>
@@ -170,6 +190,11 @@ public class BaimContext : IdentityDbContext<AspNetUser, IdentityRole, string>
 			entity.Property(p => p.Description);
 			entity.Property(p => p.DesignTheme);
 			entity.Property(p => p.Avatar);
+
+			entity.HasOne(p=>p.Company)
+			.WithMany(m => m.Projects)
+			.HasForeignKey(m => m.CompanyId)
+			.OnDelete(DeleteBehavior.Restrict);
 		});
 
 		builder.Entity<UserProject>(entity =>
