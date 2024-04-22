@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import styles from "./RegisterUser.module.css";
 import Combobox from "@/components/ComboBox/ComboBox";
 import { Nunito } from "next/font/google";
 import Link from "next/link";
-import {useAuth} from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -16,7 +16,6 @@ const RegisterUser = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const router = useRouter();
-  const { token, setToken, isTokenExpired ,userData,setUserData} = useAuth();
 
   const registerUser = async () => {
     try {
@@ -39,10 +38,6 @@ const RegisterUser = () => {
     }
     router.push("/manageUsers");
   };
-  useEffect(() => {
-    console.log(token)
-    console.log(userData)
-  }, []);
 
   return (
     <div className={`${nunito.className} ${styles.container}`}>

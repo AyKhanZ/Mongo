@@ -12,44 +12,52 @@ import UploadImage from "@/components/UploadImage/UploadImage";
 const nunito = Nunito({ subsets: ["latin"] });
 
 const PostPartner = () => {
-  const [id1C, setId1C] = useState("");
-  const [name, setName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [img, setImg] = useState("");
+  const [partner, setPartner] = useState({
+    id1C: "",
+    name: "",
+    type: "",
+    desc: "",
+    img: "",
+  });
   const router = useRouter();
   const params = useParams();
 
   const getPartner = async (id: number) => {
     try {
       const response = await fetch(
-        `https://localhost:7164/Partners/ById/${id}`
+        `https://localhost:7164/Partner/GetPartnerById/${id}`
       );
       const data = await response.json();
 
-      setImg(data.image);
-      setId1C(data.id1C);
-      setName(data.name);
-      setDesc(data.description);
+      setPartner({
+        ...partner,
+        img: data.combinedImage,
+        id1C: data.id1C,
+        type: data.productType,
+        name: data.name,
+        desc: data.description,
+      });
     } catch (error: any) {
       console.error(error);
     }
   };
 
-  //   useEffect(() => {
-  //     getPartner(Number(params.editId));
-  //   }, [params]);
+  useEffect(() => {
+    getPartner(Number(params.editId));
+    console.log(partner);
+  }, [params]);
 
   const edit = async (id: number) => {
     try {
       const partnerToEdit = {
-        id: params.editId,
-        id1C: id1C,
-        name: name,
-        description: desc,
-        image: img,
+        id1C: partner.id1C,
+        name: partner.name,
+        typeOfActivity: partner.type,
+        description: partner.desc,
+        image: partner.img,
       };
 
-      await fetch(`https://localhost:7164/Partners/ById/${params.editId}`, {
+      await fetch(`https://localhost:7164/Partner/UpdatePartnerData`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +67,6 @@ const PostPartner = () => {
     } catch (error: any) {
       console.error(error);
     }
-
     router.push("/managePartners");
   };
 
@@ -89,30 +96,53 @@ const PostPartner = () => {
               <label className={styles.label}>Id 1C</label>
               <input
                 className={styles.input}
-                defaultValue={id1C}
-                onChange={(ev) => setId1C(ev.target.value)}
+                defaultValue={partner.id1C}
+                onChange={(ev) =>
+                  setPartner({ ...partner, id1C: ev.target.value })
+                }
                 placeholder="Id 1C"
                 type="text"
               />
               <label className={styles.label}>Name</label>
               <input
                 className={styles.input}
-                defaultValue={name}
-                onChange={(ev) => setName(ev.target.value)}
+                defaultValue={partner.name}
+                onChange={(ev) =>
+                  setPartner({ ...partner, name: ev.target.value })
+                }
                 placeholder="Partners name"
+                type="text"
+              />
+              <label className={styles.label}>Type of activity</label>
+              <input
+                className={styles.input}
+                defaultValue={partner.type}
+                onChange={(ev) =>
+                  setPartner({ ...partner, type: ev.target.value })
+                }
+                placeholder="Partners type of activity"
                 type="text"
               />
               <label className={styles.label}>Description</label>
               <textarea
                 className={styles.inputDesc}
-                defaultValue={desc}
-                onChange={(ev) => setDesc(ev.target.value)}
+                defaultValue={partner.desc}
+                onChange={(ev) =>
+                  setPartner({ ...partner, desc: ev.target.value })
+                }
                 placeholder="Partners description"
               />
             </div>
             <div className={styles.imageContainer}>
               <label className={styles.label}>Image</label>
-              <UploadImage setImg={setImg} img={img} />
+              <UploadImage
+                setImg={(newImg: any) => {
+                  if (newImg) {
+                    setPartner({ ...partner, img: newImg });
+                  }
+                }}
+                img={partner.img}
+              />
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ import {faBars as bars} from '@fortawesome/free-solid-svg-icons'
 
 function NavMenu() {
  
-    const getUniqueElements = (arr: string[]) => {
+    const getUniqueElements = (arr: string[]) => {  
         let uniqueArray = [];
         
         for (let i = 0; i < arr.length; i++) {
@@ -24,7 +24,7 @@ function NavMenu() {
         const productTypes = Products.map(p => p.productType)
         return getUniqueElements(productTypes)
     }
-
+ 
     const getProductType = (productType: string) => {
         return Products.filter(p => productType === p.productType)
     }
@@ -49,35 +49,30 @@ function NavMenu() {
                 <li>
                    <Link className='navLink' href='/'>О компании</Link>
                    <menu>
-                      <li><a className='navLink'>Информация</a></li>
-                      <li><a className='navLink'>Наш коллектив</a></li>
+                      <li><Link className='navLink' href='/team'>Наш коллектив</Link></li>
                       <li><a className='navLink'>Карьера</a></li> 
-                      <li><a className='navLink'>Обратная связь</a></li>
+                      <li><Link className='navLink' href='/#crm'>Обратная связь</Link></li>
                    </menu>  
-                </li>
-
+                </li> 
+ 
                 <li id="demo2">
-                    <Link className='navLink' href='/products'>Продукты</Link>
+                    <Link className='navLink' href='/Продукты'>Продукты</Link>
                     <menu>
-                        {drawSubcategories('/products',pt)}
+                        {drawSubcategories('/Продукты',pt)}
                     </menu>
                 </li>
 
                 <li id="demo2">
-                    <Link className='navLink' href='/services'>Услуги</Link>
-                    <menu>
-                        {drawSubcategories('/service',s)}
-                    </menu>
+                    <Link className='navLink' href='/Услуги'>Услуги</Link>
                 </li>
 
                 <li><Link className='navLink' href='/clients'>Наши клиенты</Link></li>
+                <li><Link className='navLink' href='/partners'>Наши партнёры</Link></li>
 
                 <li id="demo2">
-                    <Link className='navLink' href='/materials'>Полезные материалыы</Link>
+                    <Link className='navLink' href='/'>Полезные материалы</Link>
                     <menu>
-                        <li><a className='navLink'>Новости</a></li>
-                        <li><a className='navLink'>Инструкции</a></li>
-                        <li><a className='navLink'>Видеоматериалы</a></li>
+                        <li><Link href='/Полезные материалы/Новости' className='navLink'>Новости</Link></li>
                     </menu>
                 </li>
 

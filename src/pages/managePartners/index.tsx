@@ -9,13 +9,11 @@ import DeleteForm from "@/components/DeleteForm/DeleteForm";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Nunito } from "next/font/google";
-import ProductFilters from "@/components/ProductFilters/ProductFilters";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
 const ManagePartners = () => {
-  const [url, setUrl] = useState("https://localhost:7164/Partners");
-  const [partners, setPartners] = useState([]);
+  const [partners, setPartners] = useState<Partner[]>([]);
   const [delPartnerId, setDelPartnerId] = useState(0);
   const [deleteShown, setDeleteShown] = useState(false);
 
@@ -23,7 +21,7 @@ const ManagePartners = () => {
 
   const fetchPartners = async () => {
     try {
-      const response = await fetch(url);
+      const response = await fetch("https://localhost:7164/Partner/Partners");
       const data = await response.json();
       setPartners(data);
     } catch (error: any) {
@@ -33,7 +31,7 @@ const ManagePartners = () => {
 
   const deletePartner = async (id: number) => {
     try {
-      await fetch(`https://localhost:7164/Partners/ById/${id}`, {
+      await fetch(`https://localhost:7164/Partner/ById/${id}`, {
         method: "DELETE",
       });
     } catch (error: any) {
@@ -43,7 +41,7 @@ const ManagePartners = () => {
 
   useEffect(() => {
     fetchPartners();
-  }, [partners, url]);
+  }, [partners]);
 
   const showDelete = (pId: any) => {
     setDelPartnerId(pId);
@@ -136,7 +134,7 @@ const ManagePartners = () => {
             ))
           ) : (
             <div className={styles.containerNone}>
-              <p className={styles.noProductsText}>No partners yet ƪ(˘⌣˘)ʃ</p>
+              <p className={styles.noPartnersText}>No partners yet ƪ(˘⌣˘)ʃ</p>
             </div>
           )}
         </div>

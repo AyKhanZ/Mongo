@@ -1,0 +1,676 @@
+.mainContainer {
+  display: flex;
+  width: 50vw;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  height: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.formTitle {
+  color: #00c5b2;
+  font-size: 22px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 15px 0px 30px 0px;
+}
+
+.formTitleSc {
+  color: #2c3638;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 15px 0px 20px 0px;
+}
+.containerStep1 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+.column {
+  padding: 10px;
+}
+
+.ulColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+  list-style: none;
+  padding: 0;
+}
+
+.liColumn {
+  margin-bottom: 5px;
+}
+
+.genderInnerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+.genderContainer {
+  width: 100%;
+  gap: 1em;
+  margin-bottom: 14px;
+}
+.label {
+  color: #c2c2c2;
+  font-size: 16px;
+}
+.label::after {
+  content: " *";
+}
+
+.labelGender {
+  font-size: 16px;
+}
+
+.gender {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+.genderInput {
+  accent-color: cadetblue;
+}
+
+.form {
+  position: relative;
+  width: 70%;
+  padding: 15px 30px;
+  background: white;
+  border-radius: 4px;
+}
+
+.formControll {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.formControll1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.formControll:not(:last-of-type) {
+  margin-bottom: 33px;
+}
+
+/*.formControll.dateControll{*/
+/*    margin-top: 15px;*/
+
+/*}*/
+.formInput {
+  position: relative;
+  width: 100%;
+}
+
+.formInput input,
+.formInput textarea {
+  font-size: 16px;
+  position: relative;
+  width: 100%;
+  padding: 8px 0px;
+  outline: 1px solid transparent;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #c2c2c2;
+  background: transparent !important;
+  z-index: 9;
+  color: #2c3638;
+  justify-content: center;
+}
+
+.formControll label,
+.formControll1 label {
+  position: absolute;
+  left: 0px;
+  bottom: 10px;
+  color: #c2c2c2;
+  font-size: 16px;
+  z-index: 1;
+  transition: all 0.1s ease-in;
+}
+.formControll .phoneLabel {
+  position: absolute;
+  left: 46px;
+  bottom: 10px;
+  color: #c2c2c2;
+  font-size: 16px;
+  z-index: 1;
+  transition: all 0.1s ease-in;
+}
+.code {
+  font-size: 18px;
+}
+
+.formControll .required:after {
+  content: " *";
+}
+.formInput input:focus + .phoneLabel,
+.formInput input:valid + .phoneLabel {
+  bottom: 100%;
+  z-index: 9;
+  transition: all 0.1s ease-in-out;
+  left: 0px;
+}
+.formInput input:focus + label,
+.formInput input:valid + label,
+.formInput textarea:focus + label,
+.formInput textarea:valid + label {
+  bottom: 100%;
+  z-index: 9;
+  transition: all 0.1s ease-in-out;
+}
+.formTextarea {
+  resize: none;
+  min-height: 50px;
+}
+
+.formInput:focus {
+  border-bottom: 1px solid #00c5b2;
+}
+.formInput.error {
+  border-bottom: 1px solid red;
+}
+.formInput.error:focus {
+  border-bottom: 1px solid red;
+}
+.errorText {
+  margin-top: 1px;
+  color: red;
+  font-size: 14px;
+}
+.formSubmit {
+  position: relative;
+  width: 100%;
+  margin: 14px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.formSubmit .formBtn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+.formSubmit .formBtn,
+.formSubmit .findBtn {
+  width: 40%;
+  padding: 8px;
+  background: #00c5b191;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.5px;
+  color: #fff;
+  cursor: pointer;
+  max-width: 300px;
+}
+.addBtn {
+  max-width: 300px;
+  width: 150px;
+  padding: 8px;
+  background: #00c5b191;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  letter-spacing: 0.5px;
+  color: #fff;
+  cursor: pointer;
+  margin: 30px 0;
+}
+.formSubmit .findBtn {
+  margin-bottom: 10px;
+  max-width: 300px;
+}
+
+.formSubmit .formBtn:hover,
+.formSubmit .findBtn:hover {
+  background: #00c5b2;
+  transition: all 0.2s ease-out;
+}
+.formFindBtn {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 33px;
+  max-width: 300px;
+}
+.grid2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 60px;
+}
+
+.passwordShowHide {
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  display: grid;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 99;
+}
+
+.passwordShowHide .icon {
+  grid-row: 1/2;
+  grid-column: 1/2;
+}
+
+.passwordShowHide .icon path {
+  fill: #c2c2c2;
+  transition: all 0.2s ease;
+}
+
+.passwordShowHide:hover .icon path {
+  fill: #2c3638;
+  transition: all 0.2s ease;
+}
+
+.passwordShowHide .icon.showPassword {
+  opacity: 1;
+  z-index: 9;
+}
+
+.passwordShowHide .icon.hidePassword {
+  opacity: 1;
+  z-index: 9;
+}
+
+.passwordShowHide.hide .icon.showPassword {
+  opacity: 0;
+  z-index: -1;
+}
+
+.passwordShowHide.hide .icon.hidePassword {
+  z-index: 9;
+  opacity: 1;
+}
+
+/* Steps */
+
+.stepTabItems {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  justify-content: center;
+}
+
+.stepTabItems .stepItem {
+  position: relative;
+  list-style: none;
+  width: 60px;
+  height: 60px;
+  background: #e2e2e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+}
+
+.stepTabItems .stepItem.active {
+  background: #00c5b2;
+}
+
+.stepTabItems .stepItem:not(:last-child) {
+  margin-right: 80px;
+}
+
+.stepTabItems .stepItem:not(:last-of-type)::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: rgb(241, 239, 239);
+  left: calc(100% + 10px);
+}
+
+.stepTabItems .stepItem.active::before {
+  background: #00c5b2;
+}
+
+.stepTabs .stepTab {
+  display: none;
+}
+
+.stepTabs .stepTab.active {
+  width: 100%;
+  display: block;
+}
+.step1Container {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+.step1Left {
+  display: flex;
+  width: 50%;
+  /*align-items: center;*/
+  /*justify-content: center;*/
+  flex-direction: column;
+}
+.step1Right {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+.photoLabel {
+  font-size: 16px;
+  color: #c2c2c2;
+}
+.phoneInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.step2Container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 300px;
+}
+.rowContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+.tableHeader tr:first-child {
+  margin-top: 100px;
+}
+.table {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7em;
+}
+.table {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.headerData {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.cell {
+  text-align: start;
+}
+.formInputTable input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  position: relative;
+  width: 90%;
+  padding: 8px 0px;
+  outline: 1px solid transparent;
+  border: 1px solid transparent;
+  border-bottom: 1px solid #c2c2c2;
+  background: transparent !important;
+  z-index: 9;
+  color: #2c3638;
+  justify-content: center;
+  max-height: 50px;
+}
+.btns {
+  display: flex;
+  justify-content: flex-end;
+  width: 100px;
+}
+.inputsInnerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5em;
+  border: 1px solid black;
+  padding: 1.5em;
+  padding-bottom: 0.7em;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+.inputsStep3 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+}
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 70%;
+  justify-content: center;
+}
+.inviteContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.btnDelete {
+  background-color: transparent;
+  position: relative;
+  border: none;
+  margin-right: 1.5em;
+}
+
+.btnDelete::after {
+  content: "delete";
+  position: absolute;
+  top: -130%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(168, 7, 7);
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: 0.2s linear;
+  transition-delay: 0.2s;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.icon {
+  transform: scale(1.2);
+  transition: 0.2s linear;
+}
+
+.btnDelete:hover > .icon {
+  transform: scale(1.5);
+}
+
+.btnDelete:hover > .icon path {
+  fill: rgb(168, 7, 7);
+}
+
+.btnDelete:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: -160%;
+}
+.buttonAdd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 4px;
+  height: 32px;
+  width: 50%;
+  border: none;
+  background: #00c5b2;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.labelAdd {
+  margin: 0px 10px;
+  line-height: 22px;
+  font-size: 16px;
+  color: white;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
+
+.buttonAdd:hover {
+  background: #02af9f;
+}
+
+.buttonAdd:hover .svgicon {
+  animation: rotate 1.3s linear forwards;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 30rem;
+  margin: 0 auto;
+  border: 1px solid #d7dbe3;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+  border-radius: 0.25rem;
+  padding: 2rem;
+  z-index: 1;
+  text-align: center;
+}
+
+.emoji {
+  display: block;
+  text-align: center;
+  font-size: 5rem;
+  line-height: 5rem;
+}
+
+.modalBtn {
+  cursor: pointer;
+  display: block;
+  margin: 0 -2rem -2rem -2rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0 0.25rem 0.25rem;
+  border: none;
+  background-color: #0cd977;
+  text-decoration: none;
+}
+.confettiWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  zindex: 9999;
+}
+
+@keyframes confettiRain {
+  0% {
+    opacity: 1;
+    margin-top: -100vh;
+    margin-left: -200px;
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: 100vh;
+    margin-left: 200px;
+  }
+}
+
+.confetti {
+  opacity: 0;
+  position: absolute;
+  width: 1rem;
+  height: 1.5rem;
+  animation: confettiRain 4s linear forwards;
+}

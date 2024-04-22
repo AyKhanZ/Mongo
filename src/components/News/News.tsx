@@ -4,12 +4,12 @@ import Image from 'next/image'
 const News = () => {
   return (
     <>
-        <div className="a fade-left">
-            <h2 className={styles.centeredHeading}>Новости</h2>
+        <div className=" a fade-in">
+            <h2 className={`${styles.centeredHeading} a fade-in`}>Новости</h2>
         </div>
         <div className={styles.twoHalves}>
             <div className="a fade-left">
-                <section className="half">
+                <section className={styles.half}>
                     <div className={styles.horizontal}>
                         <Image className={styles.circleImg} width={100} height={100} alt='1c' src='/nds.png' />
                         <div>
@@ -31,7 +31,7 @@ const News = () => {
             <div className="a fade-right">
                 <section className={styles.half}>
                     <div className={styles.horizontal}>
-                        <Image className={styles.circleImg} width={100} height={100} alt='1c' src='/doctor.png' />
+                        <Image className={styles.circleImg} width={100} height={100} alt='1c' src='/tax.png' />
                         <div>
                             <h3>Обязательное медицинское страхование</h3>
                             <p>Автоматический зачет НДС вводится на основании данных которые поставщик вбил в систему и так далее. Но при этом поставщик готов дать гарантии безо...</p>
@@ -39,7 +39,7 @@ const News = () => {
                         </div>
                     </div>
                     <div className={styles.horizontal}>
-                        <Image className={styles.circleImg} width={100} height={100} alt='1c' src='/cut.png' />
+                        <Image className={styles.circleImg} width={100} height={100} alt='1c' src='/nds 1.png' />
                         <div>
                             <h3>Новый расчет по налогу на прибыль</h3>
                             <p>Автоматический зачет НДС вводится на основании данных которые поставщик вбил в систему и так далее. Но при этом поставщик готов дать гарантии безо...</p>

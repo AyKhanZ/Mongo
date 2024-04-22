@@ -150,9 +150,19 @@
   color: #4070f4;
   background-color: transparent;
 }
+.btn {
+  margin-left: 16px;
+}
 
+.btn:hover {
+  cursor: pointer;
+}
 .link span {
   white-space: nowrap;
+}
+
+#logOut {
+  margin: 20px;
 }
 
 .link i {

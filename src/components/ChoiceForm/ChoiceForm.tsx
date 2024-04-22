@@ -82,7 +82,9 @@ const ChoiceForm: React.FC = () => {
                     </div>
                     <input className={styles.submit} value="Получить предложение" type="submit" />
                 </form>
-                <Image width={500} height={400} src="/businessman.png" alt="businessman" />
+                <div className={styles.img}>
+                <Image width={350} height={350} src="/luggage.png" alt="businessman" />
+                </div>
             </div>
         </div>
     );

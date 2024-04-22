@@ -1,25 +1,63 @@
 .plan {
-  width: 80%;
-  margin: 30px 10%;
-  min-width: 240px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  background-color: #3d8584;
-  color: white;
-  padding: 15px 0;
-  z-index: 0.9;
+  width: 100%;
+  background-color: #efefef;
+  font-size: 1.5rem;
+  padding: 50px 0 ;
   text-align: center;
+  font-weight: 600;
+}
+
+.vertical {
+    border-left: 4px solid #3d8584;
+    border-radius: 2px;
 }
 
 .threeColumns {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  margin: 50px 0;
+  display: flex;
   color: #3d8584;
 }
 
 .col {
-  margin: 20px;
-  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   border-radius: 10px;
-  padding: 10px;
+  width: 33vw;
+  padding: 20px;
+}
+
+
+.heading {
+  color:#3d8584;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+
+
+
+@keyframes flip {
+  0% {
+    transform: rotateY(180deg);
+  }
+  50% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg)
+  }
+}
+
+.first {
+  animation: bounce-top 1s infinite 3s;
+}
+
+.sec {
+  animation: bounce-top 1s infinite 4s;
+}
+
+.third {
+  animation: bounce-top 1s infinite 5s;
 }
