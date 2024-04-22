@@ -37,7 +37,6 @@ const PostPartner = () => {
         name: data.name,
         desc: data.description,
       });
-      console.log(partner);
     } catch (error: any) {
       console.error(error);
     }
@@ -45,12 +44,12 @@ const PostPartner = () => {
 
   useEffect(() => {
     getPartner(Number(params.editId));
+    console.log(partner);
   }, [params]);
 
   const edit = async (id: number) => {
     try {
       const partnerToEdit = {
-        id: params.editId,
         id1C: partner.id1C,
         name: partner.name,
         typeOfActivity: partner.type,
@@ -58,7 +57,7 @@ const PostPartner = () => {
         image: partner.img,
       };
 
-      await fetch(`https://localhost:7164/Partners/ById/${params.editId}`, {
+      await fetch(`https://localhost:7164/Partner/UpdatePartnerData`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

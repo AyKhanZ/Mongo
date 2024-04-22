@@ -126,23 +126,7 @@ const SideNavBar = () => {
                       />
                     </span>
                   </div>
-                  <div className={`${styles.menu_title} ${styles.flex}`}>
-                    <span className={styles.title}>
-                      <Link className={styles.link} href="#">
-                        <FontAwesomeIcon
-                          icon={lock}
-                          className={`${styles.fa_solid} ${styles.fa_bars} ${styles.bx} ${styles.bx_lock_alt}`}
-                        />
-                        <span className={styles.name}>Сервисы</span>
-                      </Link>
-                    </span>
-                    <span className={styles.ico}>
-                      <FontAwesomeIcon
-                        icon={lock}
-                        className={`${styles.fa_solid} ${styles.fa_bars} ${styles.bx} ${styles.bx_lock_alt}`}
-                      />
-                    </span>
-                  </div>
+
                   <div className={`${styles.menu_title} ${styles.flex}`}>
                     <span className={styles.title}>
                       <Link className={styles.link} href="/managePartners">

@@ -160,3 +160,43 @@ export const positionsList = [
   { value: "Project manager", label: "Project manager" },
   { value: "Intern", label: "Intern" },
 ];
+export const data = {
+  company: {
+    name: "Kapital Bank",
+    description:
+      "orem Ipstandard dummy text ever since the 1500t to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
+    logo: "/download.png",
+  },
+  projects: [
+    {
+      name: "Название проекта 1",
+      clientManager: "Фидан А.",
+      baimManager: "Шамси В.",
+      developer: "Эльвин А.",
+      feedback: {
+        rating: "super-happy",
+        readonly: true,
+      },
+    },
+    {
+      name: "Название проекта 2",
+      clientManager: "Фидан А.",
+      baimManager: "Шамси В.",
+      developer: "Эльвин А.",
+      feedback: {
+        rating: "neutral",
+        readonly: true,
+      },
+    },
+    {
+      name: "Название проекта 3",
+      clientManager: "Фидан А.",
+      baimManager: "Шамси В.",
+      developer: "Эльвин А.",
+      feedback: {
+        rating: "super-sad",
+        readonly: true,
+      },
+    },
+  ],
+};

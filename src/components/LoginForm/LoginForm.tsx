@@ -41,7 +41,7 @@ const LoginForm = () => {
       setUserData(data.user);
 
       if (data.user.emailConfirmed) {
-        router.push("/dashboard");
+        router.push("/multiStepForm");
         console.log("Email is confirmed");
       } else {
         setIsConfirmed(true);

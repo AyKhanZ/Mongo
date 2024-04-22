@@ -11,21 +11,15 @@ import Link from "next/link";
 const Error = () => {
   return (
     <div className={styles.container}>
-      <div
-        className={styles.a}
-        // href="https://codepen.io/uiswarup/full/vYPxywO"
-        // target="_blank"
-      >
+      <div className={styles.a}>
         <header className="topHeader"></header>
 
-        {/* <!--dust particel--> */}
         <div>
           <div className={styles.starsec}></div>
           <div className={styles.starthird}></div>
           <div className={styles.starfourth}></div>
           <div className={styles.starfifth}></div>
         </div>
-        {/* <!--Dust particle end---> */}
 
         <div className={styles.lamp__wrap}>
           <div className={styles.lamp}>
@@ -37,9 +31,7 @@ const Error = () => {
             <div className={styles.light}></div>
           </div>
         </div>
-        {/* <!-- END Lamp --> */}
         <section className={styles.error}>
-          {/* <!-- Content --> */}
           <div className={styles.error__content}>
             <div className={styles.error__message}>
               <h1 className={styles.message__title}>Страница не найдена</h1>
@@ -51,14 +43,9 @@ const Error = () => {
               </p>
             </div>
             <div className={styles.error__nav}>
-              <Link
-                href="/"
-                target="_blanck"
-                className={styles.eNav__link}
-              ></Link>
+              <Link href="/" className={styles.eNav__link}></Link>
             </div>
           </div>
-          {/* <!-- END Content --> */}
         </section>
       </div>
     </div>

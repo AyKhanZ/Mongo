@@ -1,12 +1,10 @@
 import DashboardCard from "@/components/shared/DashboardCard";
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-// @ts-ignore
-import {CardBody, CardSubtitle, CardTitle } from 'reactstrap';
+import { CardBody, CardSubtitle, CardTitle } from "reactstrap";
 
 const SalesSummary = () => {
-
-  const chartoptions = {
+  const chartoptions: any = {
     series: [
       {
         name: "Any",
@@ -18,12 +16,12 @@ const SalesSummary = () => {
       },
       {
         name: "Any",
-        data: [0, 20, 50, 35, 70, 90, 60, 100]
+        data: [0, 20, 50, 35, 70, 90, 60, 100],
       },
       {
         name: "Any",
-        data: [0, 20, 30, 25, 40, 60, 30, 40 ]
-      }
+        data: [0, 20, 30, 25, 40, 60, 30, 40],
+      },
     ],
     options: {
       chart: {
@@ -55,7 +53,6 @@ const SalesSummary = () => {
     },
   };
 
-  // @ts-ignore
   return (
     <DashboardCard>
       <CardBody>
@@ -72,7 +69,7 @@ const SalesSummary = () => {
         />
       </CardBody>
     </DashboardCard>
-  )
+  );
 };
 
 export default SalesSummary;

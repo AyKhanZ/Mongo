@@ -1,0 +1,61 @@
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.inputWrapper {
+  margin-bottom: 20px;
+}
+
+.inputLabel {
+  display: block;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+.selectWrapper {
+  margin-bottom: 20px;
+}
+
+.selectLabel {
+  display: block;
+  font-weight: bold;
+}
+
+.select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-top: 5px;
+}
+
+.buttonWrapper {
+  margin-top: 20px;
+}
+
+.createButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(243, 188, 106);
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.createButton:hover {
+  background-color: rgba(163, 128, 75, 0.824);
+}
