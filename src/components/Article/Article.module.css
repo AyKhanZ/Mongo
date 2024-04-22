@@ -1,0 +1,18 @@
+.containerArticle {
+    width: 80%;
+    font-size: 1.2rem;
+}
+
+.containerArticle p {
+    margin: 30px 0 50px 0;
+}
+
+.containerArticle img {
+    width: 100%;
+    border-radius: 16px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}

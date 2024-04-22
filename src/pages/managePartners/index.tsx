@@ -9,7 +9,6 @@ import DeleteForm from "@/components/DeleteForm/DeleteForm";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { Nunito } from "next/font/google";
-import ProductFilters from "@/components/ProductFilters/ProductFilters";
 
 const nunito = Nunito({ subsets: ["latin"] });
 

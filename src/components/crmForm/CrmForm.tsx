@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./crmForm.module.css";
-import Phone from "@/icons/Phone";
 
 interface FormErrors {
   name?: string;
@@ -140,7 +139,7 @@ const CrmForm = () => {
     console.log(prismRef.current?.style.transform);
   };
   return (
-    <div className={styles.wrapper}>
+    <div id='crm' className={styles.wrapper}>
       <div className={styles.recPrism} ref={prismRef}>
         <div className={`${styles.face} ${styles.faceFront}`}>
           <div className={styles.headings}>
@@ -245,7 +244,7 @@ const CrmForm = () => {
 
         <div className={`${styles.face} ${styles.faceBottom}`}>
           <div className={styles.content}>
-            <Phone></Phone>
+            {/* <Phone></Phone> */}
             <div className={styles.thankYou}>
               <div>
                 Спасибо за запрос! Мы обязательно свяжемся с Вами в ближайщее

@@ -1,0 +1,15 @@
+.containerNone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    border-radius: 15px;
+    border: 1px dashed #cbccce;
+  }
+  
+  .noProductsText {
+    font-size: 22px;
+    color: #cbccce;
+  }

@@ -9,7 +9,6 @@
   .list {
     border: 1px solid transparent;
     border-radius: 20px;
-    width: 100%;
     padding: 0 50px;
     background-color: #EFEFEF;
     color: #326b6a;
@@ -17,6 +16,8 @@
     flex-direction: column;
     justify-content: center;
     height: 246px;
+    font-size: 1.2rem;
+    max-width: 500px;
   }
 
   .lst {
@@ -38,4 +39,5 @@
 
   .heading {
     margin: 10px;
+    font-size: 1.5rem;
   }

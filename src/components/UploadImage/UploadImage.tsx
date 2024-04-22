@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import styles from "./UploadImage.module.css";
 import Image from "next/image";
 import { useEffect } from "react";
-import { set } from "mongoose";
 
 const UploadImage = ({ setImg, img = null }: any) => {
   const [imageSrc, setImageSrc] = useState(img);

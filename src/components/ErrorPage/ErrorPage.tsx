@@ -6,6 +6,7 @@ import { faUser as user } from "@fortawesome/free-solid-svg-icons";
 import { faBars as bars } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import styles from "./ErrorPage.module.css";
+import Link from "next/link";
 
 const Error = () => {
   return (
@@ -50,11 +51,11 @@ const Error = () => {
               </p>
             </div>
             <div className={styles.error__nav}>
-              <a
-                href="http://www.thedresscounter.com"
+              <Link
+                href="/"
                 target="_blanck"
                 className={styles.eNav__link}
-              ></a>
+              ></Link>
             </div>
           </div>
           {/* <!-- END Content --> */}

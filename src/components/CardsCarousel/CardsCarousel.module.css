@@ -1,0 +1,68 @@
+/* Carousel.module.css */
+
+
+.arrow {
+    background: #b1d5d5;
+    border: 1px solid #b1d5d5;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    color: #3d8584;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @keyframes slide-up {
+    0% {
+      transform: translateY(200px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .carouselImages {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      border-radius: 20px;
+      align-items: center;
+      animation: slide-up 2s;
+    }
+
+    .carouselWrapper {
+        display: flex;
+        width: calc(100% - 100px);
+        justify-content: space-evenly;
+    }
+  
+    .carouselImage {
+      border-radius: 20px;
+      width: 400px;
+      height: 600px;
+    }
+  
+  .carouselContainer {
+      position: relative;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .carouselContainer button {
+      border-radius: 50%;
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      background-color: #f2f2f2; 
+      border: none;
+      cursor: pointer;
+    }
+    
+    .carouselContainer button:hover {
+      background-color: #e3e3e3; 
+    }
+    

@@ -14,7 +14,7 @@ const Modules = () => {
   }, [cModules.length]);
 
   return (
-    <section className={styles.textAndImg}>
+    <section className={styles.textAndImg}> 
       <div className='a fade-left'>
         <div className={styles.list}>
           <h2 className={styles.heading}>Какие модули автоматизирует 1С:</h2>
